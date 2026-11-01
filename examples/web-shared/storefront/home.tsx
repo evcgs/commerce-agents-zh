@@ -9,6 +9,7 @@ import { type ReactNode, useState } from "react";
 import type { AgentApi } from "../api";
 import { formatDayMonth } from "../format";
 import { Icon, type IconName } from "../icons";
+import { t } from "../i18n";
 import type { MemoryFact } from "../protocol";
 import { Button, Pill, Sheet } from "../ui";
 import { useStoreFrame } from "./frame";
@@ -83,7 +84,11 @@ export function MoreLink({ label, onClick }: { label: string; onClick: () => voi
 }
 
 /** How a fact's category reads to the shopper. */
-const CATEGORY_LABELS: Record<string, string> = { preference: "Preference", constraint: "Rule", context: "About you" };
+const CATEGORY_LABELS: Record<string, string> = {
+  preference: t("Preference", "偏好"),
+  constraint: t("Rule", "规则"),
+  context: t("About you", "关于你"),
+};
 
 function FactRow({
   fact,
@@ -114,7 +119,7 @@ function FactRow({
           <p className="min-w-0 flex-1 text-[14px] leading-snug text-(--ink)">{fact.value}</p>
           <div className="flex shrink-0 gap-3 pt-px text-[12.5px] font-semibold">
             <button type="button" onClick={() => setDraft(fact.value)} className="text-(--ink-2) hover:text-(--ink)">
-              Edit
+              {t("Edit", "编辑")}
             </button>
             <button
               type="button"
@@ -126,7 +131,7 @@ function FactRow({
               }}
               className="font-medium text-(--danger) hover:underline disabled:opacity-50"
             >
-              Forget
+              {t("Forget", "忘记")}
             </button>
           </div>
         </div>
@@ -147,24 +152,28 @@ function FactRow({
             }}
             rows={2}
             maxLength={200}
-            aria-label="Correct this"
+            aria-label={t("Correct this", "修改这条记忆")}
             autoFocus
             className="w-full resize-none rounded-[10px] border border-(--accent) bg-(--card) px-3 py-2 text-[14px] leading-snug text-(--ink) shadow-[0_0_0_3px_var(--accent-soft)] outline-none"
           />
-          {failed ? <p className="mt-1 text-[12px] text-(--danger)">That could not be saved. Keep it to a preference or a standing rule.</p> : null}
+          {failed ? (
+            <p className="mt-1 text-[12px] text-(--danger)">
+              {t("That could not be saved. Keep it to a preference or a standing rule.", "保存失败，内容需为一条偏好或长期规则。")}
+            </p>
+          ) : null}
           <div className="mt-2 flex gap-2">
             <Button variant="primary" size="sm" onClick={() => void save()} disabled={busy || !draft.trim()}>
-              Save
+              {t("Save", "保存")}
             </Button>
             <Button size="sm" onClick={() => setDraft(null)}>
-              Cancel
+              {t("Cancel", "取消")}
             </Button>
           </div>
         </div>
       )}
       <div className="mt-1.5 flex items-center gap-2 text-[11.5px] text-(--ink-soft)">
-        {isNew ? <Pill tone="accent">New this session</Pill> : <Pill>{CATEGORY_LABELS[fact.category] ?? fact.category}</Pill>}
-        {fact.updated_at ? <span>Saved {formatDayMonth(fact.updated_at)}</span> : null}
+        {isNew ? <Pill tone="accent">{t("New this session", "本次会话新增")}</Pill> : <Pill>{CATEGORY_LABELS[fact.category] ?? fact.category}</Pill>}
+        {fact.updated_at ? <span>{t(`Saved ${formatDayMonth(fact.updated_at)}`, `保存于 ${formatDayMonth(fact.updated_at)}`)}</span> : null}
       </div>
     </li>
   );
@@ -211,21 +220,26 @@ export function AccountSheet({
     <Sheet title={name} detail={detail} onClose={onClose}>
       {others.length && onSwitchProfile ? (
         <div className="flex flex-wrap items-center gap-2 text-[13px] text-(--ink-2)">
-          <span>Signed in as {name}.</span>
+          <span>{t(`Signed in as ${name}.`, `当前以 ${name} 的身份登录。`)}</span>
           {others.map((profile) => (
             <Button key={profile.id} size="sm" icon="user" onClick={() => onSwitchProfile(profile.id)}>
-              Switch to {profile.name}
+              {t(`Switch to ${profile.name}`, `切换到 ${profile.name}`)}
             </Button>
           ))}
         </div>
       ) : null}
       <section>
         <h3 className="flex items-baseline gap-2 text-[15px] font-semibold text-(--ink)">
-          What {assistantName} knows
-          <span className="ml-auto text-[12px] font-normal tabular-nums text-(--ink-soft)">{facts.length} saved</span>
+          {t(`What ${assistantName} knows`, `${assistantName} 记住的信息`)}
+          <span className="ml-auto text-[12px] font-normal tabular-nums text-(--ink-soft)">
+            {t(`${facts.length} saved`, `已保存 ${facts.length} 条`)}
+          </span>
         </h3>
         <p className="mt-1 text-[13px] leading-snug text-(--ink-soft)">
-          {assistantName} uses these when it recommends something. Edit or forget any line; a forgotten line is deleted.
+          {t(
+            `${assistantName} uses these when it recommends something. Edit or forget any line; a forgotten line is deleted.`,
+            `${assistantName} 推荐商品时会参考这些信息。每一条都可以编辑或忘记；忘记即删除。`,
+          )}
         </p>
         {facts.length ? (
           <ul className="mt-2">
@@ -234,11 +248,14 @@ export function AccountSheet({
             ))}
           </ul>
         ) : (
-          <p className="mt-4 text-[13.5px] text-(--ink-2)">Nothing saved yet.</p>
+          <p className="mt-4 text-[13.5px] text-(--ink-2)">{t("Nothing saved yet.", "还没有保存任何信息。")}</p>
         )}
       </section>
       <p className="mt-auto border-t border-(--line) pt-3 text-[12px] leading-relaxed text-(--ink-soft)">
-        Only preferences and standing rules are kept. Card, account, phone, and email details are refused.
+        {t(
+          "Only preferences and standing rules are kept. Card, account, phone, and email details are refused.",
+          "仅保留偏好和长期规则。银行卡、账号、手机号、邮箱等敏感信息一律拒绝保存。",
+        )}
       </p>
     </Sheet>
   );

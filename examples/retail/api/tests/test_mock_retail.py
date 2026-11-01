@@ -5,6 +5,9 @@ from datetime import datetime
 
 from commerce_common.types import MemoryCategory, MemoryFact
 from demo_common.storefront_fixtures import load_json
+
+# The conftest pins the process to English before anything imports; these assertions
+# check the upstream English fixtures and copy.
 from retail.api.mock_retail import (
     DATA_DIR,
     FREE_SHIPPING_OVER,

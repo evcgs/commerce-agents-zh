@@ -34,6 +34,7 @@ import {
   Skeleton,
   StatStrip,
   StatTile,
+  t,
   ViewLink,
 } from "web-shared";
 import { orderRows } from "@/lib/format";
@@ -50,13 +51,13 @@ function briefing(data: OverviewResponse): string {
   const { snapshot, needs_attention } = data;
   const parts: string[] = [];
   if (snapshot.sales_change_pct != null) {
-    const direction = snapshot.sales_change_pct >= 0 ? "up" : "down";
-    parts.push(`Sales are ${direction} ${formatChangePct(Math.abs(snapshot.sales_change_pct)).replace("+", "")} on the week.`);
+    const direction = snapshot.sales_change_pct >= 0 ? t("up", "上升") : t("down", "下降");
+    parts.push(t(`Sales are ${direction} ${formatChangePct(Math.abs(snapshot.sales_change_pct)).replace("+", "")} on the week.`, `本周销售额${direction} ${formatChangePct(Math.abs(snapshot.sales_change_pct)).replace("+", "")}。`));
   }
   const orders = needs_attention.order_issues.length;
   const listings = needs_attention.inventory.length;
-  const needs = [orders ? plural(orders, "order") : "", listings ? plural(listings, "listing") : ""].filter(Boolean);
-  parts.push(needs.length ? `${needs.join(" and ")} need you today.` : "Nothing needs you today.");
+  const needs = [orders ? t(plural(orders, "order"), `${formatNumber(orders)} 个订单`) : "", listings ? t(plural(listings, "listing"), `${formatNumber(listings)} 个商品`) : ""].filter(Boolean);
+  parts.push(needs.length ? t(`${needs.join(" and ")} need you today.`, `今天有 ${needs.join("和")} 需要你处理。`) : t("Nothing needs you today.", "今天没有需要你处理的事项。"));
   return parts.join(" ");
 }
 
@@ -86,10 +87,10 @@ function IssueRow({ issue, onAskAssistant }: { issue: OrderIssue; onAskAssistant
       icon={style.icon}
       tone={style.tone}
       title={issue.summary}
-      meta={[style.label, `Order ${issue.order_id}`, issue.opened_at ? `opened ${formatDayMonth(issue.opened_at)}` : ""].filter(Boolean).join(" · ")}
+      meta={[style.label, t(`Order ${issue.order_id}`, `订单 ${issue.order_id}`), issue.opened_at ? t(`opened ${formatDayMonth(issue.opened_at)}`, `开启于 ${formatDayMonth(issue.opened_at)}`) : ""].filter(Boolean).join(" · ")}
       action={{
-        label: issue.kind === "buyer_message" ? "Draft reply" : "Ask",
-        onClick: () => onAskAssistant(`What are my options for order ${issue.order_id}? ${issue.summary}.`),
+        label: issue.kind === "buyer_message" ? t("Draft reply", "起草回复") : t("Ask", "询问"),
+        onClick: () => onAskAssistant(t(`What are my options for order ${issue.order_id}? ${issue.summary}.`, `订单 ${issue.order_id} 有哪些处理方案？${issue.summary}。`)),
       }}
     />
   );
@@ -110,14 +111,14 @@ function InventoryRow({ alert, onAskAssistant }: { alert: InventoryAlert; onAskA
       meta={
         <>
           <span className={soldOut ? "font-semibold text-(--danger)" : low ? "font-semibold text-(--warn)" : ""}>
-            {soldOut ? "Sold out" : `${formatNumber(alert.stock)} in stock`}
+            {soldOut ? t("Sold out", "已售罄") : t(`${formatNumber(alert.stock)} in stock`, `库存 ${formatNumber(alert.stock)}`)}
           </span>
           {[
             "",
             alert.days_of_cover != null && !soldOut ? coverLabel(alert.days_of_cover) : "",
-            alert.sales_last_30d != null ? `${formatNumber(alert.sales_last_30d)} sold in 30 days` : "",
+            alert.sales_last_30d != null ? t(`${formatNumber(alert.sales_last_30d)} sold in 30 days`, `近 30 天售出 ${formatNumber(alert.sales_last_30d)}`) : "",
             alert.listing_id,
-            soldOut && alert.storefront_visible === false ? "hidden from the storefront" : "",
+            soldOut && alert.storefront_visible === false ? t("hidden from the storefront", "已从店面隐藏") : "",
           ]
             .filter((part, index) => index === 0 || part)
             .join(" · ")}
@@ -127,13 +128,13 @@ function InventoryRow({ alert, onAskAssistant }: { alert: InventoryAlert; onAskA
         // A paused listing still alerts here but shows no chip to shoppers.
         low && alert.stock > 0 && alert.storefront_visible ? (
           <Pill tone="warn" dot>
-            Storefront shows “Only {formatNumber(alert.stock)} left”
+            {t(`Storefront shows “Only ${formatNumber(alert.stock)} left”`, `店面显示“仅剩 ${formatNumber(alert.stock)} 件”`)}
           </Pill>
         ) : null
       }
       action={{
-        label: low ? "Draft restock" : "Plan markdown",
-        onClick: () => onAskAssistant(low ? `Draft a restock plan for ${ref}.` : `Plan a markdown for ${ref}.`),
+        label: low ? t("Draft restock", "起草补货") : t("Plan markdown", "规划降价"),
+        onClick: () => onAskAssistant(low ? t(`Draft a restock plan for ${ref}.`, `为 ${ref} 起草一份补货方案。`) : t(`Plan a markdown for ${ref}.`, `为 ${ref} 规划一次降价。`)),
       }}
     />
   );
@@ -142,7 +143,7 @@ function InventoryRow({ alert, onAskAssistant }: { alert: InventoryAlert; onAskA
 function Insights({ insights, onAskAssistant }: { insights: HomeInsight[]; onAskAssistant: (text: string) => void }) {
   if (insights.length === 0) return null;
   return (
-    <Panel title="From the assistant" icon={<KindIcon icon="spark" tone="accent" size={24} />}>
+    <Panel title={t("From the assistant", "来自助手的洞察")} icon={<KindIcon icon="spark" tone="accent" size={24} />}>
       <ul className="divide-y divide-(--line)">
         {insights.map((insight) => (
           <li key={insight.insight_id} className="px-[18px] py-2.5">
@@ -153,7 +154,7 @@ function Insights({ insights, onAskAssistant }: { insights: HomeInsight[]; onAsk
               onClick={() => onAskAssistant(insight.prompt)}
               className="mt-1.5 inline-flex items-center gap-1 text-[12.5px] font-semibold text-(--accent-ink) hover:underline"
             >
-              Ask <Icon name="arrow-right" size={13} />
+              {t("Ask", "追问")} <Icon name="arrow-right" size={13} />
             </button>
           </li>
         ))}
@@ -181,15 +182,16 @@ export default function HomeView({
   const queue = useMemo(() => (data ? rows(data, filter) : []), [data, filter]);
   const now = useMemo(() => new Date(), []);
   const title = `${greeting(now)}${operator ? `, ${operator}` : ""}`;
-  const today = now.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" });
+  const today = now.toLocaleDateString(t("en-US", "zh-CN"), { weekday: "long", month: "long", day: "numeric" });
 
   if (failed && !data) {
     return (
       <>
         <PageHeader title={title} subtitle={today} />
         <Notice>
-          The merchant API on port 8000 isn&apos;t reachable. Start it with{" "}
-          <code className="rounded bg-(--well) px-1 font-mono text-[13px]">uvicorn retail.api.main:app --app-dir examples --port 8000</code> and reload.
+          {t("The merchant API on port 8000 isn't reachable. Start it with", "无法连接 8000 端口上的商家 API。请先运行")}{" "}
+          <code className="rounded bg-(--well) px-1 font-mono text-[13px]">uvicorn retail.api.main:app --app-dir examples --port 8000</code>{" "}
+          {t("and reload.", "再刷新页面。")}
         </Notice>
       </>
     );
@@ -222,68 +224,68 @@ export default function HomeView({
     <div className="ac-reveal flex flex-col gap-5">
       <PageHeader title={title} subtitle={`${today} · ${briefing(data)}`} />
 
-      <ApprovalsBanner changes={pending} onReview={() => onAskAssistant("Walk me through the changes awaiting my approval and what each one would do.")} />
+      <ApprovalsBanner changes={pending} onReview={() => onAskAssistant(t("Walk me through the changes awaiting my approval and what each one would do.", "带我过一遍等待我审批的变更，以及每项变更会做什么。"))} />
 
-      <Panel title="This week" subtitle={`${formatPeriodLabel(snapshot.period)}${comparison ? ` · against the ${comparison}` : ""}`} bodyClassName="pb-1">
+      <Panel title={t("This week", "本周")} subtitle={`${formatPeriodLabel(snapshot.period)}${comparison ? t(` · against the ${comparison}`, ` · 对比${comparison}`) : ""}`} bodyClassName="pb-1">
         <StatStrip>
           <StatTile
-            label="Sales"
+            label={t("Sales", "销售额")}
             value={formatMoney(snapshot.sales, currency, { whole: snapshot.sales >= 1000 })}
             changePct={snapshot.sales_change_pct}
             points={values(data.trends?.sales)}
             prior={values(data.trends_prior?.sales)}
-            onClick={() => onAskAssistant(askWhy("Sales", snapshot.sales_change_pct, comparison))}
-            ariaLabel="Sales: ask the assistant why"
+            onClick={() => onAskAssistant(askWhy(t("Sales", "销售额"), snapshot.sales_change_pct, comparison))}
+            ariaLabel={t("Sales: ask the assistant why", "销售额：询问助手原因")}
           />
           <StatTile
-            label="Orders"
+            label={t("Orders", "订单量")}
             value={formatNumber(snapshot.orders)}
             changePct={snapshot.orders_change_pct}
             points={values(data.trends?.orders)}
             prior={values(data.trends_prior?.orders)}
-            onClick={() => onAskAssistant(askWhy("Orders", snapshot.orders_change_pct, comparison))}
-            ariaLabel="Orders: ask the assistant why"
+            onClick={() => onAskAssistant(askWhy(t("Orders", "订单量"), snapshot.orders_change_pct, comparison))}
+            ariaLabel={t("Orders: ask the assistant why", "订单量：询问助手原因")}
           />
           <StatTile
-            label="Conversion"
+            label={t("Conversion", "转化率")}
             value={snapshot.conversion_rate != null ? formatRate(snapshot.conversion_rate) : "—"}
             changePct={snapshot.conversion_change_pct}
             points={values(data.trends?.conversion)}
             prior={values(data.trends_prior?.conversion)}
-            onClick={() => onAskAssistant(askWhy("Conversion", snapshot.conversion_change_pct, comparison))}
-            ariaLabel="Conversion: ask the assistant why"
+            onClick={() => onAskAssistant(askWhy(t("Conversion", "转化率"), snapshot.conversion_change_pct, comparison))}
+            ariaLabel={t("Conversion: ask the assistant why", "转化率：询问助手原因")}
           />
           <StatTile
-            label="Average order"
+            label={t("Average order", "客单价")}
             value={snapshot.average_order_value != null ? formatMoney(snapshot.average_order_value, currency) : "—"}
             changePct={aovChangePct}
             points={values(data.trends?.average_order_value)}
             prior={values(data.trends_prior?.average_order_value)}
-            onClick={() => onAskAssistant(askWhy("Average order value", aovChangePct, comparison))}
-            ariaLabel="Average order value: ask the assistant why"
+            onClick={() => onAskAssistant(askWhy(t("Average order value", "客单价"), aovChangePct, comparison))}
+            ariaLabel={t("Average order value: ask the assistant why", "客单价：询问助手原因")}
           />
         </StatStrip>
       </Panel>
 
       <div className="grid items-start gap-4 xl:grid-cols-[minmax(0,1fr)_300px]">
         <Panel
-          title="Needs you today"
+          title={t("Needs you today", "今日待办")}
           action={
             <Segmented<Filter>
-              label="Filter attention items"
+              label={t("Filter attention items", "筛选待办事项")}
               value={filter}
               onChange={setFilter}
               options={[
-                { id: "all", label: "All", count: counts.orders + counts.stock + counts.slow },
-                { id: "orders", label: "Orders", count: counts.orders },
-                { id: "stock", label: "Low stock", count: counts.stock },
-                { id: "slow", label: "Slow", count: counts.slow },
+                { id: "all", label: t("All", "全部"), count: counts.orders + counts.stock + counts.slow },
+                { id: "orders", label: t("Orders", "订单"), count: counts.orders },
+                { id: "stock", label: t("Low stock", "低库存"), count: counts.stock },
+                { id: "slow", label: t("Slow", "滞销"), count: counts.slow },
               ]}
             />
           }
         >
           {queue.length === 0 ? (
-            <p className="px-[18px] pb-4 pt-1 text-[13.5px] text-(--ink-soft)">Nothing needs you today.</p>
+            <p className="px-[18px] pb-4 pt-1 text-[13.5px] text-(--ink-soft)">{t("Nothing needs you today.", "今天没有需要你处理的事项。")}</p>
           ) : (
             <>
               <AttentionList>
@@ -298,7 +300,7 @@ export default function HomeView({
               <QueueOverflow
                 hidden={queue.length - ROW_CAP}
                 link={{
-                  label: "See all",
+                  label: t("See all", "查看全部"),
                   // The hidden rows are order issues first, so open Orders when any of them is one.
                   onClick: () => onNavigate(queue.slice(ROW_CAP).some((row) => row.kind === "issue") ? "orders" : "inventory"),
                 }}
@@ -309,9 +311,9 @@ export default function HomeView({
 
         <div className="flex flex-col gap-4">
           <Insights insights={data.insights ?? []} onAskAssistant={onAskAssistant} />
-          <Panel title="Recent orders" action={<ViewLink label="All orders" onClick={() => onNavigate("orders")} />}>
+          <Panel title={t("Recent orders", "最近订单")} action={<ViewLink label={t("All orders", "全部订单")} onClick={() => onNavigate("orders")} />}>
             {data.recent_orders.length === 0 ? (
-              <p className="px-[18px] pb-4 text-[13px] text-(--ink-soft)">No orders yet.</p>
+              <p className="px-[18px] pb-4 text-[13px] text-(--ink-soft)">{t("No orders yet.", "还没有订单。")}</p>
             ) : (
               <RecordList rows={orderRows(data.recent_orders.slice(0, 4))} />
             )}

@@ -115,14 +115,21 @@ def build_merchant_router(
     backend: DemoMerchant,
     agent: MerchantAgent,
     identity: MerchantIdentity,
+    agent_slot: list[MerchantAgent] | None = None,
     example_dir: str,
     overview_extras: Callable[[], dict[str, Any]] | None = None,
     portal_reads: Mapping[str, Callable[[], Any]] | None = None,
 ) -> APIRouter:
     """The router above, over an agent the vertical has already constructed.
+    ``agent_slot`` is the caller's one-slot list to hold the live agent in, so a host
+    can swap the agent at run time; without it the router keeps its own slot.
     ``overview_extras`` supplies the vertical's own home-page keys on ``/overview``;
     ``portal_reads`` maps a path to a callable (sync or async) served as a scoped GET."""
-    memory_store = cast(MemoryStore, agent.memory.store)
+    # commerce-agents-zh: the router holds the agent in a one-slot list so a host can
+    # swap it at run time (the locale and model-settings routes rebuild the agent).
+    agents = agent_slot if agent_slot is not None else [agent]
+    agents[0] = agent
+    memory_store = cast(MemoryStore, agents[0].memory.store)
     sessions: SessionStore[MerchantSessionState] = SessionStore(MerchantSessionState)
     CurrentSession = session_dependency(sessions, "/api/merchant/session")
     router = APIRouter()
@@ -148,7 +155,7 @@ def build_merchant_router(
     async def chat(request: MerchantChatRequest, record: CurrentSession) -> StreamingResponse:
         append_user_turn(record, request.message, "Portal events")
         return stream_turn(
-            agent, sessions, record, context(record), env_hint=f"examples/{example_dir}/.env"
+            agents[0], sessions, record, context(record), env_hint=f"examples/{example_dir}/.env"
         )
 
     @router.get("/overview")
@@ -247,11 +254,11 @@ def build_merchant_router(
             record.state.host_action_change_ids.add(change_id)
         executor = MerchantToolExecutor(
             backend=backend,
-            config=agent.config,
-            skills=agent.skills,
+            config=agents[0].config,
+            skills=agents[0].skills,
             session=context(record),
             state=record.state,
-            memory=agent.memory,
+            memory=agents[0].memory,
         )
         execution = await executor.execute(action, {"change_id": change_id})
         record.state.host_action_change_ids.discard(change_id)
@@ -301,8 +308,8 @@ def build_merchant_router(
             "store": storefront.store_name,
             "role": "merchant",
             "listings": len(storefront.products),
-            "skills": agent.skills.names,
-            "model": agent.config.model,
+            "skills": agents[0].skills.names,
+            "model": agents[0].config.model,
         }
 
     return router

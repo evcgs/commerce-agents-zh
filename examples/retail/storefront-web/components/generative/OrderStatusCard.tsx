@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { Fragment } from "react";
-import { formatDate, formatMoney } from "web-shared";
+import { formatDate, formatMoney, lang, t } from "web-shared";
 import type { OrderStatusPayload } from "@/lib/types";
 
 /** Rail stages reached; statuses absent here render no rail. */
@@ -14,14 +14,14 @@ const RAIL_PROGRESS: Record<string, number> = {
   delivered: 4,
 };
 
-const RAIL_STAGES = ["Ordered", "Packed", "Shipped", "Delivered"] as const;
+const RAIL_STAGES = [t("Ordered", "已下单"), t("Packed", "已打包"), t("Shipped", "已发货"), t("Delivered", "已送达")];
 
 function shortDay(iso: string): string {
   const match = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso);
   if (!match) return iso;
   // Parsed by parts so the local timezone can't shift it a day.
   const date = new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
-  return new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric" }).format(date);
+  return new Intl.DateTimeFormat(lang() === "en" ? "en-US" : "zh-CN", { month: "short", day: "numeric" }).format(date);
 }
 
 function DeliveryRail({ order }: { order: NonNullable<OrderStatusPayload["order"]> }) {
@@ -58,9 +58,9 @@ function DeliveryRail({ order }: { order: NonNullable<OrderStatusPayload["order"
                   {isDelaySegment ? (
                     <span
                       className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full bg-(--warn-soft) px-2 py-0.5 text-[11px] font-semibold text-(--warn)"
-                      title="The original delivery estimate was missed"
+                      title={t("The original delivery estimate was missed", "原定送达时间已错过")}
                     >
-                      delayed
+                      {t("delayed", "延迟")}
                     </span>
                   ) : null}
                 </div>
@@ -128,6 +128,18 @@ const STATUS_STYLES: Record<string, string> = {
   refunded: "bg-(--ok-soft) text-(--ok)",
 };
 
+/** Mirrors web-shared's order status vocabulary. */
+const STATUS_LABELS: Record<string, string> = {
+  processing: t("processing", "处理中"),
+  shipped: t("shipped", "已发货"),
+  out_for_delivery: t("out for delivery", "派送中"),
+  delivered: t("delivered", "已送达"),
+  delayed: t("delayed", "已延迟"),
+  cancelled: t("cancelled", "已取消"),
+  return_initiated: t("return initiated", "退货申请中"),
+  refunded: t("refunded", "已退款"),
+};
+
 export default function OrderStatusCard({ payload }: { payload: OrderStatusPayload }) {
   const order = payload.order;
   // Adopters swap backends, so only http(s) tracking links render.
@@ -137,9 +149,9 @@ export default function OrderStatusCard({ payload }: { payload: OrderStatusPaylo
   return (
     <section className="rounded-2xl border border-(--line) bg-(--card) p-4 shadow-(--shadow-sm)">
       <div className="flex items-center justify-between gap-2">
-        <h3 className="text-[15px] font-semibold text-(--ink)">Order {payload.order_id}</h3>
+        <h3 className="text-[15px] font-semibold text-(--ink)">{t(`Order ${payload.order_id}`, `订单 ${payload.order_id}`)}</h3>
         <span className={`rounded-full px-2.5 py-0.5 text-[13px] font-medium ${STATUS_STYLES[status] ?? STATUS_STYLES.processing}`}>
-          {status.replaceAll("_", " ")}
+          {STATUS_LABELS[status] ?? status.replaceAll("_", " ")}
         </span>
       </div>
       <p className="mt-2 text-[15px] leading-relaxed text-(--ink)">{payload.summary}</p>
@@ -155,13 +167,13 @@ export default function OrderStatusCard({ payload }: { payload: OrderStatusPaylo
             </div>
           ))}
           <div className="flex justify-between border-t border-(--line) pt-1 font-medium text-(--ink)">
-            <span>Total</span>
+            <span>{t("Total", "合计")}</span>
             <span>{formatMoney(order.total, order.currency)}</span>
           </div>
           {order.estimated_delivery && RAIL_PROGRESS[status] == null ? (
             // The rail shows the estimate for its own statuses; this line covers the rest.
             <div className="text-[13px] text-(--ink-soft)">
-              Estimated delivery: {formatDate(order.estimated_delivery)}
+              {t(`Estimated delivery: ${formatDate(order.estimated_delivery)}`, `预计送达：${formatDate(order.estimated_delivery)}`)}
             </div>
           ) : null}
         </div>
@@ -173,7 +185,7 @@ export default function OrderStatusCard({ payload }: { payload: OrderStatusPaylo
           rel="noreferrer"
           className="mt-3 inline-flex items-center gap-1.5 rounded-lg border border-(--line) px-3 py-1.5 text-[13px] font-semibold text-(--ink) transition hover:border-(--accent) hover:shadow-(--shadow-sm)"
         >
-          Track package
+          {t("Track package", "追踪包裹")}
           <span aria-hidden>↗</span>
         </a>
       ) : null}

@@ -98,6 +98,12 @@ const PATHS = {
       <path d="m12.5 7.5 4 4" />
     </>
   ),
+  // commerce-agents-zh: the prompt sheet's entry (rendered text lines).
+  prompt: <path d="M4 6.5h16M4 11.5h11M4 16.5h14" />,
+  // commerce-agents-zh: the data-source sheet's entry (a puzzle piece snapping in).
+  connector: (
+    <path d="M10.2 4.5a1.9 1.9 0 0 1 3.6 0v1h3.7a1 1 0 0 1 1 1v3.7h1a1.9 1.9 0 0 1 0 3.6h-1v3.7a1 1 0 0 1-1 1h-3.7v-1a1.9 1.9 0 0 0-3.6 0v1H6.5a1 1 0 0 1-1-1v-3.7h-1a1.9 1.9 0 0 1 0-3.6h1V6.5a1 1 0 0 1 1-1h3.7z" />
+  ),
   user: (
     <>
       <circle cx="12" cy="8.5" r="3.5" />

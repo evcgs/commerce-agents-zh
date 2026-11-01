@@ -15,6 +15,7 @@ from typing import Any
 from commerce_common.delegation import DelegateExtension
 from commerce_common.execution import BaseToolExecutor, Handler, parse_argument
 from commerce_common.fencing import truncate_display
+from commerce_common.locale import t
 from commerce_common.memory import MemoryRuntime
 from commerce_common.presentation import PresentationExtension
 from commerce_common.skills import SkillRegistry
@@ -44,7 +45,7 @@ from .gates import (
     guardrail_block_message,
     take_discard_actor_kind,
 )
-from .memory import MERCHANT_MEMORY_EXTRACTION_PROMPT
+from .memory import merchant_extraction_prompt
 from .serialization import (
     alert_record,
     listing_details_payload,
@@ -79,7 +80,7 @@ def build_memory(
         config,
         store,
         fence=MERCHANT_FENCE,
-        extraction_prompt=MERCHANT_MEMORY_EXTRACTION_PROMPT,
+        extraction_prompt=merchant_extraction_prompt(),
         write_filter=write_filter,
     )
 
@@ -91,16 +92,37 @@ def _record(model: Any) -> dict[str, Any]:
 class MerchantToolExecutor(BaseToolExecutor):
     fence = MERCHANT_FENCE
     components = PRESENTATION_COMPONENTS
-    displayed_text = "Displayed to the operator."
-    unavailable_text = (
-        "{name} is temporarily unavailable. Work with what you already have or let the "
-        "operator know."
-    )
-    absent_text = "{name} is not something this portal does; say so plainly and do not suggest it."
-    delegate_repeat_text = (
-        "{name} already ran {count} times this turn — reuse the analysis result above, "
-        "or tell the operator a fresh run needs a new message."
-    )
+    # The tool-result copy is per-locale, so each is a property resolved at read time
+    # rather than a class attribute frozen at import under whichever locale loaded first.
+
+    @property
+    def displayed_text(self) -> str:
+        return t("Displayed to the operator.", "已展示给运营人员。")
+
+    @property
+    def unavailable_text(self) -> str:
+        return t(
+            "{name} is temporarily unavailable. Work with what you already have or let the "
+            "operator know.",
+            "{name} 暂时不可用。请基于已有信息继续，或如实告知运营人员。",
+        )
+
+    @property
+    def absent_text(self) -> str:
+        return t(
+            "{name} is not something this portal does; say so plainly and do not suggest it.",
+            "{name} 不是本门户提供的功能；请直接说明，不要建议使用。",
+        )
+
+    @property
+    def delegate_repeat_text(self) -> str:
+        return t(
+            "{name} already ran {count} times this turn — reuse the analysis result above, "
+            "or tell the operator a fresh run needs a new message.",
+            "{name} 本回合已运行 {count} 次——请复用上方的分析结果，或告知运营人员"
+            "需要新消息才能重新运行。",
+        )
+
     progress_max_chars = PROGRESS_MESSAGE_MAX_CHARS
 
     def __init__(

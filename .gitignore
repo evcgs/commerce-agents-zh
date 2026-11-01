@@ -40,3 +40,16 @@ merchant-agent/managed-agents/merchant-mcp-server/.merchant_memory.json
 .vscode/
 .claude/
 pyrightconfig.json
+
+# commerce-agents-zh: run-time model settings (can carry an API key)
+examples/retail/data/model-override.json
+# commerce-agents-zh: run-time prompt overrides (static system prompts)
+examples/retail/data/prompt-override.json
+# commerce-agents-zh: prompt-version history (editable timeline; carries prompt text)
+examples/retail/data/prompt-versions.json
+# commerce-agents-zh: run-time data-source settings (can carry an API key)
+examples/retail/data/backend-override.json
+
+# commerce-agents-zh: agentctl runtime artifacts (logs + pidfile)
+logs/
+examples/retail/data/.agentctl.pids

@@ -7,6 +7,7 @@
 
 import type { ReactNode } from "react";
 import { Icon } from "../icons";
+import { t } from "../i18n";
 import { IconButton } from "../ui";
 import { useStoreFrame } from "./frame";
 
@@ -43,7 +44,7 @@ export function BagPanel({
         >
           {count}
         </span>
-        <IconButton icon="x" label={`Close ${title.toLowerCase()}`} onClick={closePanel} className="ml-auto xl:hidden" />
+        <IconButton icon="x" label={t(`Close ${title.toLowerCase()}`, `关闭${title}`)} onClick={closePanel} className="ml-auto xl:hidden" />
       </div>
       <div className="panel-scroll min-h-0 flex-1 overflow-y-auto px-[18px] py-3.5">
         {isEmpty ? (
@@ -102,14 +103,14 @@ export function Stepper({
   onChange: (quantity: number) => void;
 }) {
   const busy = useStoreFrame().chat?.busy ?? false;
-  const units = unit ? ` ${unit}${quantity === 1 ? "" : "s"}` : "";
+  const units = unit ? t(` ${unit}${quantity === 1 ? "" : "s"}`, ` ${unit}`) : "";
   return (
     <div className="flex items-center rounded-full border border-(--line-strong) bg-(--card)">
       <button
         type="button"
         disabled={busy}
         onClick={() => onChange(quantity - 1)}
-        aria-label={unit ? `Fewer ${unit}s for ${itemTitle}` : `Decrease ${itemTitle} quantity`}
+        aria-label={unit ? t(`Fewer ${unit}s for ${itemTitle}`, `减少 ${itemTitle} 的${unit}`) : t(`Decrease ${itemTitle} quantity`, `减少 ${itemTitle} 的数量`)}
         className="px-2.5 py-0.5 text-sm text-(--ink-soft) hover:text-(--ink) disabled:opacity-40"
       >
         −
@@ -122,7 +123,7 @@ export function Stepper({
         type="button"
         disabled={busy}
         onClick={() => onChange(quantity + 1)}
-        aria-label={unit ? `More ${unit}s for ${itemTitle}` : `Increase ${itemTitle} quantity`}
+        aria-label={unit ? t(`More ${unit}s for ${itemTitle}`, `增加 ${itemTitle} 的${unit}`) : t(`Increase ${itemTitle} quantity`, `增加 ${itemTitle} 的数量`)}
         className="px-2.5 py-0.5 text-sm text-(--ink-soft) hover:text-(--ink) disabled:opacity-40"
       >
         +
@@ -138,10 +139,10 @@ export function RemoveLink({ itemTitle, onClick }: { itemTitle: string; onClick:
       type="button"
       disabled={busy}
       onClick={onClick}
-      aria-label={`Remove ${itemTitle}`}
+      aria-label={t(`Remove ${itemTitle}`, `移除 ${itemTitle}`)}
       className="text-[12px] text-(--ink-soft) underline-offset-2 hover:text-(--danger) hover:underline disabled:opacity-40"
     >
-      Remove
+      {t("Remove", "移除")}
     </button>
   );
 }
@@ -157,17 +158,17 @@ export function CheckoutButton({ staged, disabled, prompt }: { staged: boolean; 
           const cards = document.querySelectorAll("[data-checkout-card]");
           const card = cards[cards.length - 1];
           if (card) card.scrollIntoView({ behavior: "smooth", block: "center" });
-          else ask("Show me the checkout summary again.");
+          else ask(t("Show me the checkout summary again.", "再给我看一下结算摘要。"));
         }}
         className="mt-3 w-full rounded-(--radius) border border-(--line-strong) bg-(--card) py-2.5 text-[14px] font-semibold text-(--ink) transition hover:border-(--accent)"
       >
-        View summary
+        {t("View summary", "查看摘要")}
       </button>
     );
   }
   return (
     <button type="button" onClick={() => ask(prompt)} disabled={disabled} className="btn-primary mt-3 w-full">
-      Check out
+      {t("Check out", "去结算")}
     </button>
   );
 }

@@ -4,7 +4,7 @@
 "use client";
 
 import { useId } from "react";
-import { formatMoney, useCatalogIndex, safeHandoffs } from "web-shared";
+import { formatMoney, useCatalogIndex, safeHandoffs, t } from "web-shared";
 import { fetchProducts } from "@/lib/api";
 import type { CheckoutPayload, Product } from "@/lib/types";
 import { STORE_POLICY } from "@/lib/storePolicy";
@@ -23,10 +23,10 @@ export default function CheckoutSummary({ payload }: { payload: CheckoutPayload 
   return (
     <section data-checkout-card className="rounded-2xl border-2 border-(--accent) bg-(--card) p-4 shadow-(--shadow-sm)">
       <div className="flex items-center justify-between gap-2">
-        <h3 className="text-[15px] font-semibold text-(--ink)">Ready to check out</h3>
+        <h3 className="text-[15px] font-semibold text-(--ink)">{t("Ready to check out", "可以结算了")}</h3>
         <div className="flex items-center gap-1.5">
           <span className="whitespace-nowrap rounded-full border border-(--line) bg-(--well)/60 px-2.5 py-0.5 text-[11px] font-semibold text-(--ink-soft)">
-            Not charged
+            {t("Not charged", "未扣款")}
           </span>
           {payload.fulfillment_method ? (
             <span className="rounded-full bg-(--accent-soft) px-2.5 py-0.5 text-[13px] font-semibold capitalize text-(--ink)">
@@ -63,39 +63,43 @@ export default function CheckoutSummary({ payload }: { payload: CheckoutPayload 
           );
         })}
         <div className="flex justify-between border-t border-(--line) pt-1.5 text-(--ink)">
-          <span>Subtotal</span>
+          <span>{t("Subtotal", "小计")}</span>
           <span>{formatMoney(cart.subtotal, cart.currency)}</span>
         </div>
         <div className="flex justify-between gap-2 text-(--ink)">
           <span>
-            Shipping{" "}
+            {t("Shipping", "运费")}{" "}
             <span className="text-[13px] text-(--ink-soft)">
-              standard · {STORE_POLICY.standardShippingEta}
+              {t("standard", "标准")} · {STORE_POLICY.standardShippingEta}
             </span>
           </span>
           <span className={freeShipping ? "font-medium text-(--ok)" : "text-(--ink)"}>
-            {freeShipping ? "Free" : "Calculated at checkout"}
+            {freeShipping ? t("Free", "免费") : t("Calculated at checkout", "结算时计算")}
           </span>
         </div>
         {!freeShipping && STORE_POLICY.freeShippingThreshold - cart.subtotal > 0 ? (
           <div className="flex justify-between text-[13px] text-(--ink-soft)">
             <span>
-              Add {formatMoney(STORE_POLICY.freeShippingThreshold - cart.subtotal)} more to
-              unlock free shipping
+              {t(
+                `Add ${formatMoney(STORE_POLICY.freeShippingThreshold - cart.subtotal)} more to unlock free shipping`,
+                `再买 ${formatMoney(STORE_POLICY.freeShippingThreshold - cart.subtotal)} 即可免运费`,
+              )}
             </span>
           </div>
         ) : null}
         <div className="flex justify-between text-(--ink)">
-          <span>Tax</span>
-          <span>Calculated at checkout</span>
+          <span>{t("Tax", "税费")}</span>
+          <span>{t("Calculated at checkout", "结算时计算")}</span>
         </div>
         <div className="flex justify-between border-t border-(--line) pt-1.5 text-base font-bold text-(--ink)">
-          <span>Estimated total</span>
+          <span>{t("Estimated total", "预计总额")}</span>
           <span>{formatMoney(cart.subtotal, cart.currency)}</span>
         </div>
         <p className="text-[11px] leading-snug text-(--ink-soft)">
-          {freeShipping ? "Before tax" : "Before shipping and tax"}; the final total appears at
-          checkout.
+          {t(
+            `${freeShipping ? "Before tax" : "Before shipping and tax"}; the final total appears at checkout.`,
+            `${freeShipping ? "未含税费" : "未含运费和税费"}，最终金额以结算页为准。`,
+          )}
         </p>
       </div>
       <p className="mt-2 text-[11px] text-(--ink-soft)">{STORE_POLICY.returnsLine}</p>
@@ -111,7 +115,7 @@ export default function CheckoutSummary({ payload }: { payload: CheckoutPayload 
               aria-describedby={handoffNoteId}
               className="w-full rounded-xl bg-(--accent) py-2.5 text-center text-sm font-bold text-(--ink)"
             >
-              {h.label ?? (h.seller ? `Continue to checkout with ${h.seller}` : "Continue to checkout")}
+              {h.label ?? (h.seller ? t(`Continue to checkout with ${h.seller}`, `继续到 ${h.seller} 完成支付`) : t("Continue to checkout", "前往结算"))}
             </a>
           ))}
         </div>
@@ -122,13 +126,13 @@ export default function CheckoutSummary({ payload }: { payload: CheckoutPayload 
           aria-disabled
           aria-describedby={handoffNoteId}
           className="mt-3 w-full cursor-not-allowed rounded-xl bg-(--accent) py-2.5 text-sm font-bold text-(--ink) opacity-90"
-          title="Nothing is charged here. Payment happens when you check out."
+          title={t("Nothing is charged here. Payment happens when you check out.", "此处不会扣款，支付在结算时完成。")}
         >
-          Continue to checkout
+          {t("Continue to checkout", "前往结算")}
         </button>
       )}
       <p id={handoffNoteId} className="mt-2 text-center text-[11px] text-(--ink-soft)/80">
-        Nothing is charged here. Payment happens when you check out.
+        {t("Nothing is charged here. Payment happens when you check out.", "此处不会扣款，支付在结算时完成。")}
       </p>
     </section>
   );

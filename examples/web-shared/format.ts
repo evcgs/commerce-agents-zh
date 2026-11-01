@@ -1,6 +1,8 @@
 // Copyright 2026 Anthropic PBC
 // SPDX-License-Identifier: Apache-2.0
 
+import { t } from "./i18n";
+
 const moneyFormatters = new Map<string, Intl.NumberFormat>();
 
 export function formatMoney(
@@ -46,7 +48,7 @@ const ISO_DAY = /\d{4}-\d{2}-\d{2}/g;
 function dayLabel(value: string): string {
   const date = parseDate(value);
   if (Number.isNaN(date.getTime())) return value;
-  return date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+  return date.toLocaleDateString(t("en-US", "zh-CN"), { month: "short", day: "numeric", year: "numeric" });
 }
 
 /** "Jun 24, 2026"; dates inside a trailing note ("(revised from ...)") are formatted too. */
@@ -61,7 +63,7 @@ export function formatDayMonth(value: string | null | undefined): string {
   if (!value) return "";
   const date = parseDate(value);
   if (Number.isNaN(date.getTime())) return value;
-  return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+  return date.toLocaleDateString(t("en-US", "zh-CN"), { month: "short", day: "numeric" });
 }
 
 /** "Fri, Aug 21", or "Fri, Jan 2, 2027" outside the current year. */
@@ -70,7 +72,7 @@ export function formatWeekday(value: string | null | undefined): string {
   const date = parseDate(value);
   if (Number.isNaN(date.getTime())) return value;
   const year = date.getFullYear() === new Date().getFullYear() ? undefined : "numeric";
-  return date.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric", year });
+  return date.toLocaleDateString(t("en-US", "zh-CN"), { weekday: "short", month: "short", day: "numeric", year });
 }
 
 /** "1 order", "3 orders". */
@@ -78,14 +80,18 @@ export function plural(count: number, one: string, many = `${one}s`): string {
   return `${formatNumber(count)} ${count === 1 ? one : many}`;
 }
 
-/** "12 days of cover", "1 day of cover", "<1 day of cover". */
+/** "库存不足 1 天", "库存可撑 X 天". */
 export function coverLabel(days: number): string {
-  return days < 1 ? "<1 day of cover" : `${plural(Math.round(days), "day")} of cover`;
+  return days < 1
+    ? t("<1 day of cover", "库存不足 1 天")
+    : t(`${plural(Math.round(days), "day")} of cover`, `库存可撑 ${formatNumber(Math.round(days))} 天`);
 }
 
-/** "sells out in ~4 days", "sells out within a day". */
+/** "约 X 天后售罄", "一天内售罄". */
 export function runwayLabel(days: number): string {
-  return days < 1 ? "sells out within a day" : `sells out in ~${plural(Math.round(days), "day")}`;
+  return days < 1
+    ? t("sells out within a day", "一天内售罄")
+    : t(`sells out in ~${plural(Math.round(days), "day")}`, `约 ${formatNumber(Math.round(days))} 天后售罄`);
 }
 
 /** What can still be chosen on a product with options, and what a variant chose. */
@@ -113,10 +119,10 @@ export function optionValuesLabel(item: Pick<OptionFields, "option_values">): st
   return Object.values(item.option_values ?? {}).join(" · ");
 }
 
-/** "From $349" on a family record, whose price is its lowest variant's; the plain price otherwise. */
+/** Family record shows a "$349 起" style label (lowest variant's price); the plain price otherwise. */
 export function priceLabel(product: OptionFields): string {
   const money = formatMoney(product.price, product.currency);
-  return hasOptions(product) ? `From ${money}` : money;
+  return hasOptions(product) ? t(`From ${money}`, `${money} 起`) : money;
 }
 
 export function titleCase(value: string): string {
@@ -192,7 +198,7 @@ export function formatComparisonLabel(
     const compareEnd = parseDate(compare[2]).getTime();
     const compareDays = Math.round((compareEnd - parseDate(compare[1]).getTime()) / dayMs);
     if (primaryDays === compareDays && Math.round((primaryStart - compareEnd) / dayMs) === 1) {
-      return primaryDays === 6 ? "prior week" : "prior period";
+      return primaryDays === 6 ? t("prior week", "上一周") : t("prior period", "上一时段");
     }
   }
   return formatPeriodLabel(compareTo);
@@ -203,8 +209,8 @@ export function describeProposer(change: {
   created_by_kind?: "operator" | "agent";
 }): string {
   return change.created_by_kind === "agent"
-    ? `Proposed by ${change.created_by}'s assistant`
-    : `Staged by ${change.created_by}`;
+    ? t(`Proposed by ${change.created_by}'s assistant`, `由 ${change.created_by} 的助手提议`)
+    : t(`Staged by ${change.created_by}`, `由 ${change.created_by} 暂存`);
 }
 
 /** Approvals are always a person. */
@@ -214,11 +220,12 @@ export function describeResolver(change: {
   discarded_by?: string | null;
   discarded_by_kind?: "operator" | "agent" | null;
 }): string | null {
-  if (change.status === "applied" && change.applied_by) return `Approved by ${change.applied_by}`;
+  if (change.status === "applied" && change.applied_by)
+    return t(`Approved by ${change.applied_by}`, `已由 ${change.applied_by} 批准`);
   if (change.status === "discarded" && change.discarded_by) {
     return change.discarded_by_kind === "agent"
-      ? `Dismissed by ${change.discarded_by}'s assistant`
-      : `Dismissed by ${change.discarded_by}`;
+      ? t(`Dismissed by ${change.discarded_by}'s assistant`, `已由 ${change.discarded_by} 的助手驳回`)
+      : t(`Dismissed by ${change.discarded_by}`, `已由 ${change.discarded_by} 驳回`);
   }
   return null;
 }
@@ -226,9 +233,9 @@ export function describeResolver(change: {
 /** "Good morning" before noon, "Good afternoon" until six, then "Good evening". */
 export function greeting(now: Date): string {
   const hour = now.getHours();
-  if (hour < 12) return "Good morning";
-  if (hour < 18) return "Good afternoon";
-  return "Good evening";
+  if (hour < 12) return t("Good morning", "早上好");
+  if (hour < 18) return t("Good afternoon", "下午好");
+  return t("Good evening", "晚上好");
 }
 
 export interface HandoffLink {

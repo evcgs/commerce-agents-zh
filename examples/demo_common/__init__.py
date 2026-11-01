@@ -9,6 +9,7 @@ and adds only its own routes. This module exports what the verticals and their t
 import; the fixture helpers are imported from their own modules."""
 
 from .host import REPO_ROOT, host_approval_default, load_demo_env, spawn_background
+from .locale import get_locale, normalize, set_locale, t
 from .memory import MemorySeeder
 from .merchant import MerchantIdentity, build_merchant_router
 from .sessions import (
@@ -20,6 +21,7 @@ from .sessions import (
     session_dependency,
 )
 from .storefront import CartAddRequest, StorefrontHost, build_storefront_host
+from .storefront_fixtures import load_localized_json
 
 __all__ = [
     "REPO_ROOT",
@@ -34,8 +36,13 @@ __all__ = [
     "UnknownSessionError",
     "build_merchant_router",
     "build_storefront_host",
+    "get_locale",
     "host_approval_default",
     "load_demo_env",
+    "load_localized_json",
+    "normalize",
     "session_dependency",
+    "set_locale",
     "spawn_background",
+    "t",
 ]

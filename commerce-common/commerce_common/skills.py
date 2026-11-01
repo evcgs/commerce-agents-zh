@@ -13,12 +13,17 @@ from pathlib import Path
 
 import yaml
 
+from commerce_common.locale import get_locale, t
+
 
 @dataclass(frozen=True)
 class Skill:
     name: str
     description: str
     body: str
+    # commerce-agents-zh: Chinese copies. Empty falls back to the upstream English text.
+    description_zh: str = ""
+    body_zh: str = ""
 
 
 class SkillLoadError(ValueError):
@@ -37,7 +42,15 @@ def parse_skill_md(text: str, path: Path | None = None) -> Skill:
     description = meta.get("description")
     if not name or not description:
         raise SkillLoadError(f"{path or 'SKILL.md'}: frontmatter needs `name` and `description`")
-    return Skill(name=str(name), description=str(description).strip(), body=body.strip())
+    description_zh = str(meta.get("description_zh") or description).strip()
+    body_zh = (meta.get("body_zh") or "").strip()
+    return Skill(
+        name=str(name),
+        description=str(description).strip(),
+        body=body.strip(),
+        description_zh=description_zh,
+        body_zh=body_zh,
+    )
 
 
 def load_skill_dir(skill_dir: Path) -> Skill:
@@ -79,8 +92,16 @@ class SkillRegistry:
     def index_block(self) -> str:
         if not self._skills:
             return "(no skills installed)"
-        return "\n".join(f"- `{skill.name}` — {skill.description}" for skill in self._skills)
+        return "\n".join(
+            f"- `{skill.name}` — {t(skill.description, skill.description_zh)}"
+            for skill in self._skills
+        )
 
     def get_instructions(self, name: str) -> str | None:
         skill = self._by_name.get(name)
-        return None if skill is None else skill.body
+        if skill is None:
+            return None
+        # Chinese edition: in the zh locale, serve the Chinese body when one exists.
+        if get_locale() == "zh" and skill.body_zh:
+            return skill.body_zh
+        return skill.body

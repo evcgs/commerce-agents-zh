@@ -6,6 +6,8 @@
 import pytest
 
 from demo_common.tests.fixtures import session_record
+
+# The conftest pins the process to English before anything imports.
 from retail.api import main
 
 

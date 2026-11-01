@@ -1,41 +1,14 @@
 // Copyright 2026 Anthropic PBC
 // SPDX-License-Identifier: Apache-2.0
+// commerce-agents-zh: the page body renders client-side so the bilingual layer's
+// module-level copy evaluates under the language cookie before the first paint.
 
 "use client";
 
-/** Renders lib/showcase-fixtures.ts; no API needed. */
+import dynamic from "next/dynamic";
 
-import CartPanel from "@/components/CartPanel";
-import GenerativeBlock from "@/components/generative";
-import { SHOWCASE, SHOWCASE_CART } from "@/lib/showcase-fixtures";
+const ShowcasePage = dynamic(() => import("./ShowcaseImpl"), { ssr: false });
 
-const SECTIONS = Object.keys(SHOWCASE) as (keyof typeof SHOWCASE)[];
-
-function Section({ name, children }: { name: string; children: React.ReactNode }) {
-  return (
-    <section className="mt-10">
-      <h2 className="mb-3 font-mono text-sm text-(--ink-soft)">{name}</h2>
-      <div data-component={name}>{children}</div>
-    </section>
-  );
-}
-
-export default function ShowcasePage() {
-  return (
-    <main className="mx-auto max-w-2xl px-6 py-12">
-      <p className="text-[11px] font-semibold uppercase tracking-widest text-(--ink-soft)">
-        ACME component showcase (fixture data)
-      </p>
-      {SECTIONS.map((name) => (
-        <Section key={name} name={name}>
-          <GenerativeBlock block={{ component: name, payload: SHOWCASE[name] }} status="final" onAdd={() => true} />
-        </Section>
-      ))}
-      <Section name="cart">
-        <div className="flex h-[440px] flex-col overflow-hidden rounded-xl border border-(--line) bg-(--card)">
-          <CartPanel cart={SHOWCASE_CART} />
-        </div>
-      </Section>
-    </main>
-  );
+export default function Page() {
+  return <ShowcasePage />;
 }

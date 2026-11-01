@@ -4,7 +4,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { formatMoney, optionValuesLabel, priceLabel, useStoreFrame } from "web-shared";
+import { formatMoney, optionValuesLabel, priceLabel, t, useStoreFrame } from "web-shared";
 import { fetchProduct } from "@/lib/api";
 import type { PriceIntelligence, Product, ProductDetails, ProductsPayload, ReviewAspects } from "@/lib/types";
 import ProductTile, { AddButton, DeliveryPromise, OptionLine, ProductImage, Rating } from "../ProductTile";
@@ -45,11 +45,11 @@ function PriceIntelligenceRow({ intel }: { intel: PriceIntelligence }) {
         <div className="text-[13px] font-semibold text-(--ink)">{intel.verdict}</div>
         <div className="text-[11px] text-(--ink-soft)">
           {intel.position === "low"
-            ? "Sitting near the low end of its own range"
+            ? t("Sitting near the low end of its own range", "处于近期价格区间的低位")
             : intel.position === "high"
-              ? "Sitting near the high end of its own range"
-              : "Sitting in the typical band of its own range"}
-          {" "}· last {intel.days} days
+              ? t("Sitting near the high end of its own range", "处于近期价格区间的高位")
+              : t("Sitting in the typical band of its own range", "处于近期常见价格区间")}
+          {" "}{t(`· last ${intel.days} days`, `· 近 ${intel.days} 天`)}
         </div>
       </div>
     </div>
@@ -60,14 +60,20 @@ function ReviewAspectsRow({ synthesis }: { synthesis: ReviewAspects }) {
   return (
     <div data-review-aspects className="mt-2">
       <div className="text-[11px] font-semibold uppercase tracking-wide text-(--ink-soft)">
-        From {synthesis.review_count.toLocaleString()} customer reviews
+        {t(
+          `From ${synthesis.review_count.toLocaleString()} customer reviews`,
+          `来自 ${synthesis.review_count.toLocaleString()} 条买家评价`,
+        )}
       </div>
       <div className="mt-1.5 flex flex-wrap gap-1.5">
         {synthesis.aspects.map((aspect) => (
           <div
             key={aspect.name}
             className="rounded-lg border border-(--line) bg-(--card) px-2 py-1"
-            title={`${aspect.name}: ${aspect.positive_pct}% positive across ${aspect.mentions.toLocaleString()} mentions`}
+            title={t(
+              `${aspect.name}: ${aspect.positive_pct}% positive across ${aspect.mentions.toLocaleString()} mentions`,
+              `${aspect.name}：${aspect.positive_pct}% 好评，共 ${aspect.mentions.toLocaleString()} 条提及`,
+            )}
           >
             <div className="flex items-baseline gap-1.5 text-[13px]">
               <span className="font-medium text-(--ink)">{aspect.name}</span>
@@ -79,7 +85,7 @@ function ReviewAspectsRow({ synthesis }: { synthesis: ReviewAspects }) {
                 {aspect.positive_pct}%
               </span>
               <span className="text-[11px] text-(--ink-soft)">
-                {aspect.mentions.toLocaleString()} mentions
+                {t(`${aspect.mentions.toLocaleString()} mentions`, `${aspect.mentions.toLocaleString()} 条提及`)}
               </span>
             </div>
             <div className="mt-1 h-1 w-full overflow-hidden rounded-full bg-(--well)">
@@ -102,7 +108,7 @@ function VariantList({ family, variants }: { family: Product; variants: Product[
   const { ask } = useStoreFrame();
   const pricesDiffer = variants.some((variant) => variant.price !== variants[0]?.price);
   return (
-    <ul className="mt-2 flex flex-wrap gap-1.5" aria-label="Options">
+    <ul className="mt-2 flex flex-wrap gap-1.5" aria-label={t("Options", "规格")}>
       {variants.map((variant) => {
         const label = optionValuesLabel(variant);
         const available = variant.in_stock !== false;
@@ -111,7 +117,7 @@ function VariantList({ family, variants }: { family: Product; variants: Product[
             <button
               type="button"
               disabled={!available}
-              onClick={() => ask(`Add the ${family.title} in ${label} (${variant.product_id}) to my cart.`)}
+              onClick={() => ask(t(`Add the ${family.title} in ${label} (${variant.product_id}) to my cart.`, `帮我选 ${label} 规格的 ${family.title}（${variant.product_id}），加入购物车。`))}
               className="rounded-full border border-(--line) bg-(--card) px-2.5 py-1 text-[12px] text-(--ink) transition-colors hover:border-(--ink) disabled:cursor-not-allowed disabled:text-(--ink-soft)/70 disabled:line-through"
             >
               {label}
@@ -168,7 +174,7 @@ function ProductDetail({
                 <Rating rating={full.rating} count={full.review_count} />
                 {full.in_stock === false ? (
                   <span className="rounded-full bg-(--ink)/85 px-2 py-0.5 text-[11px] font-medium text-(--surface)">
-                    Out of stock
+                    {t("Out of stock", "已售罄")}
                   </span>
                 ) : null}
               </div>
@@ -176,7 +182,7 @@ function ProductDetail({
             </div>
             <button
               onClick={onClose}
-              aria-label="Collapse details"
+              aria-label={t("Collapse details", "收起详情")}
               className="shrink-0 rounded-md px-1.5 text-base leading-none text-(--ink-soft) hover:text-(--ink)"
             >
               ×
@@ -189,7 +195,7 @@ function ProductDetail({
         <p className="mt-2 text-[13px] leading-snug text-(--ink)">{reason}</p>
       ) : null}
       {details === null ? (
-        <p className="mt-2 animate-pulse text-[13px] text-(--ink-soft)">Loading details…</p>
+        <p className="mt-2 animate-pulse text-[13px] text-(--ink-soft)">{t("Loading details…", "正在加载详情…")}</p>
       ) : (
         <div className="ac-reveal">
           {details.price_intelligence ? (
@@ -325,7 +331,7 @@ export default function ProductCarousel({
             />
             <button
               onClick={() => nudge(-1)}
-              aria-label="Scroll to previous products"
+              aria-label={t("Scroll to previous products", "滚动查看之前的商品")}
               className="absolute left-0 top-1/2 -translate-y-1/2 rounded-full border border-(--line) bg-(--card) px-2 py-1 text-sm text-(--ink) shadow-md transition hover:border-(--accent)"
             >
               ‹
@@ -340,7 +346,7 @@ export default function ProductCarousel({
             />
             <button
               onClick={() => nudge(1)}
-              aria-label="Scroll to more products"
+              aria-label={t("Scroll to more products", "滚动查看更多商品")}
               className="absolute right-0 top-1/2 -translate-y-1/2 rounded-full border border-(--line) bg-(--card) px-2 py-1 text-sm text-(--ink) shadow-md transition hover:border-(--accent)"
             >
               ›

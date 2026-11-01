@@ -13,6 +13,7 @@ from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
 from typing import Any
 
+from demo_common.locale import t
 from demo_common.merchant_fixtures import (
     FAMILY_CONTENT_FIELDS,
     alert_counts,
@@ -34,7 +35,7 @@ from demo_common.merchant_fixtures import (
     snapshot_of,
     stage_campaign,
 )
-from demo_common.storefront_fixtures import load_json, refresh_family
+from demo_common.storefront_fixtures import load_localized_json, refresh_family
 from merchant_agent import (
     ActorKind,
     AlertCounts,
@@ -78,13 +79,24 @@ class MockRetailMerchant(MerchantBackend):
     ) -> None:
         self.storefront = storefront
         self.config = config or MerchantAgentConfig(brand_name=storefront.store_name)
+        # The ledger holds the operator's staged work; a locale reload re-reads fixtures
+        # only, so it is built once here and never rebuilt.
         self.ledger = ChangeLedger(self.config)
         # Analysis queries are refused for sessions scoped to any other merchant.
         self.merchant_id = merchant_id
-        metrics = load_json(data_dir, "merchant_metrics.json")
+        self._data_dir = data_dir
+        self.reload()
+
+    def reload(self) -> None:
+        """Re-read every merchant fixture under the active locale; the ``/api/locale``
+        route calls this when the language toggles, so metrics, inventory, campaigns,
+        and order issues follow it, and the config's brand name follows the storefront's
+        store name. Staged changes stay in the ledger untouched."""
+        data_dir = self._data_dir
+        metrics = load_localized_json(data_dir, "merchant_metrics.json")
         self._daily = rebase_daily(metrics["daily"])
         self._currency: str = metrics.get("currency", "USD")
-        inventory = load_json(data_dir, "merchant_inventory.json")
+        inventory = load_localized_json(data_dir, "merchant_inventory.json")
         self._default_stock: int = inventory.get("default_stock", 40)
         self._default_threshold: int = inventory.get("default_threshold", 8)
         self._inventory: dict[str, dict[str, Any]] = {
@@ -93,6 +105,7 @@ class MockRetailMerchant(MerchantBackend):
         self._assert_storefront_consistency()
         self._campaigns = load_campaigns(data_dir)
         self._issues = load_issues(data_dir)
+        self.config = self.config.model_copy(update={"brand_name": self.storefront.store_name})
 
     # ------------------------------------------------------------------
     # Listings
@@ -237,16 +250,27 @@ class MockRetailMerchant(MerchantBackend):
         if worst is not None:
             product, rate, row = worst
             sold = row.get("sales_last_30d")
-            pace = f" on {sold} sales in 30 days" if sold else ""
+            pace = t(f" on {sold} sales in 30 days", f" {sold} 笔") if sold else ""
             insights.append(
                 {
                     "insight_id": f"return-rate-{product.product_id}",
                     "kind": "returns",
-                    "headline": f"Returns on {product.title} are running at {rate:.0f}%",
-                    "detail": f"{rate:.0f}% of units come back{pace}; "
-                    "worth a look at the listing content before restocking.",
-                    "prompt": f"Returns on {product.title} ({product.product_id}) are at "
-                    f"{rate:.0f}%. What's the likely cause and what would you change?",
+                    "headline": t(
+                        f"Returns on {product.title} are running at {rate:.0f}%",
+                        f"{product.title} 的退货率已达 {rate:.0f}%",
+                    ),
+                    "detail": t(
+                        f"{rate:.0f}% of units come back{pace}; "
+                        "worth a look at the listing content before restocking.",
+                        f"近30天{pace}销量中有 {rate:.0f}% 被退回；"
+                        "补货前建议先检查商品详情内容。",
+                    ),
+                    "prompt": t(
+                        f"Returns on {product.title} ({product.product_id}) are at "
+                        f"{rate:.0f}%. What's the likely cause and what would you change?",
+                        f"{product.title}（{product.product_id}）的退货率达到 "
+                        f"{rate:.0f}%。可能的原因是什么？你会怎么调整？",
+                    ),
                 }
             )
 
@@ -257,18 +281,28 @@ class MockRetailMerchant(MerchantBackend):
             prior = sum(r.get("kids_room_sales", 0.0) for r in rows[-14:-7])
             change = change_pct(current, prior)
             if change is not None and abs(change) >= 5:
-                direction = "up" if change >= 0 else "down"
+                direction = t("up", "上涨") if change >= 0 else t("down", "下跌")
                 insights.append(
                     {
                         "insight_id": "segment-trend-kids-room",
                         "kind": "trend",
-                        "headline": f"Kids' room sales are {direction} "
-                        f"{abs(change):.0f}% week-over-week",
-                        "detail": f"${current:,.0f} this week vs ${prior:,.0f} last week "
-                        "for the kids-room segment.",
-                        "prompt": f"Kids' room sales are {direction} {abs(change):.0f}% "
-                        "week-over-week. What's driving it, and is anything at risk of "
-                        "stocking out?",
+                        "headline": t(
+                            f"Kids' room sales are {direction} "
+                            f"{abs(change):.0f}% week-over-week",
+                            f"儿童房品类销售额环比{direction} {abs(change):.0f}%",
+                        ),
+                        "detail": t(
+                            f"${current:,.0f} this week vs ${prior:,.0f} last week "
+                            "for the kids-room segment.",
+                            f"儿童房品类本周销售额 ${current:,.0f}，上周为 ${prior:,.0f}。",
+                        ),
+                        "prompt": t(
+                            f"Kids' room sales are {direction} {abs(change):.0f}% "
+                            "week-over-week. What's driving it, and is anything at risk of "
+                            "stocking out?",
+                            f"儿童房品类销售额环比{direction} {abs(change):.0f}%。"
+                            "是什么在驱动？有商品面临断货风险吗？",
+                        ),
                     }
                 )
 
@@ -289,12 +323,24 @@ class MockRetailMerchant(MerchantBackend):
                     {
                         "insight_id": f"campaign-spread-{best.campaign_id}",
                         "kind": "campaign",
-                        "headline": "Your active campaigns are earning very different returns",
-                        "detail": f"{best.name} returns ${best_roas:.2f} per $1 spent; "
-                        f"{worst_campaign.name} returns ${worst_roas:.2f}.",
-                        "prompt": f"{best.name} is returning ${best_roas:.2f} per $1 vs "
-                        f"${worst_roas:.2f} for {worst_campaign.name}. Should budget "
-                        "move between them?",
+                        "headline": t(
+                            "Your active campaigns are earning very different returns",
+                            "您进行中的推广活动回报差异明显",
+                        ),
+                        "detail": t(
+                            f"{best.name} returns ${best_roas:.2f} per $1 spent; "
+                            f"{worst_campaign.name} returns ${worst_roas:.2f}.",
+                            f"{best.name} 每投入 $1 回报 ${best_roas:.2f}；"
+                            f"{worst_campaign.name} 每投入 $1 仅回报 ${worst_roas:.2f}。",
+                        ),
+                        "prompt": t(
+                            f"{best.name} is returning ${best_roas:.2f} per $1 vs "
+                            f"${worst_roas:.2f} for {worst_campaign.name}. Should budget "
+                            "move between them?",
+                            f"{best.name} 每投入 $1 回报 ${best_roas:.2f}，而 "
+                            f"{worst_campaign.name} 仅为 ${worst_roas:.2f}。要不要在两者之间"
+                            "调整预算？",
+                        ),
                     }
                 )
 
@@ -558,7 +604,10 @@ class MockRetailMerchant(MerchantBackend):
         # applying is the operator's own act.
         return self.ledger.stage(
             kind=ChangeKind.LISTING_UPDATE,
-            summary=note or f"Update listing content on {listing.listing_id}",
+            summary=note or t(
+                f"Update listing content on {listing.listing_id}",
+                f"更新商品 {listing.listing_id} 的内容",
+            ),
             items=items,
             actor=session.operator,
             actor_kind=ActorKind.AGENT,
@@ -602,15 +651,22 @@ class MockRetailMerchant(MerchantBackend):
                 margin_after = margin_pct(item.new_price, unit_cost)
                 margins.append((margin_before, margin_after))
                 margin_notes.append(
-                    f"{resolved} margin: {margin_before}% → {margin_after}% "
-                    f"({margin_after - margin_before:+.1f} pts)"
+                    t(
+                        f"{resolved} margin: {margin_before}% → {margin_after}% "
+                        f"({margin_after - margin_before:+.1f} pts)",
+                        f"{resolved} 毛利率：{margin_before}% → {margin_after}%"
+                        f"（{margin_after - margin_before:+.1f} 个百分点）",
+                    )
                 )
             change_items.append(
                 ChangeItem(target=resolved, field="price", before=before, after=item.new_price)
             )
         return self.ledger.stage(
             kind=ChangeKind.PRICE_UPDATE,
-            summary=note or f"Price update for {len(items)} listing(s)",
+            summary=note or t(
+                f"Price update for {len(items)} listing(s)",
+                f"更新 {len(items)} 个商品的价格",
+            ),
             items=change_items,
             actor=session.operator,
             actor_kind=ActorKind.AGENT,
@@ -650,7 +706,10 @@ class MockRetailMerchant(MerchantBackend):
             )
         return self.ledger.stage(
             kind=ChangeKind.INVENTORY_ACTION,
-            summary=note or f"Inventory action for {len(items)} listing(s)",
+            summary=note or t(
+                f"Inventory action for {len(items)} listing(s)",
+                f"对 {len(items)} 个商品执行库存操作",
+            ),
             items=change_items,
             actor=session.operator,
             actor_kind=ActorKind.AGENT,
@@ -686,8 +745,12 @@ class MockRetailMerchant(MerchantBackend):
                 margin_after = margin_pct(promo_price, unit_cost)
                 margins.append((margin_before, margin_after))
                 margin_notes.append(
-                    f"{listing_id} margin: {margin_before}% → {margin_after}% "
-                    f"({margin_after - margin_before:+.1f} pts) for the window"
+                    t(
+                        f"{listing_id} margin: {margin_before}% → {margin_after}% "
+                        f"({margin_after - margin_before:+.1f} pts) for the window",
+                        f"{listing_id} 活动期毛利率：{margin_before}% → {margin_after}%"
+                        f"（{margin_after - margin_before:+.1f} 个百分点）",
+                    )
                 )
             items.append(
                 ChangeItem(
@@ -699,8 +762,12 @@ class MockRetailMerchant(MerchantBackend):
             )
         return self.ledger.stage(
             kind=ChangeKind.PROMOTION,
-            summary=f"{promotion.name} ({promotion.discount_pct:.0f}% off, "
-            f"{promotion.starts} to {promotion.ends})",
+            summary=t(
+                f"{promotion.name} ({promotion.discount_pct:.0f}% off, "
+                f"{promotion.starts} to {promotion.ends})",
+                f"{promotion.name}（立减 {promotion.discount_pct:.0f}%，"
+                f"{promotion.starts} 至 {promotion.ends}）",
+            ),
             items=items,
             actor=session.operator,
             actor_kind=ActorKind.AGENT,
@@ -742,7 +809,9 @@ class MockRetailMerchant(MerchantBackend):
         for item in change.items:
             product = self._product(item.target)
             if product is not None and change.kind is ChangeKind.PROMOTION:
-                product.attributes["promotion"] = f"{change.summary}: {float(item.after):.2f}"
+                product.attributes["promotion"] = (
+                    f"{change.summary}{t(':', '：')}{float(item.after):.2f}"
+                )
             if product is not None and change.kind in {
                 ChangeKind.PRICE_UPDATE,
                 ChangeKind.INVENTORY_ACTION,
@@ -949,10 +1018,18 @@ class MockRetailMerchant(MerchantBackend):
             "limitations": [
                 DataLimitation(
                     source="campaigns",
-                    note="email sends report spend only; their attributed revenue is not available",
+                    note=t(
+                        "email sends report spend only; their attributed revenue is "
+                        "not available",
+                        "邮件推广仅上报花费，其归因收入不可用",
+                    ),
                 ).model_dump(),
                 DataLimitation(
-                    source="orders", note="order and sales history covers the last 90 days"
+                    source="orders",
+                    note=t(
+                        "order and sales history covers the last 90 days",
+                        "订单与销售历史仅覆盖近 90 天",
+                    ),
                 ).model_dump(),
             ],
             "alerts": {

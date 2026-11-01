@@ -11,6 +11,8 @@ export { useCatalogIndex } from "./catalog";
 export { type Prefill } from "./Composer";
 export * from "./format";
 export { type GenerativeBlockProps, UnknownBlock } from "./generative";
+export { lang, LanguageProvider, t, useLang, type Lang } from "./i18n";
+export { LanguageToggle } from "./LanguageToggle";
 export { Icon, type IconName } from "./icons";
 export { Inspector } from "./Inspector";
 export { AssistantPanel } from "./portal/AssistantPanel";

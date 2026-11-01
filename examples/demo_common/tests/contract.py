@@ -42,6 +42,21 @@ STOREFRONT_PUBLIC = {
     "/api/products",
     "/api/products/{product_id:path}",
     "/api/health",
+    # commerce-agents-zh: the language toggle's endpoint (locale switch + fixture reload).
+    "/api/locale",
+    # commerce-agents-zh: the model-settings sheet (view/store the model override).
+    "/api/models",
+    # commerce-agents-zh: the prompt sheet (view the rendered layers / store the
+    # static-system override; /content is a sub-path of the same public sheet;
+    # /versions lists saved edits and /restore-version rolls one back).
+    "/api/prompts",
+    "/api/prompts/content",
+    "/api/prompts/versions",
+    "/api/prompts/restore-version",
+    # commerce-agents-zh: the connector sheet (view/store the data-source override;
+    # /ping is the test-connection button of the same public sheet).
+    "/api/backends",
+    "/api/backends/ping",
 }
 MERCHANT_PUBLIC = {"/api/merchant/session", "/api/merchant/health"}
 LOOPBACK = ("127.0.0.1", 12345)

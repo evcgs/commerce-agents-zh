@@ -15,8 +15,8 @@ from commerce_common.config import BaseAgentConfig, ThinkingEffort
 class ShoppingAgentConfig(BaseAgentConfig):
     assistant_name: str = "the shopping assistant"
     brand_voice: str = "warm, concise, and plain about trade-offs"
-    model: str = "claude-sonnet-5"
-    thinking_effort: ThinkingEffort | None = "low"
+    model: str = "gpt-5.5"
+    thinking_effort: ThinkingEffort | None = None
 
     # -- Capabilities (prompt). `domain_search_notes` is one extra search rule for the
     # domain (a travel deployment names its date filter); `enable_disclosures` registers

@@ -14,6 +14,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any
 
+from demo_common.locale import get_locale, t
 from demo_common.storefront_fixtures import (
     SessionCarts,
     example_data_dir,
@@ -109,13 +110,27 @@ STANDARD_SHIPPING = FulfillmentOption(
 )
 EXPRESS_SHIPPING = FulfillmentOption(method="delivery", eta="2 business days (express)", fee=9.99)
 FREIGHT_SHIPPING = FulfillmentOption(method="shipping", eta="5-7 business days (freight)", fee=29.0)
+
+
+def _zh_shipping(option: FulfillmentOption, zh_eta: str) -> FulfillmentOption:
+    """The upstream shipping option, its eta swapped for the Chinese one under ``zh``."""
+    return option.model_copy(update={"eta": zh_eta}) if get_locale() == "zh" else option
+
+
 _STORE_OPENS, _STORE_CLOSES = 9, 21
 
 
 class MockRetail(StorefrontBackend):
     def __init__(self, data_dir: Path = DATA_DIR) -> None:
+        self._data_dir = data_dir
+        self.reload()
+
+    def reload(self) -> None:
+        """Re-read every fixture under the active locale; the ``/api/locale`` route calls
+        this when the language toggles, so the catalog, orders, and policies follow it."""
+        data_dir = self._data_dir
         catalog, self.products, self.variants = load_catalog(data_dir)
-        self.store_name: str = catalog.get("store_name", "the store")
+        self.store_name: str = catalog.get("store_name", t("the store", "本店"))
         self._users = load_users(data_dir)
         self._orders = load_orders(data_dir)
         self._policies = load_policies(data_dir)
@@ -128,13 +143,17 @@ class MockRetail(StorefrontBackend):
         stable 2-4 day offset per product, never a Sunday, so promises stay current and
         a product's promise is the same for the whole run."""
         boot = datetime.now()
+        weekday_names = ("周一", "周二", "周三", "周四", "周五", "周六", "周日")
         for product in self.products.values():
             if not product.in_stock:
                 continue
             promised = boot + timedelta(days=2 + sum(ord(ch) for ch in product.product_id) % 3)
             if promised.weekday() == 6:
                 promised += timedelta(days=1)
-            label = f"Get it by {promised.strftime('%a, %b')} {promised.day}"
+            label = t(
+                f"Get it by {promised.strftime('%a, %b')} {promised.day}",
+                f"预计{promised.month}月{promised.day}日（{weekday_names[promised.weekday()]}）送达",
+            )
             product.attributes[DELIVERY_ATTRIBUTE] = label
             # A family's in-stock variants ship on the family's promise.
             for variant in product.variants:
@@ -253,9 +272,18 @@ class MockRetail(StorefrontBackend):
             ratio = (product.price - low) / (high - low)
             position = "low" if ratio <= 0.25 else "high" if ratio >= 0.75 else "typical"
         verdict = {
-            "low": f"${product.price:.2f} is near this item's 90-day low",
-            "typical": f"${product.price:.2f} is this item's typical price",
-            "high": f"${product.price:.2f} is above this item's typical price",
+            "low": t(
+                f"${product.price:.2f} is near this item's 90-day low",
+                f"${product.price:.2f} 接近该商品近90天最低价",
+            ),
+            "typical": t(
+                f"${product.price:.2f} is this item's typical price",
+                f"${product.price:.2f} 为该商品的常态价格",
+            ),
+            "high": t(
+                f"${product.price:.2f} is above this item's typical price",
+                f"${product.price:.2f} 高于该商品的常态价格",
+            ),
         }[position]
         return {
             "days": 90,
@@ -263,7 +291,10 @@ class MockRetail(StorefrontBackend):
             "low": low,
             "high": high,
             "position": position,
-            "verdict": f"{verdict} (90-day range ${low:.0f}–${high:.0f})",
+            "verdict": t(
+                f"{verdict} (90-day range ${low:.0f}–${high:.0f})",
+                f"{verdict}（90天价格区间 ${low:.0f}–${high:.0f}）",
+            ),
         }
 
     def review_aspects(self, product_id: str) -> dict[str, Any] | None:
@@ -348,22 +379,24 @@ class MockRetail(StorefrontBackend):
         if ready.minute or ready.second or ready.microsecond:
             ready = ready.replace(minute=0, second=0, microsecond=0) + timedelta(hours=1)
         if ready.date() != now.date() or ready.hour > _STORE_CLOSES:
-            return "tomorrow morning"
+            return t("tomorrow morning", "明天上午")
         hour12 = ready.hour % 12 or 12
-        return f"today by {hour12} {'AM' if ready.hour < 12 else 'PM'}"
+        zh_period = "上午" if ready.hour < 12 else "下午" if ready.hour < 18 else "晚上"
+        en_period = "AM" if ready.hour < 12 else "PM"
+        return t(f"today by {hour12} {en_period}", f"今天{zh_period}{hour12}点前")
 
     async def get_fulfillment_options(
         self, session: ShoppingSessionContext, product_ids: list[str]
     ) -> list[FulfillmentOption]:
         prefs = await self.get_preferences(session)
-        location = prefs.default_location or "your area"
+        location = prefs.default_location or t("your area", "您所在地区")
         quoted = [product for pid in product_ids if (product := self.product(pid))]
-        standard = STANDARD_SHIPPING
+        standard = _zh_shipping(STANDARD_SHIPPING, "3-5 个工作日（标准配送）")
         if sum(product.price for product in quoted) > FREE_SHIPPING_OVER:
             standard = standard.model_copy(update={"fee": 0.0})
         options = [
             standard,
-            EXPRESS_SHIPPING,
+            _zh_shipping(EXPRESS_SHIPPING, "2 个工作日（特快配送）"),
             FulfillmentOption(
                 method="pickup",
                 eta=self._pickup_eta(datetime.now()),
@@ -375,5 +408,5 @@ class MockRetail(StorefrontBackend):
             product.category in _FREIGHT_CATEGORIES and product.price > _FREIGHT_PRICE_FLOOR
             for product in quoted
         ):
-            options.append(FREIGHT_SHIPPING)
+            options.append(_zh_shipping(FREIGHT_SHIPPING, "5-7 个工作日（大件物流）"))
         return options

@@ -2,7 +2,7 @@
   "default_stock": 40,
   "default_threshold": 8,
   "inventory": [
-    { "product_id": "AR-2102", "stock": 3, "threshold": 12, "sales_last_30d": 52, "unit_cost": 10.5, "content_quality": "needs_work", "missing_attributes": ["wall coverage", "material"] },
+    { "product_id": "AR-2102", "stock": 3, "threshold": 12, "sales_last_30d": 52, "unit_cost": 10.5, "content_quality": "needs_work", "missing_attributes": ["墙面覆盖面积", "材质"] },
     { "product_id": "AR-2106", "stock": 4, "threshold": 10, "sales_last_30d": 38, "unit_cost": 13.0 },
     { "product_id": "AR-2101", "stock": 21, "threshold": 8, "sales_last_30d": 33, "unit_cost": 24.5 },
     { "product_id": "AR-2103", "stock": 17, "threshold": 6, "sales_last_30d": 19, "unit_cost": 22.0 },
@@ -12,7 +12,7 @@
     { "product_id": "AR-2108", "stock": 44, "threshold": 6, "sales_last_30d": 16, "unit_cost": 6.4 },
     { "product_id": "AR-2109", "stock": 23, "threshold": 6, "sales_last_30d": 14, "unit_cost": 16.2 },
     { "product_id": "AR-1401", "stock": 38, "threshold": 8, "sales_last_30d": 29, "unit_cost": 15.3 },
-    { "product_id": "AR-1804", "stock": 57, "threshold": 10, "sales_last_30d": 44, "unit_cost": 13.4, "return_rate_pct": 11.0, "content_quality": "needs_work", "missing_attributes": ["firmness"] },
+    { "product_id": "AR-1804", "stock": 57, "threshold": 10, "sales_last_30d": 44, "unit_cost": 13.4, "return_rate_pct": 11.0, "content_quality": "needs_work", "missing_attributes": ["软硬度"] },
     { "product_id": "AR-1207", "stock": 64, "threshold": 8, "sales_last_30d": 3, "unit_cost": 71.0, "slow_mover": true, "status": "paused" },
     { "product_id": "AR-1002", "stock": 0, "threshold": 8, "sales_last_30d": 17, "unit_cost": 181.0 },
     { "product_id": "AR-1508", "stock": 0, "threshold": 6, "sales_last_30d": 11, "unit_cost": 54.5 },

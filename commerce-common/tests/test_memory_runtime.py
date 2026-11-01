@@ -9,11 +9,11 @@ import pytest
 from commerce_common.config import BaseAgentConfig
 from commerce_common.fencing import Fence
 from commerce_common.memory import (
-    MEMORY_DISABLED_TEXT,
     InMemoryMemoryStore,
     MemoryRuntime,
     MemoryWriteFilter,
     RetentionMemoryStore,
+    memory_disabled_text,
 )
 from commerce_common.turn import session_tag
 
@@ -31,8 +31,8 @@ async def test_disabled_runtime_answers_the_tools_and_reads_nothing():
         assert not disabled.enabled
         assert (
             await disabled.save("u", "s", {"key": "k", "value": "v"})
-        ).result_text == MEMORY_DISABLED_TEXT
-        assert (await disabled.recall("u", {"topic": "k"})).result_text == MEMORY_DISABLED_TEXT
+        ).result_text == memory_disabled_text()
+        assert (await disabled.recall("u", {"topic": "k"})).result_text == memory_disabled_text()
         assert await disabled.tier_one("u") == []
         assert await disabled.extract(SimpleNamespace(), "u", "s", "user: hi") == []
     switched_off = runtime(InMemoryMemoryStore(), enable_memory=False)

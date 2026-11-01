@@ -87,6 +87,8 @@ class Fence:
 
     label: str
     notice: str
+    # commerce-agents-zh: the Chinese notice. Empty keeps the upstream English notice.
+    notice_zh: str = ""
 
     @property
     def open(self) -> str:

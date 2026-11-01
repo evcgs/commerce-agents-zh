@@ -2,13 +2,18 @@
 # SPDX-License-Identifier: Apache-2.0
 
 """The extraction prompt the merchant runtimes hand to ``commerce_common.memory``: what
-the assistant may remember about one operation between sessions, keyed by merchant id."""
+the assistant may remember about one operation between sessions, keyed by merchant id.
+Both locales' renderings are built at import; :func:`merchant_extraction_prompt` picks
+the active one, so a run-time locale switch is honored when the runtime is built."""
 
 from __future__ import annotations
 
-from commerce_common.memory import MEMORY_EXTRACTION_TEMPLATE
+from typing import Any
 
-MERCHANT_MEMORY_EXTRACTION_PROMPT = MEMORY_EXTRACTION_TEMPLATE.format(
+from commerce_common.locale import t
+from commerce_common.memory import MEMORY_EXTRACTION_TEMPLATE, MEMORY_EXTRACTION_TEMPLATE_ZH
+
+_EXTRACTION_ARGS = dict(
     keeper="an assistant",
     subject="one operation (a store, a property, a subscriber base, a venue)",
     occasions="sessions with its operator",
@@ -34,3 +39,20 @@ MERCHANT_MEMORY_EXTRACTION_PROMPT = MEMORY_EXTRACTION_TEMPLATE.format(
         "employee."
     ),
 )
+
+MERCHANT_MEMORY_EXTRACTION_PROMPT_EN = MEMORY_EXTRACTION_TEMPLATE.format(**_EXTRACTION_ARGS)
+MERCHANT_MEMORY_EXTRACTION_PROMPT_ZH = MEMORY_EXTRACTION_TEMPLATE_ZH.format(**_EXTRACTION_ARGS)
+
+
+def merchant_extraction_prompt() -> str:
+    """The merchant extraction prompt under the active locale."""
+    return t(MERCHANT_MEMORY_EXTRACTION_PROMPT_EN, MERCHANT_MEMORY_EXTRACTION_PROMPT_ZH)
+
+
+def __getattr__(name: str) -> Any:
+    # MERCHANT_MEMORY_EXTRACTION_PROMPT stays importable, now resolved per access
+    # (PEP 562) so it follows a run-time locale switch instead of the locale at
+    # import time.
+    if name == "MERCHANT_MEMORY_EXTRACTION_PROMPT":
+        return merchant_extraction_prompt()
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")

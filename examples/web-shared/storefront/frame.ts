@@ -4,6 +4,7 @@
 "use client";
 
 import { createContext, useContext } from "react";
+import { t } from "../i18n";
 import type { AgentTurn } from "../turn";
 
 /**
@@ -21,7 +22,7 @@ export interface StoreFrame {
 
 export const FrameContext = createContext<StoreFrame>({
   chat: null,
-  assistantName: "ACME Assistant",
+  assistantName: t("ACME Assistant", "ACME 助手"),
   ask: () => {},
   closePanel: () => {},
 });

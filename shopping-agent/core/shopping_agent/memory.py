@@ -2,13 +2,18 @@
 # SPDX-License-Identifier: Apache-2.0
 
 """The extraction prompt the shopping runtimes hand to ``commerce_common.memory``: what
-the store may remember about one customer between visits."""
+the store may remember about one customer between visits. Both locales' renderings are
+built at import; :func:`shopping_extraction_prompt` picks the active one, so a run-time
+locale switch is honored when the runtime is built."""
 
 from __future__ import annotations
 
-from commerce_common.memory import MEMORY_EXTRACTION_TEMPLATE
+from typing import Any
 
-SHOPPING_MEMORY_EXTRACTION_PROMPT = MEMORY_EXTRACTION_TEMPLATE.format(
+from commerce_common.locale import t
+from commerce_common.memory import MEMORY_EXTRACTION_TEMPLATE, MEMORY_EXTRACTION_TEMPLATE_ZH
+
+_EXTRACTION_ARGS = dict(
     keeper="a store or service",
     subject="one customer",
     occasions="visits",
@@ -34,3 +39,20 @@ SHOPPING_MEMORY_EXTRACTION_PROMPT = MEMORY_EXTRACTION_TEMPLATE.format(
         "for one to be kept."
     ),
 )
+
+SHOPPING_MEMORY_EXTRACTION_PROMPT_EN = MEMORY_EXTRACTION_TEMPLATE.format(**_EXTRACTION_ARGS)
+SHOPPING_MEMORY_EXTRACTION_PROMPT_ZH = MEMORY_EXTRACTION_TEMPLATE_ZH.format(**_EXTRACTION_ARGS)
+
+
+def shopping_extraction_prompt() -> str:
+    """The shopping extraction prompt under the active locale."""
+    return t(SHOPPING_MEMORY_EXTRACTION_PROMPT_EN, SHOPPING_MEMORY_EXTRACTION_PROMPT_ZH)
+
+
+def __getattr__(name: str) -> Any:
+    # SHOPPING_MEMORY_EXTRACTION_PROMPT stays importable, now resolved per access
+    # (PEP 562) so it follows a run-time locale switch instead of the locale at
+    # import time.
+    if name == "SHOPPING_MEMORY_EXTRACTION_PROMPT":
+        return shopping_extraction_prompt()
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")

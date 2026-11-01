@@ -12,6 +12,7 @@ from collections.abc import Sequence
 from typing import Any
 
 from commerce_common.execution import BaseToolExecutor, Handler, clamp_limit, parse_argument
+from commerce_common.locale import t
 from commerce_common.memory import MemoryRuntime, memory_fact_payload
 from commerce_common.presentation import PresentationExtension
 from commerce_common.skills import SkillRegistry
@@ -27,7 +28,7 @@ from .gates import (
     gated_update_cart_item,
     remember_order_items,
 )
-from .memory import SHOPPING_MEMORY_EXTRACTION_PROMPT
+from .memory import shopping_extraction_prompt
 from .serialization import (
     cart_payload,
     fulfillment_payload,
@@ -52,7 +53,7 @@ def build_memory(
         config,
         store,
         fence=STOREFRONT_FENCE,
-        extraction_prompt=SHOPPING_MEMORY_EXTRACTION_PROMPT,
+        extraction_prompt=shopping_extraction_prompt(),
         write_filter=write_filter,
     )
 
@@ -64,17 +65,42 @@ class ShoppingToolExecutor(BaseToolExecutor):
 
     fence = STOREFRONT_FENCE
     components = PRESENTATION_COMPONENTS
-    displayed_text = "Displayed to the customer."
-    unavailable_text = (
-        "{name} is temporarily unavailable. Work with what you already have or let the "
-        "customer know."
-    )
-    not_offered_text = "{detail} is not something this store offers; say so plainly."
-    sold_out_text = (
-        "Nothing was added: {detail}. Tell the customer, offer what the message names as "
-        "available, and add that only once they choose it."
-    )
-    absent_text = "{name} is not something this store offers; say so plainly and do not suggest it."
+    # The tool-result copy is per-locale, so each is a property resolved at read time
+    # rather than a class attribute frozen at import under whichever locale loaded first.
+    @property
+    def displayed_text(self) -> str:
+        return t("Displayed to the customer.", "已展示给顾客。")
+
+    @property
+    def unavailable_text(self) -> str:
+        return t(
+            "{name} is temporarily unavailable. Work with what you already have or let the "
+            "customer know.",
+            "{name} 暂时不可用。请基于已有信息继续，或如实告知顾客。",
+        )
+
+    @property
+    def not_offered_text(self) -> str:
+        return t(
+            "{detail} is not something this store offers; say so plainly.",
+            "{detail} 不是本店销售的商品；请直接说明。",
+        )
+
+    @property
+    def sold_out_text(self) -> str:
+        return t(
+            "Nothing was added: {detail}. Tell the customer, offer what the message names as "
+            "available, and add that only once they choose it.",
+            "未添加任何商品：{detail}。请告知顾客，并推荐提示信息中标明有货的商品，"
+            "待顾客选定后再添加。",
+        )
+
+    @property
+    def absent_text(self) -> str:
+        return t(
+            "{name} is not something this store offers; say so plainly and do not suggest it.",
+            "{name} 不是本店销售的商品；请直接说明，不要推荐它。",
+        )
 
     def __init__(
         self,

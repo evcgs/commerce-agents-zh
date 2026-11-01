@@ -3,27 +3,27 @@
  "products": [
   {
    "product_id": "AR-1001",
-   "title": "ACME Everyday 12-Cup Programmable Drip Coffee Maker",
+   "title": "ACME Everyday 12杯可编程滴滤咖啡壶",
    "brand": "ACME Everyday",
    "price": 79.0,
    "rating": 4.5,
    "review_count": 2841,
    "category": "home-kitchen",
    "labels": [
-    "bestseller"
+    "热销"
    ],
    "attributes": {
-    "capacity": "12 cups",
-    "carafe": "glass",
+    "capacity": "12杯",
+    "carafe": "玻璃",
     "programmable": "yes",
-    "color": "stainless"
+    "color": "不锈钢"
    },
    "in_stock": true,
-   "short_description": "Wake-up timer, bold-brew mode, and a keep-warm plate that doesn't scorch the pot."
+   "short_description": "唤醒预约定时、浓郁冲煮模式，保温碟久放也不会烤糊咖啡。"
   },
   {
    "product_id": "AR-1002",
-   "title": "ACME Signature 15-Bar Espresso Machine with Steam Wand",
+   "title": "ACME Signature 15巴意式浓缩咖啡机（带蒸汽棒）",
    "brand": "ACME Signature",
    "price": 329.0,
    "rating": 4.6,
@@ -31,20 +31,20 @@
    "image_url": "/products/AR-1002.webp",
    "category": "home-kitchen",
    "labels": [
-    "new"
+    "新品"
    ],
    "attributes": {
-    "pressure": "15 bar",
+    "pressure": "15巴",
     "steam_wand": "yes",
-    "water_tank": "1.8 L",
-    "color": "matte black"
+    "water_tank": "1.8升",
+    "color": "哑光黑"
    },
    "in_stock": false,
-   "short_description": "Cafe-style shots and microfoam at home; heats up in under a minute."
+   "short_description": "在家做出咖啡馆水准的浓缩与绵密奶泡；不到一分钟即可加热完成。"
   },
   {
    "product_id": "AR-1003",
-   "title": "ACME Signature 8-Inch Forged Chef's Knife",
+   "title": "ACME Signature 8英寸锻造主厨刀",
    "brand": "ACME Signature",
    "price": 64.0,
    "rating": 4.8,
@@ -52,58 +52,58 @@
    "category": "home-kitchen",
    "labels": [],
    "attributes": {
-    "blade": "german steel",
-    "length": "8 in",
-    "handle": "laminated wood",
+    "blade": "德国钢材",
+    "length": "8英寸",
+    "handle": "层压木柄",
     "dishwasher_safe": "no"
    },
    "in_stock": true,
-   "short_description": "Full-tang forged blade with a comfortable balance point; holds an edge through months of daily prep."
+   "short_description": "一体龙骨锻造刀身，配重均衡顺手；日常备菜连用数月依然锋利。"
   },
   {
    "product_id": "AR-1004",
-   "title": "ACME Signature 6-Quart Enameled Cast Iron Dutch Oven",
+   "title": "ACME Signature 6夸特珐琅铸铁炖锅",
    "brand": "ACME Signature",
    "price": 89.0,
    "rating": 4.7,
    "review_count": 5102,
    "category": "home-kitchen",
    "labels": [
-    "bestseller",
-    "sale"
+    "热销",
+    "特惠"
    ],
    "attributes": {
-    "capacity": "6 qt",
-    "material": "enameled cast iron",
-    "oven_safe": "260 C",
-    "color": "dusk blue"
+    "capacity": "6夸特",
+    "material": "珐琅铸铁",
+    "oven_safe": "260°C",
+    "color": "暮色蓝"
    },
    "in_stock": true,
-   "short_description": "Braises, breads, and big-batch soups; goes from stovetop to oven to table."
+   "short_description": "炖肉、烤面包、大锅汤皆宜；从炉灶进烤箱，再直接端上餐桌。"
   },
   {
    "product_id": "AR-1005",
-   "title": "ACME Everyday Ceramic Nonstick 10-Piece Cookware Set",
+   "title": "ACME Everyday 陶瓷不粘10件套炊具组",
    "brand": "ACME Everyday",
    "price": 149.0,
    "rating": 4.3,
    "review_count": 942,
    "category": "home-kitchen",
    "labels": [
-    "eco-friendly"
+    "环保"
    ],
    "attributes": {
     "pieces": "10",
-    "coating": "ceramic nonstick",
+    "coating": "陶瓷不粘",
     "induction_ready": "yes",
     "pfas_free": "yes"
    },
    "in_stock": true,
-   "short_description": "PFAS-free ceramic coating over aluminum; even heat without the babying."
+   "short_description": "铝制锅身覆无PFAS陶瓷涂层；受热均匀，无需小心翼翼养护。"
   },
   {
    "product_id": "AR-1006",
-   "title": "ACME Home HEPA Air Purifier for Large Rooms",
+   "title": "ACME Home 大房间适用HEPA空气净化器",
    "brand": "ACME Home",
    "price": 189.0,
    "rating": 4.4,
@@ -111,33 +111,33 @@
    "category": "home-kitchen",
    "labels": [],
    "attributes": {
-    "coverage": "1100 sq ft",
-    "filter": "true HEPA + carbon",
-    "noise": "24 dB sleep mode",
-    "smart": "app + auto mode"
+    "coverage": "1100平方英尺",
+    "filter": "真HEPA+活性炭",
+    "noise": "24分贝睡眠模式",
+    "smart": "App+自动模式"
    },
    "in_stock": true,
-   "short_description": "Quiet enough for bedrooms, strong enough for open-plan living rooms; filter alerts in the app."
+   "short_description": "静音到可以放卧室，风量足以净化开放式客厅；滤芯更换提醒尽在App。"
   },
   {
    "product_id": "AR-1007",
-   "title": "ACME Everyday Robot Vacuum with Self-Empty Base",
+   "title": "ACME Everyday 扫地机器人（带自动集尘座）",
    "brand": "ACME Everyday",
    "price": 399.0,
    "rating": 4.2,
    "review_count": 2210,
    "category": "home-kitchen",
    "labels": [
-    "sale"
+    "特惠"
    ],
    "attributes": {
-    "suction": "4000 Pa",
-    "self_empty": "about 8 weeks",
-    "mapping": "lidar",
-    "pet_hair": "tangle-free brush"
+    "suction": "4000帕",
+    "self_empty": "约8周",
+    "mapping": "激光雷达",
+    "pet_hair": "防缠绕滚刷"
    },
    "in_stock": true,
-   "short_description": "Lidar mapping, room-by-room schedules, and a base that empties itself for weeks at a time.",
+   "short_description": "激光雷达建图，按房间设定清扫计划，集尘座一次可连续自动集尘数周。",
    "long_description": "It maps your home with lidar on its first run and then cleans room by room on the schedule you set. The tangle-free roller and 4000 Pa suction are tuned for pet hair on both hard floors and rugs, and the self-empty base goes about eight weeks between bag changes. Quiet mode keeps it under 58 dB so it can run while you're on calls. Works with the ACME Home app for no-go zones and per-room suction levels.",
    "specs": {
     "suction": "4000 Pa",
@@ -155,41 +155,41 @@
   },
   {
    "product_id": "AR-1008",
-   "title": "ACME Rest Weighted Blanket, Queen",
+   "title": "ACME Rest 重力毯（Queen双人加大）",
    "brand": "ACME Rest",
    "price": 49.0,
    "rating": 4.6,
    "review_count": 4310,
    "category": "home-kitchen",
    "labels": [
-    "bestseller"
+    "热销"
    ],
    "attributes": {
-    "size": "queen",
-    "cover": "washable bamboo",
-    "fill": "glass beads"
+    "size": "双人加大（Queen）",
+    "cover": "可拆洗竹纤维",
+    "fill": "玻璃珠"
    },
    "in_stock": true,
-   "short_description": "Evenly stitched glass-bead fill with a removable, washable bamboo cover that sleeps cool. Three weights; about a tenth of body weight is the usual pick.",
+   "short_description": "玻璃珠填充分区缝制、受力均匀，可拆洗竹纤维被套睡感凉爽。三种重量可选，一般取体重约十分之一即可。",
    "variants": [
     {
      "product_id": "AR-1008-12LB",
      "option_values": {
-      "weight": "12 lb"
+      "weight": "12磅"
      },
      "price": 49.0
     },
     {
      "product_id": "AR-1008-15LB",
      "option_values": {
-      "weight": "15 lb"
+      "weight": "15磅"
      },
      "price": 59.0
     },
     {
      "product_id": "AR-1008-20LB",
      "option_values": {
-      "weight": "20 lb"
+      "weight": "20磅"
      },
      "price": 69.0
     }
@@ -197,24 +197,24 @@
   },
   {
    "product_id": "AR-1101",
-   "title": "ACME Select 27\" 4K IPS Monitor with USB-C",
+   "title": "ACME Select 27英寸4K IPS显示器（USB-C）",
    "brand": "ACME Select",
    "price": 349.0,
    "rating": 4.7,
    "review_count": 1892,
    "category": "office-electronics",
    "labels": [
-    "bestseller"
+    "热销"
    ],
    "attributes": {
-    "size": "27 in",
+    "size": "27英寸",
     "resolution": "4K UHD",
     "panel": "IPS",
     "ports": "USB-C 90W, HDMI x2, DP",
     "vesa": "100x100"
    },
    "in_stock": true,
-   "short_description": "Factory-calibrated 4K panel with single-cable USB-C power and video for laptops.",
+   "short_description": "出厂校色4K面板，一根USB-C线即可为笔记本同时供电并传输画面。",
    "long_description": "A 27-inch 4K IPS panel factory-calibrated to 99% sRGB, with a 90W USB-C port that powers your laptop and carries video over one cable. The stand adjusts for height, tilt, and pivot, and the thin bezels make a clean dual-monitor setup. A built-in KVM switches your keyboard and mouse between two computers, which is handy if you split time between a work laptop and a personal desktop.",
    "specs": {
     "resolution": "3840 x 2160",
@@ -232,7 +232,7 @@
   },
   {
    "product_id": "AR-1102",
-   "title": "ACME Studio Mesh Office Chair",
+   "title": "ACME Studio 网布办公椅",
    "brand": "ACME Studio",
    "price": 289.0,
    "rating": 4.5,
@@ -240,14 +240,14 @@
    "category": "office-electronics",
    "labels": [],
    "attributes": {
-    "lumbar": "adjustable",
+    "lumbar": "可调节",
     "armrests": "4D",
-    "recline": "135 degrees",
-    "weight_capacity": "300 lb",
-    "material": "breathable mesh"
+    "recline": "135度",
+    "weight_capacity": "300磅",
+    "material": "透气网布"
    },
    "in_stock": true,
-   "short_description": "Adjustable lumbar, 4D armrests, and a breathable mesh back built for full workdays.",
+   "short_description": "可调腰椎支撑、4D扶手加透气网背，为全天办公而设计。",
    "long_description": "The chair is built around an adjustable lumbar support that tracks the curve of your lower back, with a synchronized recline that keeps your feet planted as you lean. The mesh back keeps airflow moving through long afternoons, the seat pan slides forward and back to fit longer legs, and the 4D armrests adjust in height, depth, width, and angle so your shoulders can actually relax. Assembly takes about 20 minutes with the included tools.",
    "specs": {
     "seat_height": "17-21 in",
@@ -264,67 +264,67 @@
   },
   {
    "product_id": "AR-1103",
-   "title": "ACME Studio 48\" Electric Standing Desk",
+   "title": "ACME Studio 48英寸电动升降桌",
    "brand": "ACME Studio",
    "price": 379.0,
    "rating": 4.4,
    "review_count": 1320,
    "category": "office-electronics",
    "labels": [
-    "new"
+    "新品"
    ],
    "attributes": {
-    "width": "48 in",
-    "height_range": "28-47 in",
+    "width": "48英寸",
+    "height_range": "28-47英寸",
     "memory_presets": "4",
-    "top": "bamboo"
+    "top": "竹制桌面"
    },
    "in_stock": true,
-   "short_description": "Dual-motor lift with four memory presets and a bamboo top that doesn't wobble at standing height."
+   "short_description": "双电机升降、四档记忆高度，竹制桌面升到站立高度也稳当不晃。"
   },
   {
    "product_id": "AR-1104",
-   "title": "ACME Select Low-Profile Mechanical Keyboard",
+   "title": "ACME Select 低矮轴体机械键盘",
    "brand": "ACME Select",
    "price": 99.0,
    "rating": 4.6,
    "review_count": 3105,
    "category": "office-electronics",
    "labels": [
-    "bestseller"
+    "热销"
    ],
    "attributes": {
-    "switches": "low-profile tactile",
+    "switches": "低矮段落轴",
     "connectivity": "BT5.1 + 2.4GHz + USB-C",
     "layout": "75%",
-    "backlight": "white"
+    "backlight": "白色"
    },
    "in_stock": true,
-   "short_description": "Quiet tactile switches, three-device Bluetooth, and a battery that lasts about six weeks."
+   "short_description": "安静段落轴，蓝牙可连三台设备，续航约六周。"
   },
   {
    "product_id": "AR-1105",
-   "title": "ACME Select Noise-Cancelling Headphones",
+   "title": "ACME Select 降噪头戴式耳机",
    "brand": "ACME Select",
    "price": 249.0,
    "rating": 4.5,
    "review_count": 5530,
    "category": "office-electronics",
    "labels": [
-    "sale"
+    "特惠"
    ],
    "attributes": {
-    "anc": "adaptive",
-    "battery": "40 h",
-    "multipoint": "2 devices",
-    "weight": "254 g"
+    "anc": "自适应",
+    "battery": "40小时",
+    "multipoint": "2台设备",
+    "weight": "254克"
    },
    "in_stock": true,
-   "short_description": "Adaptive noise cancelling tuned for open offices and flights, with 40-hour battery life."
+   "short_description": "自适应降噪专为开放式办公室与飞行场景调校，续航长达40小时。"
   },
   {
    "product_id": "AR-1106",
-   "title": "ACME Select 1080p Webcam with Auto-Framing",
+   "title": "ACME Select 1080p自动构图网络摄像头",
    "brand": "ACME Select",
    "price": 69.0,
    "rating": 4.3,
@@ -334,16 +334,16 @@
    "labels": [],
    "attributes": {
     "resolution": "1080p60",
-    "field_of_view": "90 degrees",
+    "field_of_view": "90度",
     "auto_framing": "yes",
     "privacy_shutter": "yes"
    },
    "in_stock": true,
-   "short_description": "Sharp low-light image, auto-framing that follows you, and a physical privacy shutter."
+   "short_description": "弱光画面依旧清晰，自动构图镜头跟随人像，并配物理隐私遮罩。"
   },
   {
    "product_id": "AR-1107",
-   "title": "ACME Studio Adjustable Aluminum Laptop Stand",
+   "title": "ACME Studio 可调节铝合金笔记本支架",
    "brand": "ACME Studio",
    "price": 39.0,
    "rating": 4.7,
@@ -351,17 +351,17 @@
    "category": "office-electronics",
    "labels": [],
    "attributes": {
-    "material": "aluminum",
-    "height_range": "2-12 in",
-    "max_laptop": "17 in",
+    "material": "铝合金",
+    "height_range": "2-12英寸",
+    "max_laptop": "17英寸",
     "foldable": "yes"
    },
    "in_stock": true,
-   "short_description": "Raises the screen to eye level and folds flat for a backpack; rock solid even at full height."
+   "short_description": "抬屏齐视线，可放平收进背包；升到最高也稳如磐石。"
   },
   {
    "product_id": "AR-1108",
-   "title": "ACME Select LED Desk Lamp with Wireless Charger",
+   "title": "ACME Select 无线充电LED台灯",
    "brand": "ACME Select",
    "price": 54.0,
    "rating": 4.4,
@@ -369,36 +369,36 @@
    "image_url": "/products/AR-1108.webp",
    "category": "office-electronics",
    "labels": [
-    "eco-friendly"
+    "环保"
    ],
    "attributes": {
-    "color_temp": "2700-6000 K",
-    "brightness": "5 levels",
-    "charger": "10W Qi pad",
+    "color_temp": "2700-6000K",
+    "brightness": "5档",
+    "charger": "10W Qi无线充电板",
     "usb_port": "yes"
    },
    "in_stock": true,
-   "short_description": "Flicker-free light with warm-to-cool presets and a phone charging pad in the base."
+   "short_description": "无频闪照明，冷暖色温随心切换，底座内置手机无线充电板。"
   },
   {
    "product_id": "AR-1201",
-   "title": "ACME Basecamp 2-Person Backpacking Tent",
+   "title": "ACME Basecamp 2人徒步帐篷",
    "brand": "ACME Basecamp",
    "price": 149.0,
    "rating": 4.6,
    "review_count": 812,
    "category": "outdoor-camping",
    "labels": [
-    "bestseller"
+    "热销"
    ],
    "attributes": {
-    "capacity": "2 person",
-    "weight": "2.1 kg",
-    "season": "3-season",
-    "setup": "freestanding"
+    "capacity": "2人",
+    "weight": "2.1公斤",
+    "season": "三季",
+    "setup": "自由支撑"
    },
    "in_stock": true,
-   "short_description": "A 2.1 kg freestanding three-season tent that pitches in about four minutes.",
+   "short_description": "2.1公斤自由支撑三季帐篷，约四分钟即可搭好。",
    "long_description": "A true two-person backpacking tent that keeps weight at 2.1 kg without giving up livability: two doors, two vestibules, and enough headroom to sit up and play cards through a rainy evening. Color-coded aluminum poles make the first pitch intuitive, the full-coverage rainfly has taped seams, and the mesh body keeps condensation moving on humid nights. Packs down to the size of a loaf of bread.",
    "specs": {
     "floor_area": "2.9 sq m",
@@ -416,7 +416,7 @@
   },
   {
    "product_id": "AR-1202",
-   "title": "ACME Basecamp 4-Person Family Tent",
+   "title": "ACME Basecamp 4人家庭帐篷",
    "brand": "ACME Basecamp",
    "price": 219.0,
    "rating": 4.5,
@@ -424,17 +424,17 @@
    "category": "outdoor-camping",
    "labels": [],
    "attributes": {
-    "capacity": "4 person",
-    "weight": "7.4 kg",
-    "standing_height": "183 cm",
-    "setup": "8 minutes"
+    "capacity": "4人",
+    "weight": "7.4公斤",
+    "standing_height": "183厘米",
+    "setup": "8分钟"
    },
    "in_stock": true,
-   "short_description": "Standing-height family tent with a room divider and a porch awning for muddy boots."
+   "short_description": "可站直的家庭帐篷，带隔断帘与门厅遮檐，泥靴有处安放。"
   },
   {
    "product_id": "AR-1203",
-   "title": "ACME Basecamp 20°F Insulated Sleeping Bag",
+   "title": "ACME Basecamp 20°F保暖睡袋",
    "brand": "ACME Basecamp",
    "price": 89.0,
    "rating": 4.2,
@@ -442,17 +442,17 @@
    "category": "outdoor-camping",
    "labels": [],
    "attributes": {
-    "rating": "-7 C / 20 F",
-    "fill": "synthetic",
-    "weight": "1.3 kg",
-    "packed": "compression sack included"
+    "rating": "-7°C / 20°F",
+    "fill": "化纤",
+    "weight": "1.3公斤",
+    "packed": "附赠压缩袋"
    },
    "in_stock": true,
-   "short_description": "Synthetic 20°F bag that stays warm when damp and packs down small."
+   "short_description": "化纤填充20°F睡袋，受潮仍保暖，收纳体积小。"
   },
   {
    "product_id": "AR-1204",
-   "title": "ACME Signature Two-Burner Camp Stove",
+   "title": "ACME Signature 双头露营炉",
    "brand": "ACME Signature",
    "price": 64.5,
    "rating": 4.4,
@@ -460,57 +460,57 @@
    "category": "outdoor-camping",
    "labels": [],
    "attributes": {
-    "burners": "2 x 10000 BTU",
-    "fuel": "propane",
-    "ignition": "matchless",
+    "burners": "2×10000 BTU",
+    "fuel": "丙烷",
+    "ignition": "免火柴点火",
     "wind_panels": "yes"
    },
    "in_stock": true,
-   "short_description": "Compact two-burner propane stove with matchless ignition and fold-out wind panels."
+   "short_description": "紧凑双头丙烷炉，免火柴点火，配有可翻折挡风板。"
   },
   {
    "product_id": "AR-1205",
-   "title": "ACME Journey 45L Hard Cooler",
+   "title": "ACME Journey 45升硬质保温箱",
    "brand": "ACME Journey",
    "price": 199.0,
    "rating": 4.7,
    "review_count": 1102,
    "category": "outdoor-camping",
    "labels": [
-    "sale"
+    "特惠"
    ],
    "attributes": {
-    "capacity": "45 L",
-    "ice_retention": "5 days",
-    "bear_resistant": "certified",
+    "capacity": "45升",
+    "ice_retention": "5天",
+    "bear_resistant": "已认证",
     "drain": "yes"
    },
    "in_stock": true,
-   "short_description": "Keeps ice through a long weekend in summer heat; certified bear-resistant latches."
+   "short_description": "盛夏小长假冰块不化；防熊锁扣通过认证。"
   },
   {
    "product_id": "AR-1206",
-   "title": "ACME Basecamp 400-Lumen Rechargeable Headlamp",
+   "title": "ACME Basecamp 400流明可充电头灯",
    "brand": "ACME Basecamp",
    "price": 34.0,
    "rating": 4.5,
    "review_count": 2098,
    "category": "outdoor-camping",
    "labels": [
-    "bestseller"
+    "热销"
    ],
    "attributes": {
-    "brightness": "400 lumens",
-    "battery": "USB-C rechargeable",
-    "runtime": "up to 40 h",
+    "brightness": "400流明",
+    "battery": "USB-C可充电",
+    "runtime": "最长40小时",
     "red_mode": "yes"
    },
    "in_stock": true,
-   "short_description": "Bright, light, and USB-C rechargeable, with a red mode that won't wake the tent."
+   "short_description": "又亮又轻，USB-C充电；红光模式不会吵醒帐篷里的人。"
   },
   {
    "product_id": "AR-1207",
-   "title": "ACME Journey 55L Hiking Backpack",
+   "title": "ACME Journey 55升徒步背包",
    "brand": "ACME Journey",
    "price": 159.0,
    "rating": 4.4,
@@ -518,74 +518,74 @@
    "category": "outdoor-camping",
    "labels": [],
    "attributes": {
-    "capacity": "55 L",
-    "frame": "internal aluminum",
-    "fit": "adjustable torso",
-    "rain_cover": "included"
+    "capacity": "55升",
+    "frame": "内置铝架",
+    "fit": "可调背长",
+    "rain_cover": "附赠"
    },
    "in_stock": false,
-   "short_description": "Adjustable-torso pack with a supportive hip belt and an included rain cover."
+   "short_description": "背长可调，髋部承托腰带，附赠防雨罩。"
   },
   {
    "product_id": "AR-1208",
-   "title": "ACME Basecamp Gravity Water Filter, 3L",
+   "title": "ACME Basecamp 重力滤水器（3升）",
    "brand": "ACME Basecamp",
    "price": 74.0,
    "rating": 4.6,
    "review_count": 410,
    "category": "outdoor-camping",
    "labels": [
-    "eco-friendly"
+    "环保"
    ],
    "attributes": {
-    "capacity": "3 L",
-    "flow": "1.5 L/min",
-    "filter_life": "1500 L",
-    "weight": "310 g"
+    "capacity": "3升",
+    "flow": "1.5升/分钟",
+    "filter_life": "1500升",
+    "weight": "310克"
    },
    "in_stock": true,
-   "short_description": "Hang it from a branch and let gravity do the filtering — no pumping, 1.5 liters a minute."
+   "short_description": "往树枝上一挂，重力帮你完成过滤——无需手压，每分钟1.5升。"
   },
   {
    "product_id": "AR-1301",
-   "title": "ACME Fit 6mm Non-Slip Yoga Mat",
+   "title": "ACME Fit 6mm防滑瑜伽垫",
    "brand": "ACME Fit",
    "price": 42.0,
    "rating": 4.6,
    "review_count": 3804,
    "category": "fitness",
    "labels": [
-    "eco-friendly",
-    "bestseller"
+    "环保",
+    "热销"
    ],
    "attributes": {
-    "thickness": "6 mm",
-    "material": "natural rubber + cork",
-    "grip": "wet/dry",
-    "weight": "1.9 kg"
+    "thickness": "6毫米",
+    "material": "天然橡胶+软木",
+    "grip": "干湿防滑",
+    "weight": "1.9公斤"
    },
    "in_stock": true,
-   "short_description": "Cork surface that grips better as you sweat, over cushioned natural rubber."
+   "short_description": "软木表面越出汗越防滑，下衬缓震天然橡胶。"
   },
   {
    "product_id": "AR-1302",
-   "title": "ACME Fit Adjustable Dumbbells, 5-50 lb Pair",
+   "title": "ACME Fit 可调哑铃对装（5-50磅）",
    "brand": "ACME Fit",
    "price": 429.0,
    "rating": 4.7,
    "review_count": 1511,
    "category": "fitness",
    "labels": [
-    "bestseller"
+    "热销"
    ],
    "attributes": {
-    "range": "5-50 lb each",
-    "increments": "5 lb",
-    "adjustment": "dial",
-    "footprint": "40 x 20 cm per tray"
+    "range": "每只5-50磅",
+    "increments": "5磅",
+    "adjustment": "拨盘式",
+    "footprint": "每托盘40×20厘米"
    },
    "in_stock": true,
-   "short_description": "A full dumbbell rack in two trays — dial from 5 to 50 pounds in seconds.",
+   "short_description": "两只托盘顶一整副哑铃架——拨盘一转，5到50磅秒切换。",
    "long_description": "The pair replaces a rack of dumbbells with a dial adjustment that moves from 5 to 50 pounds in 5-pound steps. The plates lock with a reassuring click and don't rattle mid-set, and the contoured handle stays comfortable through high-rep days. They're sized for apartment corners: each tray is about the footprint of a shoebox. Not designed to be dropped from overhead — treat them like the precision tools they are.",
    "specs": {
     "weight_range": "5-50 lb per dumbbell",
@@ -602,7 +602,7 @@
   },
   {
    "product_id": "AR-1303",
-   "title": "ACME Fit Cast Iron Kettlebell, 35 lb",
+   "title": "ACME Fit 铸铁壶铃（35磅）",
    "brand": "ACME Fit",
    "price": 54.0,
    "rating": 4.8,
@@ -610,37 +610,37 @@
    "category": "fitness",
    "labels": [],
    "attributes": {
-    "weight": "35 lb",
-    "material": "single-cast iron",
-    "coating": "powder coat",
-    "base": "flat"
+    "weight": "35磅",
+    "material": "一体铸铁",
+    "coating": "粉末涂层",
+    "base": "平底"
    },
    "in_stock": true,
-   "short_description": "Single-cast iron with a smooth powder coat that's kind to hands and floors."
+   "short_description": "一体铸铁，细腻粉末涂层，不硌手也不伤地板。"
   },
   {
    "product_id": "AR-1304",
-   "title": "ACME Fit Resistance Band Set with Door Anchor",
+   "title": "ACME Fit 阻力带套装（带门锚）",
    "brand": "ACME Fit",
    "price": 29.0,
    "rating": 4.4,
    "review_count": 5120,
    "category": "fitness",
    "labels": [
-    "sale"
+    "特惠"
    ],
    "attributes": {
-    "bands": "5 (10-50 lb)",
-    "stackable": "to 150 lb",
-    "anchor": "door + ankle straps",
-    "case": "included"
+    "bands": "5条（10-50磅）",
+    "stackable": "可叠加至150磅",
+    "anchor": "门锚+脚踝带",
+    "case": "附收纳包"
    },
    "in_stock": true,
-   "short_description": "Five stackable bands, handles, and a door anchor — a gym that fits in a drawer."
+   "short_description": "五条可叠加阻力带，配手柄和门锚——一个抽屉装下的健身房。"
   },
   {
    "product_id": "AR-1305",
-   "title": "ACME Fit High-Density Foam Roller",
+   "title": "ACME Fit 高密度泡沫轴",
    "brand": "ACME Fit",
    "price": 24.0,
    "rating": 4.5,
@@ -648,17 +648,17 @@
    "category": "fitness",
    "labels": [],
    "attributes": {
-    "length": "45 cm",
-    "density": "firm",
-    "surface": "textured",
-    "weight_capacity": "300 lb"
+    "length": "45厘米",
+    "density": "高硬度",
+    "surface": "纹理面",
+    "weight_capacity": "300磅"
    },
    "in_stock": true,
-   "short_description": "Firm textured roller that holds its shape; the post-leg-day ritual you'll actually keep."
+   "short_description": "高硬度纹理泡沫轴久用不变形；练完腿的放松仪式，就靠它坚持下来。"
   },
   {
    "product_id": "AR-1306",
-   "title": "ACME Fit Speed Rope with Ball Bearings",
+   "title": "ACME Fit 滚珠轴承竞速跳绳",
    "brand": "ACME Fit",
    "price": 19.0,
    "rating": 4.3,
@@ -666,37 +666,37 @@
    "category": "fitness",
    "labels": [],
    "attributes": {
-    "cable": "adjustable steel",
-    "bearings": "dual ball",
-    "handles": "aluminum",
-    "spare_cable": "included"
+    "cable": "可调钢缆",
+    "bearings": "双滚珠",
+    "handles": "铝合金",
+    "spare_cable": "附备用绳"
    },
    "in_stock": true,
-   "short_description": "Smooth ball-bearing spin and a quick-adjust cable, with a spare cable in the box."
+   "short_description": "滚珠轴承转动顺滑，绳长快速可调，盒内还附一根备用绳。"
   },
   {
    "product_id": "AR-1307",
-   "title": "ACME Fit Indoor Exercise Bike",
+   "title": "ACME Fit 室内健身动感单车",
    "brand": "ACME Fit",
    "price": 549.0,
    "rating": 4.2,
    "review_count": 689,
    "category": "fitness",
    "labels": [
-    "new"
+    "新品"
    ],
    "attributes": {
-    "resistance": "magnetic, 100 levels",
-    "drive": "belt",
-    "console": "bluetooth + app",
-    "footprint": "120 x 55 cm"
+    "resistance": "磁控，100档",
+    "drive": "皮带",
+    "console": "蓝牙+App",
+    "footprint": "120×55厘米"
    },
    "in_stock": true,
-   "short_description": "Near-silent magnetic resistance and a tablet mount; pairs with the usual training apps."
+   "short_description": "近无声磁控阻力，配平板支架；可与主流训练App连接。"
   },
   {
    "product_id": "AR-1308",
-   "title": "ACME Fit Percussion Massage Gun",
+   "title": "ACME Fit 筋膜按摩枪",
    "brand": "ACME Fit",
    "price": 119.0,
    "rating": 4.5,
@@ -706,15 +706,15 @@
    "attributes": {
     "speeds": "5",
     "heads": "6",
-    "battery": "4 h",
-    "noise": "45 dB"
+    "battery": "4小时",
+    "noise": "45分贝"
    },
    "in_stock": true,
-   "short_description": "Quiet enough to use on the couch, strong enough to un-knot a long run."
+   "short_description": "安静到沙发上一边追剧一边用，力道足以化解长跑后的酸结。"
   },
   {
    "product_id": "AR-1401",
-   "title": "ACME Playroom Stacking Wooden Block Set (54 pc)",
+   "title": "ACME Playroom 叠搭木积木套装（54块）",
    "brand": "ACME Playroom",
    "price": 34.0,
    "rating": 4.8,
@@ -722,16 +722,16 @@
    "image_url": "/products/AR-1401.webp",
    "category": "toys-games",
    "labels": [
-    "bestseller"
+    "热销"
    ],
    "attributes": {
-    "pieces": "54 blocks + 12 idea cards",
-    "material": "beechwood, water-based paint",
-    "age_range": "4-10 years",
-    "storage": "cotton carry sack"
+    "pieces": "54块积木+12张创意卡",
+    "material": "榉木，水性漆",
+    "age_range": "4-10岁",
+    "storage": "棉质收纳袋"
    },
    "in_stock": true,
-   "short_description": "Classic beechwood blocks with idea cards that turn a pile into bridges, towers, and towns.",
+   "short_description": "经典榉木积木配创意卡，一堆木块变出桥、塔和小镇。",
    "long_description": "Fifty-four solid beechwood blocks in six shapes and four water-based colors, with a dozen idea cards that step from a first bridge up to a whole town. The blocks are cut chunky for small hands, sanded smooth, and sized to stack true — and the cotton carry sack turns cleanup into the last round of the game.",
    "specs": {
     "pieces": "54 blocks, 6 shapes",
@@ -748,7 +748,7 @@
   },
   {
    "product_id": "AR-1402",
-   "title": "ACME Makers 540-Piece Building Brick Set",
+   "title": "ACME Makers 540片拼插积木套装",
    "brand": "ACME Makers",
    "price": 49.0,
    "rating": 4.7,
@@ -757,36 +757,36 @@
    "labels": [],
    "attributes": {
     "pieces": "540",
-    "age_range": "6-12 years",
-    "compatible": "major brick brands",
-    "ideas_book": "included"
+    "age_range": "6-12岁",
+    "compatible": "兼容主流积木品牌",
+    "ideas_book": "附创意手册"
    },
    "in_stock": true,
-   "short_description": "540 bricks, an ideas book with 12 builds, and compatibility with the bricks you already own."
+   "short_description": "540块积木、12款造型的创意手册，还能和你已有的积木混搭。"
   },
   {
    "product_id": "AR-1403",
-   "title": "ACME Makers Coding Robot Kit",
+   "title": "ACME Makers 编程机器人套件",
    "brand": "ACME Makers",
    "price": 89.0,
    "rating": 4.5,
    "review_count": 760,
    "category": "toys-games",
    "labels": [
-    "new"
+    "新品"
    ],
    "attributes": {
-    "age_range": "8-14 years",
-    "coding": "block-based app",
-    "sensors": "line, obstacle, light",
-    "battery": "rechargeable"
+    "age_range": "8-14岁",
+    "coding": "图形化编程App",
+    "sensors": "循迹、避障、光感",
+    "battery": "可充电"
    },
    "in_stock": true,
-   "short_description": "Build it, then program it to follow lines, dodge obstacles, and patrol the hallway."
+   "short_description": "先拼装，再编程，让它循线走、躲障碍、在走廊里巡逻。"
   },
   {
    "product_id": "AR-1404",
-   "title": "ACME Playroom Family Trail Board Game",
+   "title": "ACME Playroom 家庭小径桌游",
    "brand": "ACME Playroom",
    "price": 32.0,
    "rating": 4.6,
@@ -795,56 +795,56 @@
    "labels": [],
    "attributes": {
     "players": "2-6",
-    "age_range": "8+",
-    "playtime": "45 min",
-    "type": "cooperative strategy"
+    "age_range": "8岁以上",
+    "playtime": "45分钟",
+    "type": "合作策略"
    },
    "in_stock": true,
-   "short_description": "A cooperative trail-building game that adults genuinely want to replay."
+   "short_description": "合作铺路类桌游，大人也会真心想再来一局。"
   },
   {
    "product_id": "AR-1405",
-   "title": "ACME Makers 86-Piece Art Studio Kit",
+   "title": "ACME Makers 86件美术创作套装",
    "brand": "ACME Makers",
    "price": 27.0,
    "rating": 4.4,
    "review_count": 2105,
    "category": "toys-games",
    "labels": [
-    "sale"
+    "特惠"
    ],
    "attributes": {
     "pieces": "86",
-    "age_range": "4-10 years",
-    "includes": "watercolors, pastels, markers, pads",
-    "case": "wooden"
+    "age_range": "4-10岁",
+    "includes": "水彩、油画棒、马克笔、画本",
+    "case": "木盒"
    },
    "in_stock": true,
-   "short_description": "Watercolors, pastels, and markers in a fold-out wooden case that keeps the chaos contained."
+   "short_description": "水彩、油画棒、马克笔一盒打尽，折叠木盒收纳不乱。"
   },
   {
    "product_id": "AR-1406",
-   "title": "ACME Playroom Otter Plush, 40 cm",
+   "title": "ACME Playroom 水獭毛绒玩偶（40厘米）",
    "brand": "ACME Playroom",
    "price": 22.0,
    "rating": 4.9,
    "review_count": 3650,
    "category": "toys-games",
    "labels": [
-    "bestseller"
+    "热销"
    ],
    "attributes": {
-    "height": "40 cm",
-    "age_range": "0+",
-    "material": "recycled fill",
-    "washable": "machine"
+    "height": "40厘米",
+    "age_range": "0岁以上",
+    "material": "再生填充物",
+    "washable": "可机洗"
    },
    "in_stock": true,
-   "short_description": "Impossibly soft, machine washable, and stuffed with recycled fill."
+   "short_description": "软到没朋友，可机洗，内填再生纤维。"
   },
   {
    "product_id": "AR-1407",
-   "title": "ACME Playroom National Parks 1000-Piece Puzzle",
+   "title": "ACME Playroom 国家公园1000片拼图",
    "brand": "ACME Playroom",
    "price": 19.0,
    "rating": 4.5,
@@ -852,20 +852,20 @@
    "image_url": "/products/AR-1407.webp",
    "category": "toys-games",
    "labels": [
-    "eco-friendly"
+    "环保"
    ],
    "attributes": {
     "pieces": "1000",
-    "size": "70 x 50 cm",
-    "material": "recycled board",
-    "poster": "included"
+    "size": "70×50厘米",
+    "material": "再生纸板",
+    "poster": "附参考海报"
    },
    "in_stock": true,
-   "short_description": "Crisp-cut pieces, no dust, and a reference poster so the table stays peaceful."
+   "short_description": "裁切利落无纸屑，附参考海报，全家拼得和和气气。"
   },
   {
    "product_id": "AR-1408",
-   "title": "ACME Makers 3-Wheel Kids Scooter",
+   "title": "ACME Makers 三轮儿童滑板车",
    "brand": "ACME Makers",
    "price": 59.0,
    "rating": 4.6,
@@ -873,17 +873,17 @@
    "category": "toys-games",
    "labels": [],
    "attributes": {
-    "age_range": "3-8 years",
-    "wheels": "light-up PU",
-    "steering": "lean-to-steer",
-    "max_weight": "50 kg"
+    "age_range": "3-8岁",
+    "wheels": "发光PU轮",
+    "steering": "倾斜转向",
+    "max_weight": "50公斤"
    },
    "in_stock": true,
-   "short_description": "Lean-to-steer stability for new riders, with light-up wheels that make every lap an event."
+   "short_description": "倾斜转向让新手骑得稳，发光轮让每一圈都是焦点。"
   },
   {
    "product_id": "AR-1501",
-   "title": "ACME Paws Orthopedic Memory Foam Dog Bed, Large",
+   "title": "ACME Paws 大号骨科记忆棉狗窝",
    "brand": "ACME Paws",
    "price": 79.0,
    "rating": 4.6,
@@ -891,16 +891,16 @@
    "image_url": "/products/AR-1501.webp",
    "category": "pet-supplies",
    "labels": [
-    "bestseller"
+    "热销"
    ],
    "attributes": {
-    "size": "large (90 x 70 cm)",
-    "foam": "10 cm memory foam",
-    "cover": "removable, washable",
-    "base": "non-slip"
+    "size": "大号（90×70厘米）",
+    "foam": "10厘米记忆棉",
+    "cover": "可拆洗",
+    "base": "防滑"
    },
    "in_stock": true,
-   "short_description": "Ten centimeters of memory foam for older joints, with a washable cover that survives muddy seasons.",
+   "short_description": "10厘米记忆棉呵护老犬关节，可拆洗外套扛得住整个泥泞季。",
    "long_description": "Built for big dogs and aging joints: a 10 cm slab of high-density memory foam that won't flatten into a pancake by month three, wrapped in a water-resistant liner and a machine-washable microsuede cover. The non-slip base keeps it in place on hard floors, and the low front edge makes it easy for stiff-legged seniors to step in. Fits dogs up to about 40 kg comfortably.",
    "specs": {
     "dimensions": "90 x 70 x 20 cm",
@@ -917,7 +917,7 @@
   },
   {
    "product_id": "AR-1502",
-   "title": "ACME Paws 5-Level Cat Tree with Scratching Posts",
+   "title": "ACME Paws 5层猫爬架（含猫抓柱）",
    "brand": "ACME Paws",
    "price": 119.0,
    "rating": 4.4,
@@ -925,37 +925,37 @@
    "category": "pet-supplies",
    "labels": [],
    "attributes": {
-    "height": "160 cm",
+    "height": "160厘米",
     "levels": "5",
-    "posts": "sisal-wrapped",
-    "perches": "2 + 1 condo"
+    "posts": "剑麻缠绕",
+    "perches": "2个休息台+1个小屋"
    },
    "in_stock": true,
-   "short_description": "Five levels, two perches, and a condo — sturdy enough for a determined Maine Coon."
+   "short_description": "五层设计，两个休息台加一个窝屋——再壮的缅因猫也撼不动。"
   },
   {
    "product_id": "AR-1503",
-   "title": "ACME Paws Automatic Pet Feeder",
+   "title": "ACME Paws 自动宠物喂食器",
    "brand": "ACME Paws",
    "price": 89.0,
    "rating": 4.3,
    "review_count": 860,
    "category": "pet-supplies",
    "labels": [
-    "new"
+    "新品"
    ],
    "attributes": {
-    "capacity": "4 L",
-    "meals": "up to 6/day",
-    "app": "wifi + schedule",
-    "backup": "battery"
+    "capacity": "4升",
+    "meals": "每天最多6餐",
+    "app": "WiFi+定时",
+    "backup": "电池"
    },
    "in_stock": true,
-   "short_description": "Scheduled portions from the app, a voice-recording call button, and a battery backup for outages."
+   "short_description": "App定时定量喂食，可录语音唤宠进食，断电有电池续航。"
   },
   {
    "product_id": "AR-1504",
-   "title": "ACME Paws Retractable Leash, 5 m",
+   "title": "ACME Paws 伸缩牵引绳（5米）",
    "brand": "ACME Paws",
    "price": 24.0,
    "rating": 4.2,
@@ -963,17 +963,17 @@
    "category": "pet-supplies",
    "labels": [],
    "attributes": {
-    "length": "5 m",
-    "max_dog": "50 kg",
-    "brake": "one-touch lock",
-    "tape": "reflective"
+    "length": "5米",
+    "max_dog": "50公斤",
+    "brake": "一键刹车锁定",
+    "tape": "反光"
    },
    "in_stock": true,
-   "short_description": "Reflective tape, a one-touch brake, and a grip that doesn't cramp your hand on long walks."
+   "short_description": "反光牵引带、一键刹车，握把久遛也不累手。"
   },
   {
    "product_id": "AR-1505",
-   "title": "ACME Paws Hooded Litter Box with Carbon Filter",
+   "title": "ACME Paws 带顶盖活性炭过滤猫砂盆",
    "brand": "ACME Paws",
    "price": 44.0,
    "rating": 4.1,
@@ -981,37 +981,37 @@
    "category": "pet-supplies",
    "labels": [],
    "attributes": {
-    "size": "jumbo",
-    "filter": "carbon",
-    "door": "swing",
-    "scoop": "included"
+    "size": "特大号",
+    "filter": "活性炭",
+    "door": "摇摆式",
+    "scoop": "附赠猫砂铲"
    },
    "in_stock": true,
-   "short_description": "High sides, a carbon filter, and a front swing door that keeps litter (mostly) inside."
+   "short_description": "高侧壁设计、活性炭滤网，前开摇摆门让猫砂（大部分）留在盆内。"
   },
   {
    "product_id": "AR-1506",
-   "title": "ACME Paws Insulated Dog Jacket",
+   "title": "ACME Paws 保暖狗狗外套",
    "brand": "ACME Paws",
    "price": 39.0,
    "rating": 4.5,
    "review_count": 510,
    "category": "pet-supplies",
    "labels": [
-    "sale"
+    "特惠"
    ],
    "attributes": {
     "sizes": "XS-XL",
-    "insulation": "recycled synthetic",
-    "shell": "water resistant",
+    "insulation": "再生合成保暖棉",
+    "shell": "防泼水",
     "harness_slot": "yes"
    },
    "in_stock": true,
-   "short_description": "Water-resistant shell with a harness slot, for dogs who pretend they don't need it."
+   "short_description": "防泼水外壳并带牵引绳开口，专为那些嘴硬说不需要的狗狗准备。"
   },
   {
    "product_id": "AR-1507",
-   "title": "ACME Paws Interactive Feather Wand Bundle",
+   "title": "ACME Paws 互动逗猫棒套装",
    "brand": "ACME Paws",
    "price": 16.0,
    "rating": 4.7,
@@ -1019,17 +1019,17 @@
    "category": "pet-supplies",
    "labels": [],
    "attributes": {
-    "wands": "2",
-    "refills": "6 feather + 2 crinkle",
-    "pole": "telescoping",
-    "storage": "bag included"
+    "wands": "2根",
+    "refills": "6个羽毛头 + 2个响纸头",
+    "pole": "可伸缩",
+    "storage": "附收纳袋"
    },
    "in_stock": true,
-   "short_description": "Two telescoping wands and eight refills, because the first feather never survives the week."
+   "short_description": "两根可伸缩逗猫棒加八个替换头——毕竟第一根羽毛从来撑不过一周。"
   },
   {
    "product_id": "AR-1508",
-   "title": "ACME Paws 10-Gallon Aquarium Starter Kit",
+   "title": "ACME Paws 10加仑水族箱入门套装",
    "brand": "ACME Paws",
    "price": 99.0,
    "rating": 4.0,
@@ -1038,77 +1038,77 @@
    "category": "pet-supplies",
    "labels": [],
    "attributes": {
-    "capacity": "10 gal",
-    "filter": "quiet flow",
-    "light": "LED day/night",
-    "extras": "heater, net, conditioner"
+    "capacity": "10加仑",
+    "filter": "静音水流",
+    "light": "LED日/夜双模式",
+    "extras": "加热棒、捞网、水质稳定剂"
    },
    "in_stock": false,
-   "short_description": "Tank, filter, heater, and lighting in one box — just add gravel, water, and patience."
+   "short_description": "鱼缸、过滤器、加热棒和灯一盒配齐——只需自备底砂、水和耐心。"
   },
   {
    "product_id": "AR-1601",
-   "title": "ACME Glow Fast-Dry Hair Dryer",
+   "title": "ACME Glow 速干吹风机",
    "brand": "ACME Glow",
    "price": 89.0,
    "rating": 4.5,
    "review_count": 1980,
    "category": "beauty-personal-care",
    "labels": [
-    "bestseller"
+    "热销"
    ],
    "attributes": {
-    "power": "1600 W high-speed motor",
+    "power": "1600W高速电机",
     "ionic": "yes",
-    "attachments": "diffuser + 2 concentrators",
-    "weight": "340 g"
+    "attachments": "蓬松风罩 + 2个集风嘴",
+    "weight": "340克"
    },
    "in_stock": true,
-   "short_description": "High-speed motor dries in half the time at half the weight, with heat that won't cook your hair."
+   "short_description": "高速电机让干发时间减半、机身重量减半，风温呵护秀发不伤发。"
   },
   {
    "product_id": "AR-1602",
-   "title": "ACME Daily Sonic Electric Toothbrush, 2-Pack",
+   "title": "ACME Daily 声波电动牙刷 双支装",
    "brand": "ACME Daily",
    "price": 69.0,
    "rating": 4.6,
    "review_count": 3240,
    "category": "beauty-personal-care",
    "labels": [
-    "sale"
+    "特惠"
    ],
    "attributes": {
-    "modes": "5",
-    "timer": "2-min with quad pacing",
-    "battery": "30 days",
-    "heads": "4 included"
+    "modes": "5种",
+    "timer": "2分钟定时，四区换刷提醒",
+    "battery": "30天",
+    "heads": "附4个刷头"
    },
    "in_stock": true,
-   "short_description": "Two handles, four heads, five modes — the his-and-hers upgrade dentists keep suggesting."
+   "short_description": "两支手柄、四个刷头、五种模式——牙医一直建议你换上的那套升级。"
   },
   {
    "product_id": "AR-1603",
-   "title": "ACME Glow Vitamin C Brightening Serum Duo",
+   "title": "ACME Glow 维C焕亮精华双瓶装",
    "brand": "ACME Glow",
    "price": 48.0,
    "rating": 4.3,
    "review_count": 1520,
    "category": "beauty-personal-care",
    "labels": [
-    "eco-friendly"
+    "环保"
    ],
    "attributes": {
-    "actives": "15% vitamin C + E + ferulic",
-    "size": "2 x 30 ml",
+    "actives": "15%维C + 维E + 阿魏酸",
+    "size": "2瓶×30毫升",
     "fragrance_free": "yes",
     "cruelty_free": "yes"
    },
    "in_stock": true,
-   "short_description": "Fragrance-free vitamin C duo — one for now, one sealed for when the first runs out."
+   "short_description": "无香精维C精华双瓶装——一瓶先用，一瓶密封待命，第一瓶用完刚好接上。"
   },
   {
    "product_id": "AR-1604",
-   "title": "ACME Daily Precision Beard Trimmer Kit",
+   "title": "ACME Daily 精准修剪胡须刀套装",
    "brand": "ACME Daily",
    "price": 54.0,
    "rating": 4.4,
@@ -1116,17 +1116,17 @@
    "category": "beauty-personal-care",
    "labels": [],
    "attributes": {
-    "guards": "13",
-    "blade": "self-sharpening steel",
-    "battery": "90 min",
+    "guards": "13个",
+    "blade": "自研磨钢刀头",
+    "battery": "90分钟",
     "waterproof": "IPX7"
    },
    "in_stock": true,
-   "short_description": "Thirteen guards, a steel blade that stays sharp, and a charge that outlasts the month."
+   "short_description": "十三个限位梳、持久锋利的钢刀头，一次充电一个月都用不完。"
   },
   {
    "product_id": "AR-1605",
-   "title": "ACME Glow Mineral SPF 50 Sunscreen, 3-Pack",
+   "title": "ACME Glow 矿物防晒霜SPF50 三支装",
    "brand": "ACME Glow",
    "price": 36.0,
    "rating": 4.2,
@@ -1135,16 +1135,16 @@
    "labels": [],
    "attributes": {
     "spf": "50",
-    "type": "mineral (zinc)",
-    "water_resistant": "80 min",
-    "size": "3 x 88 ml"
+    "type": "矿物（氧化锌）",
+    "water_resistant": "80分钟",
+    "size": "3支×88毫升"
    },
    "in_stock": true,
-   "short_description": "Zinc-based SPF 50 that rubs in without the ghost effect; reef-safer formula."
+   "short_description": "氧化锌配方SPF50，推开后不泛白；对珊瑚礁更友好的配方。"
   },
   {
    "product_id": "AR-1606",
-   "title": "ACME Rest Mulberry Silk Pillowcase",
+   "title": "ACME Rest 桑蚕丝枕套",
    "brand": "ACME Rest",
    "price": 29.0,
    "rating": 4.5,
@@ -1152,65 +1152,65 @@
    "category": "beauty-personal-care",
    "labels": [],
    "attributes": {
-    "material": "22-momme mulberry silk",
-    "closure": "hidden zipper"
+    "material": "22姆米桑蚕丝",
+    "closure": "隐形拉链"
    },
    "in_stock": true,
-   "short_description": "22-momme silk that's kinder to hair and skin than cotton, with a hidden zipper. Standard and king, four colors.",
+   "short_description": "22姆米真丝比棉更呵护头发与肌肤，配隐形拉链。标准/加大两种尺寸，四色可选。",
    "variants": [
     {
      "product_id": "AR-1606-STANDARD-IVORY",
      "option_values": {
-      "size": "standard",
-      "color": "ivory"
+      "size": "standard（标准）",
+      "color": "象牙白"
      },
      "price": 29.0
     },
     {
      "product_id": "AR-1606-STANDARD-SLATE",
      "option_values": {
-      "size": "standard",
-      "color": "slate"
+      "size": "standard（标准）",
+      "color": "石板灰"
      },
      "price": 29.0
     },
     {
      "product_id": "AR-1606-STANDARD-BLUSH",
      "option_values": {
-      "size": "standard",
-      "color": "blush"
+      "size": "standard（标准）",
+      "color": "浅粉"
      },
      "price": 29.0
     },
     {
      "product_id": "AR-1606-STANDARD-SAGE",
      "option_values": {
-      "size": "standard",
-      "color": "sage"
+      "size": "standard（标准）",
+      "color": "鼠尾草绿"
      },
      "price": 29.0
     },
     {
      "product_id": "AR-1606-KING-IVORY",
      "option_values": {
-      "size": "king",
-      "color": "ivory"
+      "size": "king（加大）",
+      "color": "象牙白"
      },
      "price": 37.0
     },
     {
      "product_id": "AR-1606-KING-SLATE",
      "option_values": {
-      "size": "king",
-      "color": "slate"
+      "size": "king（加大）",
+      "color": "石板灰"
      },
      "price": 37.0
     },
     {
      "product_id": "AR-1606-KING-BLUSH",
      "option_values": {
-      "size": "king",
-      "color": "blush"
+      "size": "king（加大）",
+      "color": "浅粉"
      },
      "price": 37.0,
      "in_stock": false
@@ -1218,8 +1218,8 @@
     {
      "product_id": "AR-1606-KING-SAGE",
      "option_values": {
-      "size": "king",
-      "color": "sage"
+      "size": "king（加大）",
+      "color": "鼠尾草绿"
      },
      "price": 37.0
     }
@@ -1227,7 +1227,7 @@
   },
   {
    "product_id": "AR-1607",
-   "title": "ACME Daily Salon-Grade Manicure Set, 18 Pieces",
+   "title": "ACME Daily 沙龙级美甲修护套装 18件",
    "brand": "ACME Daily",
    "price": 25.0,
    "rating": 4.6,
@@ -1235,52 +1235,52 @@
    "category": "beauty-personal-care",
    "labels": [],
    "attributes": {
-    "pieces": "18",
-    "material": "stainless steel",
-    "case": "leather travel case",
-    "warranty": "lifetime sharpening"
+    "pieces": "18件",
+    "material": "不锈钢",
+    "case": "皮质旅行收纳包",
+    "warranty": "终身磨利服务"
    },
    "in_stock": true,
-   "short_description": "Stainless tools in a zip case, with lifetime sharpening — a quietly great gift."
+   "short_description": "不锈钢工具配拉链收纳包，终身免费磨利——一份低调又体面的礼物。"
   },
   {
    "product_id": "AR-1801",
-   "title": "ACME Journey 22\" Carry-On Spinner",
+   "title": "ACME Journey 22英寸万向轮登机箱",
    "brand": "ACME Journey",
    "price": 179.0,
    "rating": 4.7,
    "review_count": 2450,
    "category": "travel",
    "labels": [
-    "bestseller"
+    "热销"
    ],
    "attributes": {
-    "size": "22 in / 38 L",
-    "shell": "polycarbonate",
-    "wheels": "4 spinner",
-    "weight": "2.9 kg",
-    "warranty": "10 years"
+    "size": "22英寸 / 38升",
+    "shell": "聚碳酸酯（PC）",
+    "wheels": "4个万向轮",
+    "weight": "2.9公斤",
+    "warranty": "10年"
    },
    "in_stock": true,
-   "short_description": "A 2.9 kg polycarbonate carry-on that shrugs off baggage handlers and glides on bad pavement.",
-   "long_description": "The carry-on for people who've had a zipper fail in a departures hall. The polycarbonate shell flexes on impact instead of cracking, the heavy-duty zippers are oversized, and the 360-degree wheels keep rolling smoothly on cobblestones and carpet alike. Inside: a full-length compression panel, a zip-off laundry bag, and a security-checkpoint-friendly combination lock built into the shell. Sized to fit most overhead bins at 22 x 14 x 9 inches.",
+   "short_description": "2.9公斤聚碳酸酯登机箱，经得起行李搬运的折腾，烂路面也能顺滑推行。",
+   "long_description": "专为经历过行李箱拉链在出发大厅罢工的人打造。聚碳酸酯箱壳受冲击时回弹而不开裂，重型拉链加大设计，360度万向轮在石板路和地毯上同样顺滑。箱内配有整幅压缩隔板、可拆卸洗衣袋，以及内嵌在箱体上的密码锁（过安检更省心）。尺寸22×14×9英寸，适配大多数机舱头顶行李架。",
    "specs": {
-    "dimensions": "56 x 36 x 23 cm",
-    "volume": "38 L",
-    "weight": "2.9 kg",
-    "shell": "polycarbonate",
-    "lock": "built-in combination",
-    "warranty": "10 years"
+    "dimensions": "56×36×23厘米",
+    "volume": "38升",
+    "weight": "2.9公斤",
+    "shell": "聚碳酸酯（PC）",
+    "lock": "内置密码锁",
+    "warranty": "10年"
    },
    "review_highlights": [
-    "Two years, forty flights, still rolls like new",
-    "Compression panel genuinely fits an extra day of clothes",
-    "No external pocket — you'll miss it at security if you carry a laptop"
+    "用了两年、飞了四十次，依然顺滑如新",
+    "压缩隔板真能多塞进一天的衣服",
+    "没有外部口袋——带电脑过安检时会不方便"
    ]
   },
   {
    "product_id": "AR-1802",
-   "title": "ACME Journey 28\" Checked Spinner",
+   "title": "ACME Journey 28英寸万向轮托运箱",
    "brand": "ACME Journey",
    "price": 229.0,
    "rating": 4.5,
@@ -1288,37 +1288,37 @@
    "category": "travel",
    "labels": [],
    "attributes": {
-    "size": "28 in / 95 L",
-    "shell": "polycarbonate",
+    "size": "28英寸 / 95升",
+    "shell": "聚碳酸酯（PC）",
     "expansion": "+15%",
-    "weight": "4.3 kg"
+    "weight": "4.3公斤"
    },
    "in_stock": true,
-   "short_description": "Big-trip volume with a 15% expansion gusset and the same crack-resistant shell as the carry-on."
+   "short_description": "长途旅行大容量，15%扩展层设计，与登机箱同款抗裂箱壳。"
   },
   {
    "product_id": "AR-1803",
-   "title": "ACME Journey Compression Packing Cubes, Set of 6",
+   "title": "ACME Journey 压缩收纳袋 6件装",
    "brand": "ACME Journey",
    "price": 39.0,
    "rating": 4.6,
    "review_count": 2870,
    "category": "travel",
    "labels": [
-    "bestseller"
+    "热销"
    ],
    "attributes": {
-    "pieces": "6",
-    "compression": "double zipper",
-    "material": "ripstop nylon",
-    "shoe_bag": "included"
+    "pieces": "6件",
+    "compression": "双拉链压缩",
+    "material": "防撕裂尼龙",
+    "shoe_bag": "附鞋袋"
    },
    "in_stock": true,
-   "short_description": "Double-zip compression that buys you a third more space, plus a shoe bag for the gross stuff."
+   "short_description": "双拉链压缩多腾出三分之一空间，另附鞋袋隔离“重灾区”。"
   },
   {
    "product_id": "AR-1804",
-   "title": "ACME Rest Memory Foam Travel Pillow",
+   "title": "ACME Rest 记忆棉旅行颈枕",
    "brand": "ACME Rest",
    "price": 32.0,
    "rating": 4.3,
@@ -1326,37 +1326,37 @@
    "category": "travel",
    "labels": [],
    "attributes": {
-    "fill": "memory foam",
-    "cover": "washable",
-    "clasp": "front snap",
-    "packs_to": "60% with roll bag"
+    "fill": "记忆棉",
+    "cover": "可拆洗",
+    "clasp": "前部按扣",
+    "packs_to": "卷入收纳袋后压缩至60%"
    },
    "in_stock": true,
-   "short_description": "Actually supports your chin instead of pushing your head forward; rolls to half its size."
+   "short_description": "真正托住下巴而不是把头往前推；卷起来只有一半大小。"
   },
   {
    "product_id": "AR-1805",
-   "title": "ACME Select Universal Travel Adapter with 65W GaN Charging",
+   "title": "ACME Select 全球通用转换插头（65W氮化镓快充）",
    "brand": "ACME Select",
    "price": 49.0,
    "rating": 4.6,
    "review_count": 1980,
    "category": "travel",
    "labels": [
-    "new"
+    "新品"
    ],
    "attributes": {
-    "regions": "150+ countries",
-    "ports": "2x USB-C + 2x USB-A",
-    "output": "65 W GaN",
-    "fuse": "replaceable"
+    "regions": "150+个国家",
+    "ports": "2×USB-C + 2×USB-A",
+    "output": "65W氮化镓",
+    "fuse": "可更换"
    },
    "in_stock": true,
-   "short_description": "One brick for every outlet shape, fast enough to charge a laptop, with a spare fuse included."
+   "short_description": "一个插头走遍全球插座，快充功率足够给笔记本电脑供电，还附赠备用保险丝。"
   },
   {
    "product_id": "AR-1806",
-   "title": "ACME Journey Hanging Toiletry Bag",
+   "title": "ACME Journey 悬挂式洗漱包",
    "brand": "ACME Journey",
    "price": 27.0,
    "rating": 4.5,
@@ -1364,68 +1364,68 @@
    "category": "travel",
    "labels": [],
    "attributes": {
-    "hook": "swivel",
-    "compartments": "4 + leakproof pocket",
-    "material": "water-resistant ripstop",
-    "size": "25 x 19 x 9 cm"
+    "hook": "旋转挂钩",
+    "compartments": "4个隔层 + 防漏袋",
+    "material": "防泼水抗撕裂面料",
+    "size": "25×19×9厘米"
    },
    "in_stock": true,
-   "short_description": "Hangs from any towel bar, opens flat, and quarantines the shampoo that will eventually leak."
+   "short_description": "任何毛巾架都能挂，摊平即开，还带防漏袋隔离那瓶迟早会漏的洗发水。"
   },
   {
    "product_id": "AR-1807",
-   "title": "ACME Select Item Tracker, 4-Pack",
+   "title": "ACME Select 防丢追踪器 4枚装",
    "brand": "ACME Select",
    "price": 79.0,
    "rating": 4.4,
    "review_count": 3420,
    "category": "travel",
    "labels": [
-    "sale"
+    "特惠"
    ],
    "attributes": {
-    "pack": "4 trackers",
-    "network": "phone finder networks",
-    "battery": "1 year, replaceable",
+    "pack": "4枚追踪器",
+    "network": "接入手机查找网络",
+    "battery": "续航1年，电池可更换",
     "water": "IP67"
    },
    "in_stock": true,
-   "short_description": "Drop one in each bag and stop doing the carousel math — a year of battery, replaceable coin cell."
+   "short_description": "每个箱子放一枚，再也不用守着行李转盘掐指计算——续航一年，纽扣电池可更换。"
   },
   {
    "product_id": "AR-2101",
-   "title": "ACME Kids Under-the-Sea Twin Bedding Set",
+   "title": "ACME Kids 海底世界单人儿童床品套装",
    "brand": "ACME Kids",
    "price": 54.0,
    "rating": 4.7,
    "review_count": 1980,
    "category": "kids-room",
    "labels": [
-    "bestseller"
+    "热销"
    ],
    "attributes": {
-    "size": "twin",
-    "pieces": "comforter + sheet + pillowcase",
-    "material": "brushed microfiber",
-    "theme": "ocean"
+    "size": "twin（单人）",
+    "pieces": "被子 + 床单 + 枕套",
+    "material": "磨毛超细纤维",
+    "theme": "海洋"
    },
    "in_stock": true,
-   "short_description": "Twin comforter, fitted sheet, and pillowcase in a friendly whale, sea-turtle, and starfish print.",
-   "long_description": "The Under-the-Sea set sends bedtime beneath the waves: whales, sea turtles, and schools of fish drift across a teal-and-navy brushed-microfiber comforter, with a matching fitted sheet and one pillowcase. A year of weekly washes in testing left the colors bright.",
+   "short_description": "单人被、床单和枕套，印着亲切友好的鲸鱼、海龟和海星图案。",
+   "long_description": "「海底世界」套装把睡前时光带到海浪之下：鲸鱼、海龟和成群的鱼儿游过青绿与深蓝相间的磨毛被面，另配同款床单和一个枕套。经过每周清洗、持续一年的测试，色彩依旧鲜亮。",
    "specs": {
-    "size": "twin (68 x 86 in comforter)",
-    "material": "100% brushed microfiber",
-    "care": "machine wash cold"
+    "size": "twin单人（被子68×86英寸）",
+    "material": "100%磨毛超细纤维",
+    "care": "机洗冷水"
    },
    "review_highlights": [
-    "Still bright after a year of weekly washes",
-    "My son picks out a different sea creature every night",
-    "Softer than sets twice the price"
+    "每周洗、洗了一年，颜色依然鲜亮",
+    "我儿子每晚都要挑一只不同的海洋生物",
+    "比贵一倍的床品还柔软"
    ]
   },
   {
    "product_id": "AR-2102",
-   "title": "ACME Kids Peel-and-Stick Ocean Wall Decals (36 pc)",
+   "title": "ACME Kids 海洋主题可移除墙面贴纸（36张）",
    "brand": "ACME Kids",
    "price": 24.0,
    "rating": 4.6,
@@ -1433,29 +1433,29 @@
    "category": "kids-room",
    "labels": [],
    "attributes": {
-    "count": "36 decals",
+    "count": "36张贴纸",
     "removable": "yes",
-    "largest": "24 in whale",
-    "theme": "ocean"
+    "largest": "24英寸鲸鱼",
+    "theme": "海洋"
    },
    "in_stock": true,
-   "short_description": "36 removable ocean decals — a two-foot whale down to palm-size seahorses — that peel off clean.",
-   "long_description": "Thirty-six matte decals: a whale, dolphins, sea turtles, seahorses, and drifts of fish, plus coral and bubbles to scatter between them. Each one repositions without lifting paint, so the reef can be rebuilt whenever inspiration strikes.",
+   "short_description": "36张可移除海洋贴纸——从两英尺长的鲸鱼到手掌大的海马——撕下不留痕。",
+   "long_description": "三十六张哑光贴纸：鲸鱼、海豚、海龟、海马和成群的鱼，外加珊瑚和泡泡点缀其间。每张贴纸重新粘贴时都不会带起墙漆，灵感来了随时重排这片珊瑚礁。",
    "specs": {
-    "count": "36",
-    "largest_decal": "24 in",
-    "surface": "painted walls, doors, furniture",
-    "removal": "peels clean, repositionable"
+    "count": "36张",
+    "largest_decal": "24英寸",
+    "surface": "漆面墙壁、门、家具",
+    "removal": "撕除干净，可重复定位"
    },
    "review_highlights": [
-    "Went up in twenty minutes and came off our rental walls clean",
-    "The big whale over the bed is the star of the room",
-    "Went up bubble-free — our kid handled half the wall solo"
+    "二十分钟贴好，从出租屋墙上撕下来干干净净",
+    "床头上方的大鲸鱼是整个房间的亮点",
+    "贴上没气泡——我们家孩子独立搞定半面墙"
    ]
   },
   {
    "product_id": "AR-2103",
-   "title": "ACME Kids Tide-Pool Print Area Rug 4x5 ft",
+   "title": "ACME Kids 潮池图案儿童地毯 4×5英尺",
    "brand": "ACME Kids",
    "price": 49.0,
    "rating": 4.5,
@@ -1463,29 +1463,29 @@
    "category": "kids-room",
    "labels": [],
    "attributes": {
-    "size": "4 x 5 ft",
-    "backing": "non-slip",
-    "pile": "low, play-friendly",
-    "theme": "ocean"
+    "size": "4×5英尺",
+    "backing": "防滑",
+    "pile": "低绒，适合玩耍",
+    "theme": "海洋"
    },
    "in_stock": true,
-   "short_description": "A low-pile play rug printed as a shoreline map — tide pools, a lighthouse, and a reef to explore.",
-   "long_description": "The rug is half decor, half toy: a printed shoreline runs from a lighthouse past tide pools out to a reef, with channels for boats and figures to travel, and the low pile stays flat under bins and play. Non-slip backing for hard floors.",
+   "short_description": "低绒游戏地毯，印着海岸线地图——潮池、灯塔和等你探索的珊瑚礁。",
+   "long_description": "这块地毯一半是装饰，一半是玩具：印制的海岸线从灯塔经过潮池一路延伸到珊瑚礁，小船和人偶可以沿线“航行”，低绒设计让收纳箱和玩具都能平稳放置。硬质地板适用防滑底背。",
    "specs": {
-    "size": "48 x 60 in",
-    "pile_height": "0.3 in",
-    "backing": "non-slip latex",
-    "care": "spot clean, vacuum"
+    "size": "48×60英寸",
+    "pile_height": "0.3英寸",
+    "backing": "防滑乳胶底",
+    "care": "局部清洁，可吸尘"
    },
    "review_highlights": [
-    "Flat enough that doors clear it and figures stand on it",
-    "He plays on it more than he plays on the tablet",
-    "Colors match the bedding set perfectly"
+    "够扁平，门能顺畅开过，人偶站得稳",
+    "他在地毯上玩的时间比玩平板还多",
+    "颜色和床品套装完美搭配"
    ]
   },
   {
    "product_id": "AR-2104",
-   "title": "ACME Makers 300-Piece Meadow Puzzle",
+   "title": "ACME Makers 草甸主题拼图 300片",
    "brand": "ACME Makers",
    "price": 27.0,
    "rating": 4.4,
@@ -1494,61 +1494,61 @@
    "category": "kids-room",
    "labels": [],
    "attributes": {
-    "pieces": "300",
-    "finished_size": "18 x 24 in",
-    "art": "original meadow illustration",
-    "age_range": "8+"
+    "pieces": "300片",
+    "finished_size": "18×24英寸",
+    "art": "原创草甸插画",
+    "age_range": "8岁以上"
    },
    "in_stock": true,
-   "short_description": "An original meadow scene in 300 satisfying pieces — an afternoon at the table with a frame-worthy finish.",
-   "long_description": "An original meadow-at-sunrise illustration cut into 300 crisp-edged pieces — big enough to satisfy, small enough to finish in a weekend of table time. The finished 18 x 24 print is frame-worthy, and the lid doubles as a reference stand while you work.",
+   "short_description": "原创草甸场景，300片恰到好处的挑战——一个下午的桌面时光，成品值得装裱。",
+   "long_description": "原创日出草甸插画，切成300片边缘利落的拼图——规模够有成就感，又能在周末的桌面时光内完成。成品尺寸18×24英寸，值得装裱，盒盖还能当参考图支架，边拼边看。",
    "specs": {
-    "pieces": "300",
-    "finished_size": "18 x 24 in",
-    "board": "recycled, crisp-cut, low dust",
-    "art": "original commissioned illustration"
+    "pieces": "300片",
+    "finished_size": "18×24英寸",
+    "board": "再生纸板，切割利落，低粉尘",
+    "art": "原创定制插画"
    },
    "review_highlights": [
-    "We finished it over one rainy weekend and framed it",
-    "Pieces snap in with a satisfying click — no forcing",
-    "The lid-stand for the reference picture is a small genius touch"
+    "一个下雨的周末拼完就直接装裱了",
+    "拼块咔哒一声就位，不用硬怼",
+    "盒盖变身参考图支架，是个天才小设计"
    ]
   },
   {
    "product_id": "AR-2105",
-   "title": "ACME Playroom Storybook Bear (14 in)",
+   "title": "ACME Playroom 绘本风泰迪熊（14英寸）",
    "brand": "ACME Playroom",
    "price": 32.0,
    "rating": 4.8,
    "review_count": 2110,
    "category": "kids-room",
    "labels": [
-    "bestseller"
+    "热销"
    ],
    "attributes": {
-    "size": "14 in",
-    "material": "plush, embroidered eyes",
-    "washable": "machine wash, gentle",
-    "age_range": "3+"
+    "size": "14英寸",
+    "material": "毛绒，刺绣眼睛",
+    "washable": "可机洗（轻柔模式）",
+    "age_range": "3岁以上"
    },
    "in_stock": true,
-   "short_description": "A softly weighted bear with embroidered eyes — no buttons, no batteries, endlessly loved.",
-   "long_description": "A softly weighted 14-inch bear with embroidered eyes and nose — nothing to chew off — and seams that survive being dragged everywhere. Machine washable on gentle, and the fur comes out of the dryer bag as soft as day one.",
+   "short_description": "一只软软配重、眼睛为刺绣的小熊——没有纽扣、没有电池，值得被无限疼爱。",
+   "long_description": "一只14英寸的软配重小熊，眼睛和鼻子均为刺绣——没有可被啃咬的小零件——缝线结实，经得起被拖去任何地方。可轻柔模式机洗，从烘干袋取出后毛感依旧如初。",
    "specs": {
-    "size": "14 in seated",
-    "filling": "recycled polyfill, softly weighted",
-    "details": "embroidered eyes and nose",
-    "care": "machine wash gentle, dryer bag"
+    "size": "坐高14英寸",
+    "filling": "再生聚酯填充，软配重",
+    "details": "刺绣眼睛与鼻子",
+    "care": "轻柔模式机洗，配烘干袋"
    },
    "review_highlights": [
-    "Has been to two sleepovers and a beach trip and still looks great",
-    "Embroidered details — no parts to lose",
-    "Softer than the boutique ones we paid double for"
+    "去过两次过夜派对和一次海滩旅行，状态依然很好",
+    "全刺绣细节——没有会丢的小零件",
+    "比花双倍价钱买的精品店款还软"
    ]
   },
   {
    "product_id": "AR-2106",
-   "title": "ACME Kids Toy Storage Bins (Set of 3)",
+   "title": "ACME Kids 玩具收纳箱（3件装）",
    "brand": "ACME Kids",
    "price": 29.0,
    "rating": 4.5,
@@ -1556,28 +1556,28 @@
    "category": "kids-room",
    "labels": [],
    "attributes": {
-    "count": "3 bins",
+    "count": "3个",
     "collapsible": "yes",
-    "labels": "beachcombing icons",
-    "theme": "ocean"
+    "labels": "赶海主题图标",
+    "theme": "海洋"
    },
    "in_stock": true,
-   "short_description": "Three collapsible fabric bins with beachcombing labels, sized for figures, blocks, and books.",
-   "long_description": "Cleanup turns into a beach walk: each bin wears its own icon (shells, fish, driftwood) so putting toys away is the treasure sort. Reinforced rims keep them open; they fold flat when not needed.",
+   "short_description": "三个可折叠布艺收纳箱，带赶海主题图标，尺寸刚好收纳玩偶、积木和绘本。",
+   "long_description": "收拾玩具变成一次赶海散步：每个箱子有自己的图标（贝壳、鱼、浮木），把玩具归位就像分拣宝藏。加固箱口保持挺立，不用时折叠收起。",
    "specs": {
-    "size": "11 in cube each",
-    "material": "felt + canvas",
-    "rims": "reinforced wire"
+    "size": "每个11英寸立方",
+    "material": "毛毡 + 帆布",
+    "rims": "加固钢丝圈"
    },
    "review_highlights": [
-    "Cleanup time stopped being a negotiation",
-    "Sturdy rims — they don't slump like cheap bins",
-    "Fits the cube shelf we already had"
+    "收拾玩具不再是一场谈判",
+    "箱口结实——不像廉价箱子软塌塌",
+    "正好放进我们已有的格子柜"
    ]
   },
   {
    "product_id": "AR-2107",
-   "title": "ACME Kids Rocket Table Lamp",
+   "title": "ACME Kids 火箭造型台灯",
    "brand": "ACME Kids",
    "price": 22.0,
    "rating": 4.3,
@@ -1585,28 +1585,28 @@
    "category": "kids-room",
    "labels": [],
    "attributes": {
-    "shade": "rocket silhouette",
-    "dimmable": "3 levels",
+    "shade": "火箭剪影灯罩",
+    "dimmable": "3档",
     "power": "USB-C",
-    "theme": "space"
+    "theme": "太空"
    },
    "in_stock": true,
-   "short_description": "A warm three-level lamp with a rocket silhouette shade for the reading corner.",
-   "long_description": "A small desk-or-shelf lamp whose shade throws a soft rocket-and-moon profile on the wall. Three brightness levels — reading, wind-down, and barely-there.",
+   "short_description": "暖光三档调节，火箭剪影灯罩，专为阅读角准备。",
+   "long_description": "一盏小型桌面或置物架台灯，灯罩会在墙上投出柔和的火箭与月亮剪影。三档亮度——阅读、哄睡和微光。",
    "specs": {
-    "height": "11 in",
-    "brightness": "3 levels, max 400 lm",
+    "height": "11英寸",
+    "brightness": "3档调光，最高400流明",
     "power": "USB-C"
    },
    "review_highlights": [
-    "Perfect on the bookshelf next to the solar system posters",
-    "The wall silhouette is a sweet touch at night",
-    "Wish the cable were longer — buy an extension"
+    "放在太阳系海报旁的书架上刚刚好",
+    "夜里的墙面剪影特别温馨",
+    "线再长点就好了——记得买个延长线"
    ]
   },
   {
    "product_id": "AR-2108",
-   "title": "ACME Playroom Solar System Poster Set (4 pc)",
+   "title": "ACME Playroom 太阳系主题海报套装（4张）",
    "brand": "ACME Playroom",
    "price": 18.0,
    "rating": 4.6,
@@ -1615,29 +1615,29 @@
    "category": "kids-room",
    "labels": [],
    "attributes": {
-    "count": "4 posters",
-    "size": "16 x 20 in",
-    "finish": "matte, glare-free",
-    "theme": "space"
+    "count": "4张海报",
+    "size": "16×20英寸",
+    "finish": "哑光，不反光",
+    "theme": "太空"
    },
    "in_stock": true,
-   "short_description": "Four matte posters mapping the planets, moon phases, distances, and a launch timeline — decor that answers questions.",
-   "long_description": "A four-poster set that turns walls into reference material: a planet size-comparison chart, a solar-system distance map, a moon-phase calendar, and a rocket anatomy print. Matte stock reads clean under a night light.",
+   "short_description": "四张哑光海报：行星、月相、距离和火箭结构图——会回答问题的装饰画。",
+   "long_description": "四张一套的海报让墙面变成参考资料：行星大小对比图、太阳系距离地图、月相日历和火箭结构解剖图。哑光纸面在夜灯下看不反光。",
    "specs": {
-    "count": "4",
-    "size": "16 x 20 in each",
-    "finish": "matte",
-    "mounting": "frame or washi tape"
+    "count": "4张",
+    "size": "每张16×20英寸",
+    "finish": "哑光",
+    "mounting": "可装框或用和纸胶带张贴"
    },
    "review_highlights": [
-    "She corrects us from across the room now — citing the wall",
-    "Matte finish means no glare from the lamp",
-    "Looks designed, not licensed-cartoon"
+    "她现在会隔着房间纠正我们——引用的是墙上海报",
+    "哑光面在台灯下不反光",
+    "看着像独立设计，不是授权卡通"
    ]
   },
   {
    "product_id": "AR-2109",
-   "title": "ACME Kids Deep Sea Blackout Curtains (2 panels)",
+   "title": "ACME Kids 深海遮光窗帘（2片）",
    "brand": "ACME Kids",
    "price": 36.0,
    "rating": 4.4,
@@ -1645,29 +1645,29 @@
    "category": "kids-room",
    "labels": [],
    "attributes": {
-    "panels": "2",
-    "size": "42 x 63 in each",
+    "panels": "2片",
+    "size": "每片42×63英寸",
     "blackout": "85%",
-    "theme": "ocean"
+    "theme": "海洋"
    },
    "in_stock": true,
-   "short_description": "Two blackout panels with a subtle tone-on-tone wave weave — dark enough for early bedtimes.",
-   "long_description": "Deep Sea panels block about 85% of light behind a quiet tone-on-tone wave pattern — plain navy from across the room, rolling surf up close. Standard rod pocket.",
+   "short_description": "两片遮光帘，低调的同色系波浪织纹——早睡时间也够暗。",
+   "long_description": "深海系列帘布在安静的同色系波浪纹下遮光约85%——远看是纯海军蓝，近看是涌动的海浪。标配穿杆式设计。",
    "specs": {
-    "panels": "2",
-    "size": "42 x 63 in",
+    "panels": "2片",
+    "size": "42×63英寸",
     "blackout": "85%",
-    "care": "machine wash cold"
+    "care": "机洗冷水"
    },
    "review_highlights": [
-    "Summer bedtimes finally work",
-    "Print is subtle — the room won't need redoing at age ten",
-    "Hung in ten minutes on the rod we had"
+    "夏天的早睡安排终于实现了",
+    "图案很低调——孩子十岁也不用重新装修房间",
+    "用家里原有的窗帘杆十分钟挂好"
    ]
   },
   {
    "product_id": "AR-1901",
-   "title": "ACME Sleep Queen Platform Bed Frame",
+   "title": "ACME Sleep 双人加大（queen）平台床架",
    "brand": "ACME Sleep",
    "price": 379.0,
    "rating": 4.6,
@@ -1675,68 +1675,68 @@
    "category": "furniture-bedroom",
    "labels": [],
    "attributes": {
-    "size": "queen",
-    "headboard": "upholstered, linen-look",
-    "slats": "no box spring needed",
-    "assembly": "45 min, two people"
+    "size": "queen（双人加大）",
+    "headboard": "软包，亚麻质感",
+    "slats": "无需弹簧床架",
+    "assembly": "45分钟，两人组装"
    },
    "in_stock": true,
-   "short_description": "A queen platform frame with a cushioned linen-look headboard — no box spring, no squeaks.",
-   "long_description": "The ACME Sleep platform frame pairs a softly cushioned headboard with a solid slat base, so the mattress goes straight on. Steel core rails are wrapped to stay silent; under-bed clearance fits storage bins.",
+   "short_description": "双人加大平台床架，软包亚麻质感床头板——无需弹簧床架，零异响。",
+   "long_description": "ACME Sleep平台床架把软包床头板与稳固排骨架床板结合，床垫直接放置即可。钢制龙骨包覆消音，床底空间可放收纳箱。",
    "specs": {
-    "size": "queen",
-    "clearance": "9 in under-bed",
-    "weight_capacity": "700 lb",
-    "assembly": "two people, ~45 min"
+    "size": "queen（双人加大）",
+    "clearance": "床底净高9英寸",
+    "weight_capacity": "承重700磅",
+    "assembly": "两人安装，约45分钟"
    },
    "review_highlights": [
-    "Zero squeaks six months in",
-    "Assembly was genuinely 45 minutes",
-    "Headboard is comfortable for sitting up reading"
+    "用了半年，零异响",
+    "安装真的只花了45分钟",
+    "靠着床头板坐着看书很舒服"
    ]
   },
   {
    "product_id": "AR-1902",
-   "title": "ACME Sleep Hybrid Mattress",
+   "title": "ACME Sleep 混合弹簧床垫",
    "brand": "ACME Sleep",
    "price": 349.0,
    "rating": 4.5,
    "review_count": 2980,
    "category": "furniture-bedroom",
    "labels": [
-    "bestseller"
+    "热销"
    ],
    "attributes": {
-    "type": "hybrid coil + foam",
-    "firmness": "medium-firm",
-    "trial": "100 nights"
+    "type": "弹簧+记忆棉混合",
+    "firmness": "中等偏硬",
+    "trial": "100晚"
    },
    "in_stock": true,
-   "short_description": "A medium-firm hybrid that ships compressed and settles in two days — 100-night trial.",
-   "long_description": "The mattress layers pocketed coils under cooling foam for a medium-firm feel that suits back and side sleepers. Arrives compressed, fully expands in 48 hours, and carries a 100-night home trial. Four sizes; the price steps up with each.",
+   "short_description": "中等偏硬混合床垫，压缩发货，两天完全回弹——附100晚试睡。",
+   "long_description": "床垫在清凉凝胶记忆棉下方排布独立袋装弹簧，中等偏硬的睡感同时适合仰睡和侧睡人群。压缩运输，48小时完全舒展，附100晚在家试睡。四种尺寸，价格随尺寸递增。",
    "specs": {
-    "sizes": "twin, full, queen, king",
-    "height": "11 in",
-    "layers": "pocketed coils + gel foam",
-    "trial": "100 nights"
+    "sizes": "twin（单人）、full（双人标准）、queen（双人加大）、king（特大）",
+    "height": "11英寸",
+    "layers": "独立袋装弹簧 + 凝胶记忆棉",
+    "trial": "100晚"
    },
    "review_highlights": [
-    "The 48-hour expansion is real — wait before judging",
-    "Sleeps noticeably cooler than our old foam slab",
-    "Edge support is solid for a hybrid at this price"
+    "48小时回弹是真的——先别急着下结论",
+    "比原来的纯记忆棉床垫睡起来凉快多了",
+    "这个价位的混合床垫，边缘支撑算扎实"
    ],
    "variants": [
     {
      "product_id": "AR-1902-TWIN",
      "option_values": {
-      "size": "twin"
+      "size": "twin（单人）"
      },
      "price": 349.0
     },
     {
      "product_id": "AR-1902-FULL",
      "option_values": {
-      "size": "full"
+      "size": "full（双人标准）"
      },
      "price": 449.0,
      "in_stock": false
@@ -1744,14 +1744,14 @@
     {
      "product_id": "AR-1902-QUEEN",
      "option_values": {
-      "size": "queen"
+      "size": "queen（双人加大）"
      },
      "price": 549.0
     },
     {
      "product_id": "AR-1902-KING",
      "option_values": {
-      "size": "king"
+      "size": "king（特大）"
      },
      "price": 699.0
     }
@@ -1759,7 +1759,7 @@
   },
   {
    "product_id": "AR-1903",
-   "title": "ACME Sleep Washed-Cotton Duvet Set, Queen",
+   "title": "ACME Sleep 水洗棉被套套装 双人加大",
    "brand": "ACME Sleep",
    "price": 89.0,
    "rating": 4.4,
@@ -1767,59 +1767,59 @@
    "category": "furniture-bedroom",
    "labels": [],
    "attributes": {
-    "size": "queen",
-    "material": "washed cotton",
-    "pieces": "duvet cover + 2 shams",
-    "closure": "hidden buttons"
+    "size": "queen（双人加大）",
+    "material": "水洗棉",
+    "pieces": "被套 + 2个枕套",
+    "closure": "隐形纽扣"
    },
    "in_stock": true,
-   "short_description": "A washed-cotton duvet cover and two shams that look better slightly rumpled.",
-   "long_description": "Garment-washed cotton with a lived-in softness from day one. Hidden button closure and corner ties keep the insert in place.",
+   "short_description": "水洗棉被套加两个枕套，微微起皱的样子反而更好看。",
+   "long_description": "成衣水洗棉，第一天就有那种住惯了的柔软。隐形纽扣和被角绑带让内芯服帖不跑位。",
    "specs": {
-    "size": "queen",
-    "material": "100% washed cotton",
-    "pieces": "cover + 2 shams"
+    "size": "queen（双人加大）",
+    "material": "100%水洗棉",
+    "pieces": "被套 + 2个枕套"
    },
    "review_highlights": [
-    "Soft immediately, no break-in needed",
-    "The rumpled look hides a multitude of unmade-bed sins",
-    "Corner ties actually hold the insert"
+    "一上手就软，不需要磨合期",
+    "微皱的质感掩盖了没叠被子的一切",
+    "被角绑带真的能固定住内芯"
    ]
   },
   {
    "product_id": "AR-1721",
-   "title": "ACME Beauty Eye Palette",
+   "title": "ACME Beauty 眼影盘",
    "brand": "ACME Beauty",
    "price": 34.0,
    "rating": 4.6,
    "review_count": 3210,
    "category": "beauty-personal-care",
    "labels": [
-    "bestseller"
+    "热销"
    ],
    "attributes": {
-    "shades": "12",
-    "finish": "8 matte / 4 shimmer",
+    "shades": "12色",
+    "finish": "8哑光 / 4珠光",
     "vegan": "yes"
    },
    "in_stock": true,
-   "short_description": "Twelve wearable neutrals — eight mattes, four shimmers — built for five-minute mornings.",
-   "long_description": "The Everyday palette skips the novelty shades: twelve neutrals that blend with fingers in a hurry and layer up for evenings. Vegan formulas, low fallout.",
+   "short_description": "十二个日常百搭大地色——八哑光、四珠光——为五分钟出门的早晨而生。",
+   "long_description": "这盘眼影跳过了猎奇色：十二个中性色，赶时间时用指腹就能晕染，叠加后也能撑起晚妆。纯素配方，低飞粉。",
    "specs": {
-    "shades": "12",
-    "weight": "14 g",
+    "shades": "12色",
+    "weight": "14克",
     "vegan": "yes",
     "cruelty_free": "yes"
    },
    "review_highlights": [
-    "Every shade is actually usable",
-    "Minimal fallout even with the shimmers",
-    "Replaced three palettes in my drawer"
+    "每个色都真的用得上",
+    "珠光也几乎不飞粉",
+    "一盘替掉了抽屉里的三盘"
    ]
   },
   {
    "product_id": "AR-1722",
-   "title": "ACME Beauty Tinted Moisturizer SPF 30",
+   "title": "ACME Beauty 润色保湿霜SPF30",
    "brand": "ACME Beauty",
    "price": 28.0,
    "rating": 4.5,
@@ -1828,64 +1828,64 @@
    "labels": [],
    "attributes": {
     "spf": "30",
-    "shades": "6",
-    "finish": "natural, breathable"
+    "shades": "6色",
+    "finish": "自然妆效，透气"
    },
    "in_stock": true,
-   "short_description": "Sheer, breathable coverage with SPF 30 — skincare that behaves like makeup.",
-   "long_description": "It evens tone without masking it, layers SPF 30 under everything, and wears for a workday without caking. Six shades, lightest to deepest.",
+   "short_description": "轻薄透气的润色遮盖，自带SPF30——像彩妆一样好用的护肤品。",
+   "long_description": "它均匀肤色而不遮盖本色，SPF30可叠涂在任何妆前，带妆一整个工作日不起皮。六个色号，从最浅到最深。",
    "specs": {
-    "spf": "30 broad spectrum",
-    "size": "40 ml",
-    "shades": "6, porcelain to espresso"
+    "spf": "SPF30 广谱",
+    "size": "40毫升",
+    "shades": "6色，瓷白到深咖"
    },
    "review_highlights": [
-    "The no-makeup makeup everyone asks about",
-    "Doesn't pill under sunscreen reapplication",
-    "Shade match tool got mine right first try"
+    "人人都来问的“伪素颜”妆",
+    "叠补防晒时不起屑",
+    "色号匹配工具一次就配对了"
    ],
    "variants": [
     {
      "product_id": "AR-1722-PORCELAIN",
      "option_values": {
-      "shade": "porcelain"
+      "shade": "瓷白"
      }
     },
     {
      "product_id": "AR-1722-SAND",
      "option_values": {
-      "shade": "sand"
+      "shade": "沙色"
      }
     },
     {
      "product_id": "AR-1722-HONEY",
      "option_values": {
-      "shade": "honey"
+      "shade": "蜜色"
      }
     },
     {
      "product_id": "AR-1722-AMBER",
      "option_values": {
-      "shade": "amber"
+      "shade": "琥珀色"
      }
     },
     {
      "product_id": "AR-1722-CHESTNUT",
      "option_values": {
-      "shade": "chestnut"
+      "shade": "栗色"
      }
     },
     {
      "product_id": "AR-1722-ESPRESSO",
      "option_values": {
-      "shade": "espresso"
+      "shade": "深咖色"
      }
     }
    ]
   },
   {
    "product_id": "AR-1723",
-   "title": "ACME Beauty Long-Wear Mascara",
+   "title": "ACME Beauty 持久不晕染睫毛膏",
    "brand": "ACME Beauty",
    "price": 19.0,
    "rating": 4.4,
@@ -1893,27 +1893,27 @@
    "category": "beauty-personal-care",
    "labels": [],
    "attributes": {
-    "type": "tubing",
-    "removal": "warm water",
+    "type": "管状成膜",
+    "removal": "温水即可卸除",
     "smudge": "no"
    },
    "in_stock": true,
-   "short_description": "A tubing mascara that survives the day and removes with warm water — no raccoon eyes either way.",
-   "long_description": "It wraps each lash in flexible tubes that don't flake or smudge through a full day, then slide off with warm water and light pressure. No remover needed.",
+   "short_description": "管状成膜睫毛膏，持妆一整天，温水即可卸除——带妆卸妆都不会变熊猫眼。",
+   "long_description": "它把每根睫毛包裹进柔韧的膜管里，一整天不脱妆不晕染，温水加轻揉即可滑落，无需专用卸妆产品。",
    "specs": {
-    "type": "tubing",
-    "wear": "all-day, smudge-proof",
-    "removal": "warm water"
+    "type": "管状成膜",
+    "wear": "全天持妆，防晕染",
+    "removal": "温水即可"
    },
    "review_highlights": [
-    "Gym, rain, a wedding cry — still on",
-    "Comes off in the shower with zero scrubbing",
-    "The only mascara that doesn't transfer to my glasses"
+    "健身房、下雨天、婚礼上哭过——妆都还在",
+    "洗澡时一冲就掉，完全不用搓",
+    "唯一不会蹭到眼镜片上的睫毛膏"
    ]
   },
   {
    "product_id": "AR-2001",
-   "title": "ACME Pantry Atlantic Salmon Fillets (2 lb, frozen)",
+   "title": "ACME Pantry 大西洋三文鱼柳（2磅，冷冻）",
    "brand": "ACME Pantry",
    "price": 18.0,
    "rating": 4.6,
@@ -1921,27 +1921,27 @@
    "category": "grocery",
    "labels": [],
    "attributes": {
-    "weight": "2 lb",
-    "portions": "4 fillets",
-    "state": "individually vacuum-sealed, frozen"
+    "weight": "2磅",
+    "portions": "4片鱼柳",
+    "state": "独立真空包装，冷冻"
    },
    "in_stock": true,
-   "short_description": "Four vacuum-sealed salmon fillets — a weeknight dinner that defrosts in twenty minutes.",
-   "long_description": "Individually sealed fillets that go from freezer to pan-ready in a bowl of cold water. Skin-on for crispy-skin searing or easy grilling.",
+   "short_description": "四片真空包装三文鱼柳——二十分钟解冻的工作日晚餐。",
+   "long_description": "独立密封鱼柳，从冷冻室到一碗冷水即可下锅。带皮煎出脆皮或直接烧烤都很方便。",
    "specs": {
-    "weight": "2 lb (4 x 8 oz)",
-    "prep": "thaw 20 min in cold water",
-    "source": "farm-raised Atlantic"
+    "weight": "2磅（4片×8盎司）",
+    "prep": "冷水解冻20分钟",
+    "source": "养殖大西洋三文鱼"
    },
    "review_highlights": [
-    "Restaurant-thickness fillets, not thin tail pieces",
-    "Vacuum seals mean no freezer burn",
-    "Weeknight-fast from frozen"
+    "鱼柳是餐厅级的厚度，不是薄薄的尾部",
+    "真空密封意味着没有冻伤",
+    "冷冻状态也能快手搞定工作日晚餐"
    ]
   },
   {
    "product_id": "AR-2002",
-   "title": "ACME Pantry Lemon-Herb Marinade & Glaze",
+   "title": "ACME Pantry 柠檬香草腌料&淋酱",
    "brand": "ACME Pantry",
    "price": 6.0,
    "rating": 4.5,
@@ -1949,54 +1949,54 @@
    "category": "grocery",
    "labels": [],
    "attributes": {
-    "size": "12 oz",
-    "use": "fish, chicken, vegetables"
+    "size": "12盎司",
+    "use": "鱼、鸡肉、蔬菜"
    },
    "in_stock": true,
-   "short_description": "A bright lemon-herb marinade that doubles as a finishing glaze for fish or chicken.",
-   "long_description": "Lemon, garlic, and soft herbs in a marinade that works in fifteen minutes and reduces into a pan glaze. One bottle covers two family dinners.",
+   "short_description": "清新柠檬香草腌料，收汁后变身鱼或鸡肉的淋酱。",
+   "long_description": "柠檬、大蒜与柔和不冲的香草，腌十五分钟即可入味，收汁后就是一锅亮泽酱汁。一瓶够做两顿家庭晚餐。",
    "specs": {
-    "size": "12 oz",
-    "marinade_time": "15-30 min"
+    "size": "12盎司",
+    "marinade_time": "15-30分钟"
    },
    "review_highlights": [
-    "Made my salmon taste intentional",
-    "Reduces into a great pan sauce",
-    "Not too salty like most bottled marinades"
+    "让我的三文鱼吃起来像是刻意设计过的",
+    "收汁后就是很棒的锅烧酱",
+    "不像大多数瓶装腌料那么咸"
    ]
   },
   {
    "product_id": "AR-2003",
-   "title": "ACME Pantry Weeknight Stir-Fry Dinner Kit",
+   "title": "ACME Pantry 工作日炒面晚餐套装",
    "brand": "ACME Pantry",
    "price": 12.0,
    "rating": 4.7,
    "review_count": 2310,
    "category": "grocery",
    "labels": [
-    "bestseller"
+    "热销"
    ],
    "attributes": {
-    "serves": "5-6",
-    "includes": "noodles, ginger-garlic sauce, crispy topping"
+    "serves": "5-6人份",
+    "includes": "炒面、姜蒜酱、香脆配料"
    },
    "in_stock": true,
-   "short_description": "Wok noodles, a ginger-garlic sauce, and a crispy topping — add a protein and a bag of frozen veg, done.",
-   "long_description": "The Stir-Fry Dinner Kit bundles quick-cook wok noodles, a ginger-garlic sauce that's savory rather than spicy, and a sesame crunch topping. Bring your own protein and vegetables; one pan does the rest.",
+   "short_description": "炒面、姜蒜酱加香脆配料——自备蛋白质和一袋冷冻蔬菜，齐活。",
+   "long_description": "炒面晚餐套装包含快熟炒面、咸鲜不辣的姜蒜酱和芝麻脆顶料。蛋白质和蔬菜自备，一口锅搞定其余。",
    "specs": {
-    "serves": "5-6",
-    "noodles": "2 x 8 oz wok noodles",
-    "sauce": "ginger-garlic, mild"
+    "serves": "5-6人份",
+    "noodles": "2份×8盎司炒面",
+    "sauce": "姜蒜味，温和不辣"
    },
    "review_highlights": [
-    "The sauce is kid-approved and adult-respectable",
-    "Noodles don't clump like the cheap ones",
-    "Faster than delivery on a weeknight"
+    "孩子不抗拒、大人也觉得够味的酱",
+    "面条不像便宜货那样坨成一团",
+    "工作日做比外卖还快"
    ]
   },
   {
    "product_id": "AR-2004",
-   "title": "ACME Pantry 90% Lean Ground Beef (1.5 lb)",
+   "title": "ACME Pantry 90%瘦牛肉馅（1.5磅）",
    "brand": "ACME Pantry",
    "price": 11.0,
    "rating": 4.5,
@@ -2004,26 +2004,26 @@
    "category": "grocery",
    "labels": [],
    "attributes": {
-    "weight": "1.5 lb",
+    "weight": "1.5磅",
     "lean": "90/10",
-    "state": "fresh, vacuum-packed"
+    "state": "新鲜，真空包装"
    },
    "in_stock": true,
-   "short_description": "Lean vacuum-packed ground beef in a one-dinner portion — brown it for pasta, chili, or burgers.",
-   "long_description": "A 90/10 blend that browns without a grease slick. Vacuum packing keeps it fresh longer in the fridge or drops straight into the freezer.",
+   "short_description": "真空包装瘦牛肉馅，一顿晚餐的量——炒散做意面、辣豆酱或汉堡饼。",
+   "long_description": "9:1肥瘦比，炒散后锅底不出油汪汪的一层。真空包装在冰箱里保鲜更久，也可直接放进冷冻室。",
    "specs": {
-    "weight": "1.5 lb",
-    "blend": "90/10"
+    "weight": "1.5磅",
+    "blend": "90/10（9:1肥瘦比）"
    },
    "review_highlights": [
-    "Browns clean, no draining ceremony",
-    "Right size for one family dinner with leftovers",
-    "Freezes flat for easy stacking"
+    "炒散后清爽，不用费劲沥油",
+    "一顿家常晚餐带剩菜刚刚好的量",
+    "可平铺冷冻，码放方便"
    ]
   },
   {
    "product_id": "AR-2005",
-   "title": "ACME Pantry Fresh Pasta Duo — Rigatoni & Fettuccine",
+   "title": "ACME Pantry 新鲜意面双拼 — 大管面&意大利宽面",
    "brand": "ACME Pantry",
    "price": 9.0,
    "rating": 4.6,
@@ -2031,26 +2031,26 @@
    "category": "grocery",
    "labels": [],
    "attributes": {
-    "weight": "2 x 9 oz",
-    "cook_time": "4 minutes",
-    "state": "refrigerated fresh"
+    "weight": "2份×9盎司",
+    "cook_time": "4分钟",
+    "state": "冷藏新鲜"
    },
    "in_stock": true,
-   "short_description": "Two nests of fresh pasta that cook in four minutes — dinner's four-minute head start.",
-   "long_description": "Fresh egg pasta with real bite: rigatoni for chunky sauces, fettuccine for cream or butter-sage. Four minutes in boiling water.",
+   "short_description": "两份四分钟就能煮好的新鲜意面——晚餐的四分钟起跑线。",
+   "long_description": "新鲜鸡蛋面，有真正的嚼劲：大管面配块状酱，宽面配奶油或黄油鼠尾草。沸水煮四分钟。",
    "specs": {
-    "weight": "2 x 9 oz",
-    "cook_time": "4 min"
+    "weight": "2份×9盎司",
+    "cook_time": "4分钟"
    },
    "review_highlights": [
-    "Tastes like the Italian deli's, half the price",
-    "Four-minute dinner backbone",
-    "Holds sauce way better than dried"
+    "意大利熟食店的味道，一半的价钱",
+    "四分钟晚餐的主力担当",
+    "挂酱能力远胜干意面"
    ]
   },
   {
    "product_id": "AR-2006",
-   "title": "ACME Pantry Slow-Simmered Tomato-Basil Sauce",
+   "title": "ACME Pantry 慢炖番茄罗勒意面酱",
    "brand": "ACME Pantry",
    "price": 8.0,
    "rating": 4.7,
@@ -2058,26 +2058,26 @@
    "category": "grocery",
    "labels": [],
    "attributes": {
-    "size": "24 oz",
-    "ingredients": "8, all pronounceable",
+    "size": "24盎司",
+    "ingredients": "8种，全都叫得出名字",
     "sugar_added": "no"
    },
    "in_stock": true,
-   "short_description": "A slow-simmered tomato-basil sauce with eight ingredients and no added sugar.",
-   "long_description": "Crushed tomatoes, basil, olive oil, garlic — simmered down so it tastes like an afternoon you didn't have to spend. One jar coats a pound of pasta.",
+   "short_description": "慢炖番茄罗勒酱，只用八种配料，不添加糖。",
+   "long_description": "碎番茄、罗勒、橄榄油、大蒜——慢慢熬到你不用花一下午也能尝到那个味道。一罐刚好拌一磅意面。",
    "specs": {
-    "size": "24 oz",
-    "added_sugar": "none"
+    "size": "24盎司",
+    "added_sugar": "无"
    },
    "review_highlights": [
-    "The one jarred sauce I don't doctor",
-    "Eight ingredients, all recognizable",
-    "Great over fresh or dried pasta alike"
+    "唯一不用再调味补救的瓶装酱",
+    "八种配料全都认识",
+    "配新鲜或干意面都好吃"
    ]
   },
   {
    "product_id": "AR-2007",
-   "title": "ACME Pantry Garlic Brioche Dinner Rolls (8 pc)",
+   "title": "ACME Pantry 蒜香布里欧餐包（8个）",
    "brand": "ACME Pantry",
    "price": 5.0,
    "rating": 4.4,
@@ -2085,25 +2085,25 @@
    "category": "grocery",
    "labels": [],
    "attributes": {
-    "count": "8 rolls",
-    "prep": "5 min oven refresh"
+    "count": "8个",
+    "prep": "烤箱回温5分钟"
    },
    "in_stock": true,
-   "short_description": "Eight buttery garlic brioche rolls — five minutes in the oven and the table smells like effort.",
-   "long_description": "Par-baked brioche rolls brushed with garlic butter. Five minutes at 350°F finishes them golden.",
+   "short_description": "八个黄油蒜香布里欧餐包——烤箱五分钟，满桌都是“用心做饭”的香气。",
+   "long_description": "预烤布里欧餐包刷上蒜香黄油。350°F烤五分钟至金黄。",
    "specs": {
-    "count": "8",
-    "refresh": "5 min at 350°F"
+    "count": "8个",
+    "refresh": "350°F烤5分钟"
    },
    "review_highlights": [
-    "Disappear before the pasta hits the table",
-    "Tastes bakery-fresh from a bag",
-    "Kids fight over the corner ones"
+    "意面上桌前就被抢光了",
+    "袋装货吃出面包店的新鲜感",
+    "孩子们抢着要边角那几个"
    ]
   },
   {
    "product_id": "AR-2008",
-   "title": "ACME Pantry Rainbow Veggie Roasting Mix (2 lb)",
+   "title": "ACME Pantry 彩虹时蔬烤盘混装（2磅）",
    "brand": "ACME Pantry",
    "price": 8.0,
    "rating": 4.3,
@@ -2111,26 +2111,26 @@
    "category": "grocery",
    "labels": [],
    "attributes": {
-    "weight": "2 lb",
-    "contents": "carrots, broccoli, peppers, red onion",
-    "prep": "pre-cut, oven-ready"
+    "weight": "2磅",
+    "contents": "胡萝卜、西兰花、彩椒、红洋葱",
+    "prep": "已切配，可直接进烤箱"
    },
    "in_stock": true,
-   "short_description": "Pre-cut rainbow vegetables that roast on one sheet pan in 25 minutes.",
-   "long_description": "Carrots, broccoli, sweet peppers, and red onion, cut to roast evenly together. Toss with oil, one pan, 25 minutes — a side that goes with nearly any main.",
+   "short_description": "切好的彩虹时蔬，一盘25分钟烤好。",
+   "long_description": "胡萝卜、西兰花、甜椒和红洋葱，切块大小一致、同盘同熟。拌上油、一盘、25分钟——几乎配任何主菜。",
    "specs": {
-    "weight": "2 lb",
-    "roast": "25 min at 425°F"
+    "weight": "2磅",
+    "roast": "425°F烤25分钟"
    },
    "review_highlights": [
-    "Every piece cooks in the same time — someone thought about this",
-    "Works next to fish, pasta, or a roast chicken",
-    "No cutting board on a weeknight"
+    "每块蔬菜都同时烤熟——真有人认真想过这件事",
+    "配鱼、意面或烤鸡都合适",
+    "工作日晚餐不用碰切菜板了"
    ]
   },
   {
    "product_id": "AR-2009",
-   "title": "ACME Pantry Caesar Salad Kit (family size)",
+   "title": "ACME Pantry 凯撒沙拉套装（家庭装）",
    "brand": "ACME Pantry",
    "price": 7.0,
    "rating": 4.4,
@@ -2138,47 +2138,47 @@
    "category": "grocery",
    "labels": [],
    "attributes": {
-    "serves": "4-5",
-    "includes": "romaine, dressing, croutons, parmesan"
+    "serves": "4-5人份",
+    "includes": "罗马生菜、凯撒酱、面包干、帕玛森芝士"
    },
    "in_stock": true,
-   "short_description": "A family-size Caesar kit — romaine, dressing, croutons, and real shaved parmesan.",
-   "long_description": "Crisp romaine with a garlicky (not gloppy) dressing, sourdough croutons, and shaved parmesan. Tossed in the bag if you're feeling efficient.",
+   "short_description": "家庭装凯撒沙拉套装——罗马生菜、凯撒酱、面包干和货真价实的帕玛森刨片。",
+   "long_description": "爽脆罗马生菜配蒜香浓郁（不齁不坨）的凯撒酱、酸面包干和帕玛森刨片。想省事的话直接在袋里摇匀。",
    "specs": {
-    "serves": "4-5"
+    "serves": "4-5人份"
    },
    "review_highlights": [
-    "Dressing tastes homemade",
-    "Croutons stay crunchy to the bottom of the bowl",
-    "The shaved parm is the upgrade"
+    "酱吃着像自制的",
+    "面包干吃到碗底都还是脆的",
+    "帕玛森刨片就是那处点睛升级"
    ]
   },
   {
    "product_id": "AR-2010",
-   "title": "ACME Pantry Weekend Brownie Skillet Kit",
+   "title": "ACME Pantry 周末铸铁锅布朗尼套装",
    "brand": "ACME Pantry",
    "price": 9.0,
    "rating": 4.8,
    "review_count": 1240,
    "category": "grocery",
    "labels": [
-    "bestseller"
+    "热销"
    ],
    "attributes": {
-    "serves": "6",
-    "includes": "mix + chocolate chunks + skillet-ready liner"
+    "serves": "6人份",
+    "includes": "布朗尼粉 + 巧克力块 + 铸铁锅专用烘焙纸"
    },
    "in_stock": true,
-   "short_description": "A skillet brownie kit with proper chocolate chunks — dessert that earns the oven preheat.",
-   "long_description": "Everything for a shareable skillet brownie: rich cocoa mix, dark chocolate chunks, and a parchment liner sized for a 10-inch skillet. Add butter and one egg.",
+   "short_description": "配足量巧克力块的铸铁锅布朗尼套装——值得为它预热烤箱的甜点。",
+   "long_description": "可供分享的铸铁锅布朗尼所需的一切：浓郁可可粉、黑巧克力块，以及适配10英寸铸铁锅的烘焙纸。自备黄油和一个鸡蛋。",
    "specs": {
-    "serves": "6",
-    "bake": "22 min at 350°F"
+    "serves": "6人份",
+    "bake": "350°F烤22分钟"
    },
    "review_highlights": [
-    "The chunks stay molten — dangerous knowledge",
-    "Easier than boxed mix, tastes pastry-case",
-    "Our weekend ritual closer"
+    "巧克力块烤完还是流心的——危险的知识",
+    "比盒装粉简单，吃着像甜品店的",
+    "我们的周末收尾仪式担当"
    ]
   }
  ]

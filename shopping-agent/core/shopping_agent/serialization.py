@@ -12,6 +12,7 @@ from collections.abc import Sequence
 from typing import Any
 
 from commerce_common.fencing import MAX_FENCED_CHARS
+from commerce_common.locale import t
 
 from .fencing import STOREFRONT_FENCE
 from .types import Cart, CartItem, FulfillmentOption, Order, Policy, Product, ProductDetails
@@ -70,23 +71,45 @@ def product_details_payload(details: ProductDetails) -> dict[str, Any]:
     return {k: v for k, v in payload.items() if v is not None}
 
 
-SEARCH_EMPTY_HEADER = (
+SEARCH_EMPTY_HEADER_EN = (
     "Search returned 0 results: nothing in the catalog matched this query. Run the "
     "broader retry before telling the customer it is not carried, and do not present a "
     "different product as the requested one. Search matches product text, not ids; "
     "resolve a product id with get_product_details."
 )
+SEARCH_EMPTY_HEADER_ZH = (
+    "搜索返回 0 条结果：商品目录中没有与该查询匹配的内容。在告知顾客本店不销售之前，"
+    "请先执行放宽条件的重试；不要把其他商品当作顾客要的商品来展示。搜索匹配的是商品文本，"
+    "不是商品 id；如需解析商品 id 请调用 get_product_details。"
+)
+
+
+def search_empty_header() -> str:
+    """The zero-result header in the active locale; the same string object both times a
+    locale is active, so identity checks against the module attribute still hold."""
+    return t(SEARCH_EMPTY_HEADER_EN, SEARCH_EMPTY_HEADER_ZH)
+
+
+def __getattr__(name: str) -> Any:
+    # SEARCH_EMPTY_HEADER stays importable, now resolved per access (PEP 562) so it
+    # follows a run-time locale switch instead of the locale at import time.
+    if name == "SEARCH_EMPTY_HEADER":
+        return search_empty_header()
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
 
 def search_result_header(count: int) -> str:
     if count == 0:
-        return SEARCH_EMPTY_HEADER
-    return (
+        return search_empty_header()
+    return t(
         f"Search returned {count} result(s): the catalog's closest text matches, "
         "which can include related items rather than the exact thing searched for. "
         "Treat a result as the requested item only if its title and attributes match; "
         "if none do, the item was not found, and anything you offer instead is named "
-        "as a stand-in."
+        "as a stand-in.",
+        f"搜索返回 {count} 条结果：以下是与查询最接近的文本匹配结果，可能包含相关商品而非"
+        "顾客所要的精确商品。仅当结果的标题与属性相符时才可视为顾客要的商品；若均不符，"
+        "则说明没有找到该商品，你转而推荐的任何替代品都必须明确说明是替代选择。",
     )
 
 
@@ -104,7 +127,10 @@ def search_result_text(
 
 
 def cart_summary(cart: Cart) -> str:
-    return f"{cart.item_count} item(s), subtotal {cart.subtotal:.2f} {cart.currency}"
+    return t(
+        f"{cart.item_count} item(s), subtotal {cart.subtotal:.2f} {cart.currency}",
+        f"共 {cart.item_count} 件商品，小计 {cart.subtotal:.2f} {cart.currency}",
+    )
 
 
 def cart_line_payload(item: CartItem) -> dict[str, Any]:
@@ -133,16 +159,18 @@ def order_payload(order: Order) -> dict[str, Any]:
 
 
 def orders_payload(orders: Sequence[Order]) -> Any:
-    return [order_payload(order) for order in orders] or {"note": "No orders found."}
+    return [order_payload(order) for order in orders] or {
+        "note": t("No orders found.", "没有找到订单。")
+    }
 
 
 def policies_payload(policies: Sequence[Policy]) -> Any:
     return [p.model_dump(exclude_none=True) for p in policies] or {
-        "note": "No matching policy content."
+        "note": t("No matching policy content.", "没有找到匹配的政策内容。")
     }
 
 
 def fulfillment_payload(options: Sequence[FulfillmentOption]) -> Any:
     return [o.model_dump(exclude_none=True) for o in options] or {
-        "note": "No fulfillment options available."
+        "note": t("No fulfillment options available.", "暂无可用的配送方式。")
     }

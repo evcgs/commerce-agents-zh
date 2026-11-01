@@ -1,5 +1,9 @@
 # commerce-agents
 
+> commerce-agents-zh: to **operate the running demo** (ports, lifecycle, config
+> endpoints, change discipline), read [AGENTS.md](AGENTS.md) first; this file covers
+> repo layout and design rules.
+
 For agents working in this repo, commerce-builder plugin users included. The public
 reference for commerce agents on Claude: a shopping agent and a merchant agent on three
 paths each, four vertical examples, and a Claude Code plugin.

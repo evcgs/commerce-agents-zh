@@ -1,6 +1,36 @@
 ---
 name: search-discovery
 description: Turning a described need (several constraints, a gift, a choice between candidates already in view, a search that came back empty or sold out) into a shortlist and a pick. Not needed when one search for the thing the customer named answers the request, or when the customer wants to learn what matters in a category first (purchase-research).
+description_zh: 把描述出的需求（多重约束、送礼、在已看到的候选间取舍、空结果或缺货的搜索）化为候选清单与推荐。当针对顾客点名之物的一次搜索就能回答请求时不需要；当顾客想先了解某品类该看什么（purchase-research）时也不需要。
+body_zh: |
+  # 搜索与发现
+
+  下文"商品"指本目录售卖的任意东西：一件产品、一晚住宿、一个套餐，或一个座位。
+
+  把顾客描述的需求化为几个选项加一句推荐，用尽量少的回合。
+
+  ## 读懂请求、组织搜索
+
+  - 从消息里取出预算、收礼人、日期、尺码、用途和否决项并落实；用结果体现你做到了，而不是回读一遍。
+  - 默认搜索；没拿到的预算、尺码或收礼人才会收窄候选，并在结果旁询问。只有当缺了它就无法搜索时才先问那一个问题，把可能的答案作为选项给出（例如"没有日期的住宿"）。
+  - 运用已给你的档案里已有的内容（家庭、已存限额、其拥有的东西），不要再问一遍。
+  - 用目录的用词组织查询，丢掉顾客的原话。
+  - 对请求点名的每件不同东西各跑一次搜索，全部在同一轮。把顾客给出的约束放进筛选；把"ta可能还想要什么"的猜测写进查询措辞。
+
+  ## 候选清单与推荐
+
+  - 在 `present_products` 中展示三到六个选项，把你推荐的放最前。每个推荐的 `reason` 用一句话点出它满足的顾客自身约束。当选项在某关键处不同，在文字里点出那个取舍。
+  - 当顾客已收窄到两到四个决赛项，用 `present_comparison` 对比ta提出的维度，而不是再发一排卡片。
+  - 结果没覆盖的问题，用 `get_product_details` 或已注册的 `web_search` 回答；两者都定不下时，说明未知。
+  - 说"几个选项都低于某数"之前，先加总它们的价格。超了就给总数，且不为被总数排除的套餐提供选项。
+  - 本店当下供不上的商品标为缺货，并把替代它的东西作为暂代品介绍。
+  - 组件前的文字控制在一到三句指引。
+
+  ## 商品是给别人的
+
+  - 收礼人的年龄、兴趣、预算，从请求、已给档案、或关于此收礼人的回忆中取；关于别人的已存事实不会转移。三者都没说收礼人是谁时，问那一个问题，或展示一组有差异的选项并说明其品味未知。
+  - 需要广度时，包含一个稳妥之选、一个讨喜之选、一个更便宜之选。
+  - 在属性关系到此收礼人的实处点出实用性（尺码、电池、噪音、年龄标识）。把年龄标识对照收礼人年龄：不匹配的撤下，或标出不匹配地展示。
 ---
 
 # Search and discovery

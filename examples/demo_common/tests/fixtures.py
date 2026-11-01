@@ -144,6 +144,11 @@ _PRODUCT_LITERAL = re.compile(
 )
 _KEY = re.compile(r"(^|[{,])(\s*)([A-Za-z_]\w*)\s*:", re.MULTILINE)
 _TRAILING_COMMA = re.compile(r",(\s*[}\]])")
+# A bilingual-copy call (commerce-agents-zh): t("English", "中文") / t(`En`, `中`).
+_T_CALL = re.compile(
+    r"""\bt\(\s*(`(?:[^`\\]|\\.)*`|"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')"""
+    r"""\s*,\s*(`(?:[^`\\]|\\.)*`|"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')\s*\)"""
+)
 
 
 def showcase_products(example_root: Path) -> list[dict]:
@@ -156,7 +161,21 @@ def showcase_products(example_root: Path) -> list[dict]:
     return [_literal_to_dict(literal) for literal in literals]
 
 
+def _resolve_t_calls(code: str) -> str:
+    """Replace each ``t(en, zh)`` copy call with the literal for the active locale, so a
+    bilingual showcase fixture parses to the same records the backend's catalog holds."""
+    from ..locale import get_locale
+
+    side = 2 if get_locale() == "zh" else 1
+
+    def pick(match: re.Match[str]) -> str:
+        return match.group(side)
+
+    return _T_CALL.sub(pick, code)
+
+
 def _literal_to_dict(literal: str) -> dict:
     """Returns a TypeScript object literal parsed as JSON after dropping comments and trailing commas."""
     code = "\n".join(line for line in literal.splitlines() if not line.lstrip().startswith("//"))
+    code = _resolve_t_calls(code)
     return json.loads(_TRAILING_COMMA.sub(r"\1", _KEY.sub(r'\1\2"\3":', code)))

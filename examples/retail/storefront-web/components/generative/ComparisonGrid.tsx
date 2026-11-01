@@ -2,11 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { CSSProperties } from "react";
-import { formatMoney } from "web-shared";
+import { formatMoney, t } from "web-shared";
 import type { ComparisonPayload } from "@/lib/types";
 import { ProductImage, ProductTitle, Rating } from "../ProductTile";
 
-const RECOMMENDED_LABEL = "Recommended";
+const RECOMMENDED_LABEL = t("Recommended", "推荐之选");
 
 /** The sign has its own column so text shares a left edge across rows. */
 function TermRow({ sign, text }: { sign: "+" | "−"; text: string }) {
@@ -71,7 +71,7 @@ export default function ComparisonGrid({
               <div>
                 {entry.best_for ? (
                   <div className="rounded-md bg-(--well) px-2 py-1 text-[13px] text-(--ink)">
-                    Best for: {entry.best_for}
+                    {t("Best for:", "适合：")} {entry.best_for}
                   </div>
                 ) : null}
               </div>
@@ -97,15 +97,18 @@ export default function ComparisonGrid({
       </div>
       {delta ? (
         <p className="mt-3 text-[13px] text-(--ink)">
-          Price difference:{" "}
+          {t("Price difference:", "价差：")}{" "}
           <span className="font-semibold">{formatMoney(delta.amount)}</span>{" "}
           <span className="text-(--ink-soft)">
-            ({formatMoney(delta.low_price)} vs {formatMoney(delta.high_price)})
+            {t(
+              `(${formatMoney(delta.low_price)} vs ${formatMoney(delta.high_price)})`,
+              `（${formatMoney(delta.low_price)} 对比 ${formatMoney(delta.high_price)}）`,
+            )}
           </span>
         </p>
       ) : null}
       {payload.dimensions?.length ? (
-        <p className="mt-3 text-xs text-(--ink-soft)/80">Compared on: {payload.dimensions.join(" · ")}</p>
+        <p className="mt-3 text-xs text-(--ink-soft)/80">{t("Compared on:", "对比维度：")} {payload.dimensions.join(" · ")}</p>
       ) : null}
     </section>
   );

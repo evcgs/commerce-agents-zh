@@ -34,7 +34,7 @@ from merchant_agent import (
 )
 from shopping_agent import ProductDetails
 
-from .storefront_fixtures import anchored_shift, load_json, weeks_since
+from .storefront_fixtures import anchored_shift, load_localized_json, weeks_since
 
 DailyRows = list[dict[str, Any]]
 
@@ -52,7 +52,7 @@ def _shift_day(day: str, delta: timedelta) -> str:
 
 
 def load_campaigns(data_dir: Path) -> dict[str, Campaign]:
-    raw = load_json(data_dir, "merchant_campaigns.json")
+    raw = load_localized_json(data_dir, "merchant_campaigns.json")
     delta = anchored_shift(raw)
     campaigns = {}
     for row in raw["campaigns"]:
@@ -62,7 +62,7 @@ def load_campaigns(data_dir: Path) -> dict[str, Campaign]:
 
 
 def load_issues(data_dir: Path) -> list[OrderIssue]:
-    raw = load_json(data_dir, "merchant_messages.json")
+    raw = load_localized_json(data_dir, "merchant_messages.json")
     delta = anchored_shift(raw)
     issues = []
     for row in raw["issues"]:
@@ -313,7 +313,7 @@ def stage_campaign(
         raise ChangeNotApplicable(f"{target}: the draft changes no budget, audience, or copy.")
     return ledger.stage(
         kind=ChangeKind.CAMPAIGN,
-        summary=f"Campaign draft: {draft.name}",
+        summary=f"推广活动草稿：{draft.name}",
         items=items,
         actor=actor,
         actor_kind=ActorKind.AGENT,

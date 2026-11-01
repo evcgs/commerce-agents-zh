@@ -26,6 +26,7 @@ from anthropic import AsyncAnthropic
 from anthropic.types import ToolParam
 
 from .fencing import Fence
+from .locale import t
 from .streaming import ToolOutcome
 from .turn import log_model_call, session_tag
 from .types import MemoryCategory, MemoryFact
@@ -48,7 +49,22 @@ _RECORD_FACT_TOOL: ToolParam = {
 }
 
 # What the memory tools answer while a deployment has memory switched off.
-MEMORY_DISABLED_TEXT = "Memory is not enabled for this deployment."
+MEMORY_DISABLED_TEXT_EN = "Memory is not enabled for this deployment."
+MEMORY_DISABLED_TEXT_ZH = "本部署未启用记忆功能。"
+
+
+def memory_disabled_text() -> str:
+    """The switched-off answer under the active locale."""
+    return t(MEMORY_DISABLED_TEXT_EN, MEMORY_DISABLED_TEXT_ZH)
+
+
+def __getattr__(name: str) -> Any:
+    # MEMORY_DISABLED_TEXT stays importable, now resolved per access (PEP 562) so it
+    # follows a run-time locale switch instead of the locale at import time.
+    if name == "MEMORY_DISABLED_TEXT":
+        return memory_disabled_text()
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+
 
 MEMORY_EXTRACTION_TEMPLATE = """You keep the short list of things {keeper} is allowed to \
 remember about {subject} between {occasions}. Read the conversation below and decide what, if \
@@ -72,7 +88,40 @@ older one. {live_key_rule}
 Left out entirely: {excluded}
 
 When the conversation taught you nothing that qualifies, record nothing."""
-"""The extraction system prompt; each role renders it once at import time."""
+"""The extraction system prompt (upstream English); each role renders it per locale at
+build time and picks the active locale's rendering when the runtime is built."""
+
+MEMORY_EXTRACTION_TEMPLATE_ZH = """You keep the short list of things {keeper} is allowed to \
+remember about {subject} between {occasions}. Read the conversation below and decide what, if \
+anything, {speaker} said that will still be true and useful next time.
+
+What qualifies: {qualifies}
+
+Rules for the value you write down:
+
+1. It contains only what {speaker} said, in their words or a close paraphrase. Nothing is \
+added around it: attributes that would have to be inferred are not facts, a stated fact is \
+not padded with likely extras, and a detail you are not sure they stated is left out.
+
+2. It stands on its own a year later, so it names its subject: {standalone_example}. Phrase \
+it as the standing fact and leave today's errand out of it.
+
+3. It is new. When the saved fact and the new statement mean the same thing, write nothing. \
+When a statement updates a saved topic, reuse that topic's key so the newer value replaces the \
+older one. {live_key_rule}
+
+4. Write the value in Simplified Chinese (简体中文), whatever language the conversation is in.
+
+Left out entirely: {excluded}
+
+When the conversation taught you nothing that qualifies, record nothing."""
+"""The Chinese-deployment variant of the extraction prompt: same body, with the value
+written in Simplified Chinese."""
+
+
+def memory_extraction_template() -> str:
+    """The extraction template under the active locale."""
+    return t(MEMORY_EXTRACTION_TEMPLATE, MEMORY_EXTRACTION_TEMPLATE_ZH)
 
 
 class MemoryStore(Protocol):
@@ -609,7 +658,7 @@ class MemoryRuntime:
     ) -> ToolOutcome:
         """The ``save_memory`` tool."""
         if not self.enabled or self.store is None:
-            return ToolOutcome(MEMORY_DISABLED_TEXT)
+            return ToolOutcome(memory_disabled_text())
         try:
             fact = self.validate(
                 str(tool_input.get("key", "")),
@@ -620,20 +669,21 @@ class MemoryRuntime:
         except MemoryWriteRejected as rejected:
             return ToolOutcome.error(str(rejected))
         if not fact.key or not fact.value:
-            return ToolOutcome.error("Nothing to save.")
+            return ToolOutcome.error(t("Nothing to save.", "没有可保存的内容。"))
         await self.store.upsert_facts(subject_id, [fact])
-        return ToolOutcome(f"Saved: {fact.key}.")
+        return ToolOutcome(t(f"Saved: {fact.key}.", f"已保存：{fact.key}。"))
 
     async def recall(self, subject_id: str, tool_input: dict[str, Any]) -> ToolOutcome:
         """The ``recall_memories`` tool; matches come back fenced."""
         if not self.enabled or self.store is None:
-            return ToolOutcome(MEMORY_DISABLED_TEXT)
+            return ToolOutcome(memory_disabled_text())
         topic = self.fence.sanitize_text(str(tool_input.get("topic", "")), 100)
         facts = await self.store.search_facts(subject_id, topic)
         payload = [memory_fact_payload(fact) for fact in facts]
         return ToolOutcome(
             self.fence.fence_payload(
-                {"topic": topic, "facts": payload or "none matched"}, self.max_fenced_chars
+                {"topic": topic, "facts": payload or t("none matched", "无匹配记忆")},
+                self.max_fenced_chars,
             )
         )
 

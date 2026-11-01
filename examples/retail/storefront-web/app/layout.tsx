@@ -2,7 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import { Instrument_Sans } from "next/font/google";
+import { LanguageProvider, type Lang } from "web-shared";
 import "./globals.css";
 
 const instrumentSans = Instrument_Sans({
@@ -13,13 +15,18 @@ const instrumentSans = Instrument_Sans({
 
 export const metadata: Metadata = {
   title: "ACME",
-  description: "Shop the ACME catalog with the ACME Assistant.",
+  description: "ACME 助手陪你逛遍 ACME 商城。",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  // The language cookie on the server, so SSR and the client's first render agree.
+  const saved = (await cookies()).get("commerce-demo-lang")?.value;
+  const initialLang: Lang = saved === "en" ? "en" : "zh";
   return (
-    <html lang="en" className={instrumentSans.variable}>
-      <body>{children}</body>
+    <html lang={initialLang === "en" ? "en" : "zh-CN"} className={instrumentSans.variable}>
+      <body>
+        <LanguageProvider initialLang={initialLang}>{children}</LanguageProvider>
+      </body>
     </html>
   );
 }

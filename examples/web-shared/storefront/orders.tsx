@@ -10,6 +10,7 @@
 
 import { type ReactNode, useState } from "react";
 import { formatDayMonth, formatMoney, formatWeekday, plural } from "../format";
+import { t } from "../i18n";
 import type { Order } from "../protocol";
 import { AskButton, Notice, PageHeader, Panel, Pill, Segmented, Skeleton, type Tone } from "../ui";
 import { useStoreFrame } from "./frame";
@@ -17,14 +18,14 @@ import { MoreLink } from "./home";
 import { StorePage } from "./Shell";
 
 const STATUS: Record<string, { label: string; tone: Tone }> = {
-  processing: { label: "Processing", tone: "muted" },
-  shipped: { label: "Shipped", tone: "info" },
-  out_for_delivery: { label: "Out for delivery", tone: "info" },
-  delayed: { label: "Delayed", tone: "warn" },
-  delivered: { label: "Delivered", tone: "ok" },
-  cancelled: { label: "Cancelled", tone: "muted" },
-  return_initiated: { label: "Return requested", tone: "violet" },
-  refunded: { label: "Refunded", tone: "ok" },
+  processing: { label: t("Processing", "处理中"), tone: "muted" },
+  shipped: { label: t("Shipped", "已发货"), tone: "info" },
+  out_for_delivery: { label: t("Out for delivery", "派送中"), tone: "info" },
+  delayed: { label: t("Delayed", "已延迟"), tone: "warn" },
+  delivered: { label: t("Delivered", "已送达"), tone: "ok" },
+  cancelled: { label: t("Cancelled", "已取消"), tone: "muted" },
+  return_initiated: { label: t("Return requested", "退货申请中"), tone: "violet" },
+  refunded: { label: t("Refunded", "已退款"), tone: "ok" },
 };
 
 const OPEN = new Set(["processing", "shipped", "out_for_delivery", "delayed"]);
@@ -94,39 +95,44 @@ export interface OrderNouns {
 
 /** Retail's vocabulary; a vertical spreads this and overrides what differs. */
 export const ORDER_NOUNS: OrderNouns = {
-  one: "order",
-  title: "Orders",
-  cardTitle: "Arriving",
-  noneOpen: "Nothing on the way",
-  openVerb: "Arrives",
-  closedWhen: (order, date) => (order.status === "delivered" ? `Delivered ${date}` : `Placed ${formatDayMonth(order.placed_at)}`),
+  one: t("order", "订单"),
+  title: t("Orders", "订单"),
+  cardTitle: t("Arriving", "即将送达"),
+  noneOpen: t("Nothing on the way", "暂无在途订单"),
+  openVerb: t("Arrives", "预计送达"),
+  closedWhen: (order, date) =>
+    order.status === "delivered"
+      ? t(`Delivered ${date}`, `已于 ${date} 送达`)
+      : t(`Placed ${formatDayMonth(order.placed_at)}`, `下单于 ${formatDayMonth(order.placed_at)}`),
   filters: [
-    { id: "open", label: "On the way", match: isOpen },
-    { id: "delayed", label: "Delayed", match: (order) => order.status === "delayed" },
-    { id: "closed", label: "Past", match: (order) => !isOpen(order) },
+    { id: "open", label: t("On the way", "在途"), match: isOpen },
+    { id: "delayed", label: t("Delayed", "延迟"), match: (order) => order.status === "delayed" },
+    { id: "closed", label: t("Past", "历史"), match: (order) => !isOpen(order) },
   ],
   handoff(order) {
-    const ref = `order ${order.order_id}`;
-    if (order.status === "delayed") return { label: "Ask why", prompt: `Why is ${ref} delayed, and when will it arrive?` };
-    if (order.status === "delivered") return { label: "Ask about a return", prompt: `Can I still return something from ${ref}?` };
-    if (isOpen(order)) return { label: "Ask", prompt: `Where is ${ref} right now?` };
-    return { label: "Ask", prompt: `What's the status of ${ref}?` };
+    const ref = t(`order ${order.order_id}`, `订单 ${order.order_id}`);
+    if (order.status === "delayed")
+      return { label: t("Ask why", "问问原因"), prompt: t(`Why is ${ref} delayed, and when will it arrive?`, `${ref} 为什么延迟了？预计什么时候能到？`) };
+    if (order.status === "delivered")
+      return { label: t("Ask about a return", "咨询退货"), prompt: t(`Can I still return something from ${ref}?`, `${ref} 里还有商品可以退货吗？`) };
+    if (isOpen(order)) return { label: t("Ask", "询问"), prompt: t(`Where is ${ref} right now?`, `${ref} 现在到哪儿了？`) };
+    return { label: t("Ask", "询问"), prompt: t(`What's the status of ${ref}?`, `${ref} 目前是什么状态？`) };
   },
 };
 
 function orderTitle(order: Order): string {
   const [first, ...rest] = order.items;
   if (!first) return order.order_id;
-  return rest.length ? `${first.title} + ${rest.length} more` : first.title;
+  return rest.length ? t(`${first.title} + ${rest.length} more`, `${first.title} + 另外 ${rest.length} 件`) : first.title;
 }
 
 function When({ order, nouns }: { order: Order; nouns: OrderNouns }) {
   const estimate = estimateOf(order);
-  if (!estimate) return <span>Placed {formatDayMonth(order.placed_at)}</span>;
+  if (!estimate) return <span>{t(`Placed ${formatDayMonth(order.placed_at)}`, `下单于 ${formatDayMonth(order.placed_at)}`)}</span>;
   if (!isOpen(order)) return <span>{nouns.closedWhen(order, estimate.date)}</span>;
   return (
     <span className={order.status === "delayed" ? "font-semibold text-(--warn)" : ""} title={estimate.note ?? undefined}>
-      {order.status === "delayed" ? "Expected" : nouns.openVerb} {estimate.date}
+      {order.status === "delayed" ? t("Expected", "预计") : nouns.openVerb} {estimate.date}
     </span>
   );
 }
@@ -172,7 +178,7 @@ export function ArrivingPanel({
   thumb: (order: Order) => ReactNode;
   onSeeAll?: () => void;
 }) {
-  if (!orders) return failed ? <Notice>Couldn&apos;t load your {nouns.title.toLowerCase()}.</Notice> : <Skeleton className="h-[188px]" />;
+  if (!orders) return failed ? <Notice>{t(`Couldn't load your ${nouns.title.toLowerCase()}.`, `无法加载你的${nouns.title}。`)}</Notice> : <Skeleton className="h-[188px]" />;
   // A shopper with no history gets no card; one with nothing open sees the two most recent.
   if (!orders.length) return null;
   const open = upcoming(orders).slice(0, 3);
@@ -180,8 +186,8 @@ export function ArrivingPanel({
   return (
     <Panel
       title={nouns.cardTitle}
-      subtitle={open.length ? plural(orders.length, nouns.one) : nouns.noneOpen}
-      action={onSeeAll ? <MoreLink label={`All ${nouns.title.toLowerCase()}`} onClick={onSeeAll} /> : null}
+      subtitle={open.length ? t(plural(orders.length, nouns.one), `共 ${orders.length} 条${nouns.one}`) : nouns.noneOpen}
+      action={onSeeAll ? <MoreLink label={t(`All ${nouns.title.toLowerCase()}`, `全部${nouns.title}`)} onClick={onSeeAll} /> : null}
     >
       <ul>
         {shown.map((order) => (
@@ -215,18 +221,18 @@ export function OrdersView({
     <StorePage>
       <PageHeader title={nouns.title} subtitle={subtitle}>
         <Segmented
-          label={`Filter ${title}`}
+          label={t(`Filter ${title}`, `筛选${title}`)}
           value={filter}
           onChange={setFilter}
           options={[
-            { id: "all", label: "All", count: all.length },
+            { id: "all", label: t("All", "全部"), count: all.length },
             ...nouns.filters.map((entry) => ({ id: entry.id, label: entry.label, count: all.filter(entry.match).length })),
           ]}
         />
       </PageHeader>
       {orders === null ? (
         failed ? (
-          <Notice>Couldn&apos;t load your {title}. The assistant can still look them up.</Notice>
+          <Notice>{t(`Couldn't load your ${title}. The assistant can still look them up.`, `无法加载你的${title}。助手仍然可以帮你查询。`)}</Notice>
         ) : (
           <Skeleton className="h-[320px]" />
         )
@@ -239,7 +245,7 @@ export function OrdersView({
           </ul>
         </Panel>
       ) : (
-        <Notice>No {title} here.</Notice>
+        <Notice>{t(`No ${title} here.`, `这里没有${title}。`)}</Notice>
       )}
     </StorePage>
   );

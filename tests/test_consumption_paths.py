@@ -26,10 +26,10 @@ from commerce_common.execution import LOAD_SKILL, STATUS_FIELD
 from commerce_common.fencing import Fence
 from commerce_common.manifest import load_manifest
 from commerce_common.memory import (
-    MEMORY_DISABLED_TEXT,
     MEMORY_WRITE_REJECTED_TEXT,
     InMemoryMemoryStore,
     MemoryWriteFilter,
+    memory_disabled_text,
 )
 from commerce_common.testing import (
     FakeClient,
@@ -354,7 +354,7 @@ async def test_disabled_memory_answers_both_tools_without_touching_the_store(bui
     store.seed(handle.subject, KEY, VALUE)
     saved = await handle.call("save_memory", {"key": "other", "value": "prefers evenings"})
     recalled = await handle.call("recall_memories", {"topic": "hours"})
-    assert saved == recalled == (MEMORY_DISABLED_TEXT, False)
+    assert saved == recalled == (memory_disabled_text(), False)
     assert store.reads == 0 and store.keys(handle.subject) == [KEY]
 
 

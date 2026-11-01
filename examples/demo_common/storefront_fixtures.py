@@ -25,6 +25,8 @@ from shopping_agent import (
     UserPreferences,
 )
 
+from .locale import get_locale
+
 _WORD = re.compile(r"[a-z0-9]+")
 _ISO_DATE = re.compile(r"\d{4}-\d{2}-\d{2}")
 _IN_FLIGHT_STATUSES = {"processing", "shipped", "delayed"}
@@ -106,6 +108,16 @@ def load_json(data_dir: Path, filename: str) -> dict[str, Any]:
     return json.loads((data_dir / filename).read_text(encoding="utf-8"))
 
 
+def load_localized_json(data_dir: Path, filename: str) -> dict[str, Any]:
+    """The locale's variant of a fixture when the directory carries one, else the file
+    itself. A Chinese-run directory keeps its ``orders.json`` and adds ``orders.en.json``
+    from upstream; a directory with no variants is unaffected, whatever the locale."""
+    localized = data_dir / filename.replace(".json", f".{get_locale()}.json")
+    if localized.is_file():
+        return json.loads(localized.read_text(encoding="utf-8"))
+    return load_json(data_dir, filename)
+
+
 def load_catalog(
     data_dir: Path,
 ) -> tuple[dict[str, Any], dict[str, ProductDetails], dict[str, ProductDetails]]:
@@ -117,7 +129,7 @@ def load_catalog(
     while listing counts stay what the catalog shows. A family's ``options`` are derived
     from its variants when the fixture does not state them, it is in stock while any
     variant is, and its ``price`` is expected to be the lowest variant's."""
-    raw = load_json(data_dir, "catalog.json")
+    raw = load_localized_json(data_dir, "catalog.json")
     listings: dict[str, ProductDetails] = {}
     variants: dict[str, ProductDetails] = {}
     for entry in raw["products"]:
@@ -183,7 +195,7 @@ def option_text(product: Product) -> str:
 
 
 def load_users(data_dir: Path) -> dict[str, UserPreferences]:
-    users = load_json(data_dir, "users.json")["users"]
+    users = load_localized_json(data_dir, "users.json")["users"]
     return {user["user_id"]: UserPreferences.model_validate(user) for user in users}
 
 
@@ -194,7 +206,7 @@ def preferences_of(users: Mapping[str, UserPreferences], user_id: str) -> UserPr
 
 def load_orders(data_dir: Path) -> list[tuple[str, Order]]:
     """``(user_id, order)`` pairs, with in-flight orders re-dated relative to boot."""
-    raw = redate_in_flight_orders(load_json(data_dir, "orders.json"))
+    raw = redate_in_flight_orders(load_localized_json(data_dir, "orders.json"))
     return [
         (entry["user_id"], Order.model_validate({k: v for k, v in entry.items() if k != "user_id"}))
         for entry in raw["orders"]
@@ -203,7 +215,8 @@ def load_orders(data_dir: Path) -> list[tuple[str, Order]]:
 
 def load_policies(data_dir: Path) -> list[Policy]:
     return [
-        Policy.model_validate(entry) for entry in load_json(data_dir, "policies.json")["policies"]
+        Policy.model_validate(entry)
+        for entry in load_localized_json(data_dir, "policies.json")["policies"]
     ]
 
 

@@ -14,6 +14,7 @@ import asyncio
 import weakref
 from collections.abc import Sequence
 
+from commerce_common.locale import t
 from commerce_common.streaming import AgentEvent, ToolOutcome
 
 from .backend import StorefrontBackend
@@ -29,11 +30,14 @@ OPTIONS_GATE = "options"
 def provenance_error(product_id: str) -> str:
     # get_product_details comes first in the hint: text search does not match ids, and
     # an empty search reads to the model as proof the product does not exist.
-    return (
+    return t(
         f"product_id {product_id} was not returned by catalog or order tools in this "
         "session. Resolve it first: call get_product_details with this exact id (text "
         "search does not match product ids), or find it via search or order history, "
-        "then add it using a product_id from those results."
+        "then add it using a product_id from those results.",
+        f"product_id {product_id} 不是本会话中目录或订单工具返回过的商品。请先解析它："
+        "用这个精确 id 调用 get_product_details（文本搜索匹配不到商品 id），或通过搜索、"
+        "订单历史找到它，然后使用那些结果中返回的 product_id 加入购物车。",
     )
 
 
@@ -47,13 +51,17 @@ def check_provenance(state: ShoppingSessionState, product_id: str) -> ToolOutcom
 def options_error(product: Product) -> str:
     # Option names are catalog text arriving outside the fence: sanitized and kept
     # short. The values themselves are in the fenced record the model already holds.
-    names = STOREFRONT_FENCE.sanitize_text(", ".join(product.options), max_chars=60)
-    return (
+    names = STOREFRONT_FENCE.sanitize_text(t(", ", "、").join(product.options), max_chars=60)
+    return t(
         f"product_id {product.product_id} has options still to choose ({names}), so the "
         "cart takes one of its variants. Settle each option from what the customer said "
         "or the customer's profile, ask once with the values as chips when one is still "
         "open, then add the matching variant's product_id from the variants "
-        "get_product_details returns for this id."
+        "get_product_details returns for this id.",
+        f"product_id {product.product_id} 还有规格选项未选定（{names}），购物车只能添加它的"
+        "某个具体变体。请根据顾客所述或顾客档案确定每个选项；若有选项仍未确定，以选项值"
+        "芯片的形式一次性询问顾客，然后从 get_product_details 针对该 id 返回的变体列表中"
+        "选择匹配变体的 product_id 加入购物车。",
     )
 
 
@@ -116,17 +124,28 @@ async def gated_add_to_cart(
         current = await backend.get_cart(session)
         existing = next((i for i in current.items if i.product_id == product_id), None)
         if existing is None and len(current.items) >= config.max_cart_lines:
-            return ToolOutcome.error("The cart is full.")
+            return ToolOutcome.error(t("The cart is full.", "购物车已满。"))
         allowed = min(requested, max(0, max_quantity - (existing.quantity if existing else 0)))
         if allowed <= 0:
             return ToolOutcome.error(
-                f"This item is already at the per-item limit of {max_quantity}."
+                t(
+                    f"This item is already at the per-item limit of {max_quantity}.",
+                    f"该商品数量已达单件上限 {max_quantity} 件。",
+                )
             )
         cart = await backend.add_to_cart(session, product_id, allowed)
     # The confirmation names the id only: titles are catalog text and stay inside fences.
-    capped = f" (capped at the per-item limit of {max_quantity})" if allowed < requested else ""
+    capped = (
+        t(f" (capped at the per-item limit of {max_quantity})", f"（已按单件上限 {max_quantity} 件封顶）")
+        if allowed < requested
+        else ""
+    )
     return _written(
-        f"Added {product_id} x{allowed}{capped}. Cart now has {cart_summary(cart)}.", cart
+        t(
+            f"Added {product_id} x{allowed}{capped}. Cart now has {cart_summary(cart)}.",
+            f"已添加 {product_id} x{allowed}{capped}。当前购物车：{cart_summary(cart)}。",
+        ),
+        cart,
     )
 
 
@@ -146,11 +165,20 @@ async def gated_update_cart_item(
             return held
         cart = await backend.update_cart_item(session, product_id, applied)
     capped = (
-        f" (capped at the per-item limit of {config.max_quantity_per_item})"
+        t(
+            f" (capped at the per-item limit of {config.max_quantity_per_item})",
+            f"（已按单件上限 {config.max_quantity_per_item} 件封顶）",
+        )
         if applied < requested
         else ""
     )
-    return _written(f"Updated quantity{capped}. Cart now has {cart_summary(cart)}.", cart)
+    return _written(
+        t(
+            f"Updated quantity{capped}. Cart now has {cart_summary(cart)}.",
+            f"数量已更新{capped}。当前购物车：{cart_summary(cart)}。",
+        ),
+        cart,
+    )
 
 
 async def gated_remove_from_cart(
@@ -164,7 +192,13 @@ async def gated_remove_from_cart(
         if held := await _check_provenance_or_cart(backend, session, state, product_id):
             return held
         cart = await backend.remove_from_cart(session, product_id)
-    return _written(f"Removed. Cart now has {cart_summary(cart)}.", cart)
+    return _written(
+        t(
+            f"Removed. Cart now has {cart_summary(cart)}.",
+            f"已移除。当前购物车：{cart_summary(cart)}。",
+        ),
+        cart,
+    )
 
 
 async def _check_provenance_or_cart(

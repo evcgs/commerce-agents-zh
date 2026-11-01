@@ -10,7 +10,7 @@ from shopping_agent import CartItem, NotOffered
 from shopping_agent.executor import ShoppingToolExecutor, build_memory
 from shopping_agent.fencing import STOREFRONT_FENCE
 from shopping_agent.gates import OPTIONS_GATE, PROVENANCE_GATE, provenance_error
-from shopping_agent.serialization import SEARCH_EMPTY_HEADER
+from shopping_agent.serialization import search_empty_header
 
 
 @pytest.fixture
@@ -46,7 +46,7 @@ async def test_empty_search_result_carries_no_match_sentinel(executor, backend, 
     result = await executor.execute("search_products", {"query": "AR-1602"})
     assert not result.is_error
     header, _, fenced = result.result_text.partition("\n")
-    assert header == SEARCH_EMPTY_HEADER
+    assert header == search_empty_header()
     assert fenced.startswith(STOREFRONT_FENCE.open)
     assert fenced.endswith(STOREFRONT_FENCE.close)
     assert '"result_count": 0' in fenced

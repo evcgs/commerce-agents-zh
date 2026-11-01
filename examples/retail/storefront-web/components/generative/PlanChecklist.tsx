@@ -3,7 +3,7 @@
 
 "use client";
 
-import { formatMoney } from "web-shared";
+import { formatMoney, t } from "web-shared";
 import type { PlanPayload, Product } from "@/lib/types";
 import ProductTile, { ProductRow } from "../ProductTile";
 
@@ -34,12 +34,15 @@ function BudgetBar({ steps }: { steps: PlanPayload["steps"] }) {
       </div>
       <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-0.5 text-[11px] text-(--ink-soft)">
         <span>
-          Planned picks <span className="font-semibold text-(--ink)">{formatMoney(total)}</span>
-          {steps.some((step) => step.products.length > 1) ? " (cheapest option per step)" : ""}
+          {t("Planned picks", "所选方案合计")} <span className="font-semibold text-(--ink)">{formatMoney(total)}</span>
+          {steps.some((step) => step.products.length > 1) ? t(" (cheapest option per step)", "（每步取最低价选项）") : ""}
         </span>
         {withoutItems > 0 ? (
           <span>
-            {withoutItems} step{withoutItems === 1 ? "" : "s"} with no items to show
+            {t(
+              `${withoutItems} step${withoutItems === 1 ? "" : "s"} with no items to show`,
+              `${withoutItems} 个步骤暂无可展示的商品`,
+            )}
           </span>
         ) : null}
       </div>
@@ -82,7 +85,7 @@ export default function PlanChecklist({
                   ))}
                 </div>
               ) : partial ? null : (
-                <div className="mt-1 text-[13px] text-(--ink-soft)/80">No items to show for this step.</div>
+                <div className="mt-1 text-[13px] text-(--ink-soft)/80">{t("No items to show for this step.", "这一步暂无可展示的商品。")}</div>
               )}
             </div>
           </li>

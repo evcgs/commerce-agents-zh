@@ -4,7 +4,7 @@
 "use client";
 
 import { useState } from "react";
-import { hasOptions, optionSummary, optionValuesLabel, priceLabel, useStoreFrame } from "web-shared";
+import { hasOptions, optionSummary, optionValuesLabel, priceLabel, t, useStoreFrame } from "web-shared";
 import type { Product } from "@/lib/types";
 import { flyToCart } from "@/lib/flight";
 import { attributeChips, productGlyph, productTileClass } from "@/lib/format";
@@ -72,7 +72,7 @@ function LowStockChip({ product, className = "" }: { product: Product; className
     <span
       className={`whitespace-nowrap rounded-full bg-(--warn-soft) px-2 py-0.5 text-[11px] font-semibold text-(--warn) ${className}`}
     >
-      Only {count} left
+      {t(`Only ${count} left`, `仅剩 ${count} 件`)}
     </span>
   );
 }
@@ -121,9 +121,9 @@ export function AddButton({
         type="button"
         onClick={(event) => {
           event.stopPropagation();
-          ask(`Add the ${product.title} (${product.product_id}) to my cart.`);
+          ask(t(`Add the ${product.title} (${product.product_id}) to my cart.`, `帮我把 ${product.title}（${product.product_id}）加入购物车。`));
         }}
-        aria-label={`Choose options for ${product.title}`}
+        aria-label={t(`Choose options for ${product.title}`, `选择 ${product.title} 的规格`)}
         className="pointer-events-auto absolute bottom-2 right-2 flex h-8 w-8 items-center justify-center rounded-full bg-(--ink) text-lg font-semibold leading-none text-(--surface) shadow-(--shadow-sm) transition-all hover:scale-105"
       >
         +
@@ -144,7 +144,7 @@ export function AddButton({
         if (added) flyToCart(product, source);
         window.setTimeout(() => setPhase("idle"), added ? 1200 : 1600);
       }}
-      aria-label={`Add ${product.title} to cart`}
+      aria-label={t(`Add ${product.title} to cart`, `将 ${product.title} 加入购物车`)}
       className={`pointer-events-auto absolute bottom-2 right-2 flex h-8 w-8 items-center justify-center rounded-full text-lg font-semibold leading-none text-(--surface) shadow-(--shadow-sm) transition-all hover:scale-105 ${
         phase === "done" ? "bg-(--ok)" : phase === "error" ? "bg-(--warn)" : "bg-(--ink)"
       } ${phase === "busy" ? "animate-pulse" : ""}`}
@@ -192,7 +192,7 @@ export default function ProductTile({
           <ProductImage product={product} className={`w-full ${imageHeight}`} />
           {product.in_stock === false ? (
             <span className="absolute right-1.5 top-1.5 rounded-full bg-(--ink)/85 px-2 py-0.5 text-[11px] font-medium text-(--surface)">
-              Out of stock
+              {t("Out of stock", "已售罄")}
             </span>
           ) : (
             <LowStockChip product={product} className="absolute right-1.5 top-1.5" />
@@ -267,7 +267,7 @@ export function ProductRow({
           <Rating rating={product.rating} />
           {product.in_stock === false ? (
             <span className="rounded-full bg-(--ink)/85 px-2 py-0.5 text-[11px] font-medium text-(--surface)">
-              Out of stock
+              {t("Out of stock", "已售罄")}
             </span>
           ) : (
             <LowStockChip product={product} />

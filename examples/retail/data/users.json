@@ -3,24 +3,24 @@
     {
       "user_id": "demo-user",
       "display_name": "Priya",
-      "loyalty_tier": "ACME Subscription member",
+      "loyalty_tier": "ACME 订阅会员",
       "default_location": "Maple Heights",
       "preferences": {
-        "spending": "usually keeps to the mid-range options",
-        "home": "two-bedroom apartment, no outdoor storage",
-        "household": "partner and a 6-year-old",
-        "pet": "golden retriever named Biscuit",
-        "style": "minimal, neutral colors"
+        "spending": "通常选择中档价位的商品",
+        "home": "住两居室公寓，没有户外储物空间",
+        "household": "家里有伴侣和一个6岁的孩子",
+        "pet": "养了一只金毛犬，名叫 Biscuit",
+        "style": "风格极简，偏好中性色调"
       }
     },
     {
       "user_id": "demo-user-2",
       "display_name": "Sam",
-      "loyalty_tier": "Guest",
+      "loyalty_tier": "访客",
       "default_location": "Springfield",
       "preferences": {
-        "budget": "value-focused",
-        "interests": "trail running, weekend camping"
+        "budget": "注重性价比",
+        "interests": "越野跑、周末露营"
       }
     }
   ]

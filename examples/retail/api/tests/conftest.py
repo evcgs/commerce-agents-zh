@@ -3,6 +3,14 @@
 
 import pytest
 
+# These suites assert the upstream English fixtures and copy (titles, option values,
+# search rankings over English text). Pin the process to English before any module
+# import builds a backend or agent — the default runtime locale is zh, and the bilingual
+# layer would otherwise change what the assertions see.
+from demo_common.locale import set_locale
+
+set_locale("en")
+
 from demo_common.tests.fixtures import *  # noqa: F403
 from retail.api import main as main_module
 from retail.api.agent_config import build_merchant_config
@@ -33,12 +41,20 @@ def merchant_identity():
 
 @pytest.fixture(scope="session")
 def make_merchant_router():
-    return create_merchant_router
+    # create_merchant_router also returns the backend it serves (the locale route reloads
+    # it); the shared contract tests want just the router, so unpack here.
+    def _make(storefront, memory_store):
+        router, _merchant, _agents = create_merchant_router(storefront, memory_store)
+        return router
+
+    return _make
 
 
 @pytest.fixture(scope="session")
 def extra_public_routes() -> set[str]:
-    return set()
+    # commerce-agents-zh: the demo-remote fake third-party catalog (read-only, for the
+    # connector's remote-adapter demo; ?fail=1 injects an outage).
+    return {"/api/demo-remote/products", "/api/demo-remote/policies", "/api/demo-remote/health"}
 
 
 @pytest.fixture(scope="session")

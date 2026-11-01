@@ -3,12 +3,19 @@
 
 """Run a vertical example (API + web apps) with one command.
 
-    python scripts/run_demo.py retail              # API :8000 + storefront :3000
+    python scripts/run_demo.py retail              # API :8001 + storefront :4001
     python scripts/run_demo.py travel              # API :8001 + storefront :3001
     python scripts/run_demo.py telecom             # API :8002 + storefront :3002
     python scripts/run_demo.py entertainment       # API :8003 + storefront :3003
-    python scripts/run_demo.py retail --merchant   # API :8000 + merchant portal :3100
-    python scripts/run_demo.py retail --all        # API :8000 + storefront :3000 + portal :3100
+    python scripts/run_demo.py retail --merchant   # API :8001 + merchant portal :4101
+    python scripts/run_demo.py retail --all        # API :8001 + storefront :4001 + portal :4101
+
+Retail ports are shifted from the upstream defaults (API 8000 -> 8001, storefront 3000 -> 4001,
+merchant portal 3100 -> 4101) so the demo does not collide with other services already bound to
+8000/3000/3100 on this machine. To revert retail to the upstream ports, run
+scripts/restore-upstream-ports.sh -- but only when 8000/3000/3100 are free, otherwise you would
+preempt an existing service. The other verticals keep their upstream ports (travel 8001/3001,
+telecom 8002/3002, entertainment 8003/3003).
 
 Boots uvicorn and the Next.js dev server(s), waits until they answer, prints the URLs, and
 stops everything on Ctrl-C. Python packages and the examples/ npm workspace are installed on
@@ -43,7 +50,10 @@ NEXT = EXAMPLES_DIR / "node_modules" / ".bin" / "next"
 
 VERTICALS: dict[str, dict[str, object]] = {
     "retail": {
-        "api_port": 8000,
+        # 端口已从上游默认（api 8000 / web 3000 / portal 3100）偏移，避免抢占本机 8000/3000/3100 上的既有服务。
+        # 还原上游端口见 scripts/restore-upstream-ports.sh（仅当这些端口空闲时）。
+        "api_port": 8001,
+        "web_port": 4001,
         "store": "ACME",
         # Retail persists memory across restarts; --fresh-memory deletes these files.
         "memory_files": ("data/.memory-store.json", "data/.memory-seeded.json"),
@@ -260,7 +270,7 @@ def main() -> int:
     store = str(config["store"])
     default_api_port = int(config["api_port"])  # type: ignore[arg-type]
     api_port = args.api_port if args.api_port is not None else default_api_port
-    web_port = default_api_port - 5000  # 8000 -> 3000; the portal adds 100
+    web_port = int(config.get("web_port", default_api_port - 5000))  # 8000 -> 3000; the portal adds 100
     run_api, run_web = not args.web_only, not args.api_only
 
     if args.fresh_memory:

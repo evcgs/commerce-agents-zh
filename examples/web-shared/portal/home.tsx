@@ -8,14 +8,18 @@
 import type { ReactNode } from "react";
 import { describeProposer, describeResolver, formatDayMonth, plural } from "../format";
 import { Icon, type IconName } from "../icons";
+import { t } from "../i18n";
 import { AskButton, Button, KindIcon, Panel, Pill, type Tone } from "../ui";
 import { CHANGE_STATUS } from "./cards";
 
 /** The question a KPI tile prefills: why the figure moved against the comparison window. */
 export function askWhy(label: string, changePct: number | null | undefined, comparison: string): string {
   const name = label.toLowerCase();
-  if (changePct == null) return `How is ${name} trending, and what's behind it?`;
-  return `Why is ${name} ${changePct >= 0 ? "up" : "down"} ${Math.abs(changePct).toFixed(1)}% against the ${comparison || "prior period"}?`;
+  if (changePct == null) return t(`How is ${name} trending, and what's behind it?`, `${name}最近走势如何？背后的原因是什么？`);
+  return t(
+    `Why is ${name} ${changePct >= 0 ? "up" : "down"} ${Math.abs(changePct).toFixed(1)}% against the ${comparison || "prior period"}?`,
+    `为什么${name}较${comparison || "上一时段"}${changePct >= 0 ? "上升" : "下降"}了 ${Math.abs(changePct).toFixed(1)}%？`,
+  );
 }
 
 /** A ratio's change from its parts' changes, e.g. average order value from sales and orders. */
@@ -31,11 +35,13 @@ export function ApprovalsBanner({ changes, onReview }: { changes: { change_id: s
     <section className="flex flex-wrap items-center gap-x-4 gap-y-2 rounded-2xl border border-(--violet)/20 bg-(--violet-soft) px-[18px] py-3">
       <KindIcon icon="edit" tone="violet" size={32} />
       <div className="min-w-0 flex-1">
-        <div className="text-[14px] font-semibold text-(--ink)">{plural(changes.length, "change")} awaiting approval</div>
+        <div className="text-[14px] font-semibold text-(--ink)">
+          {t(`${plural(changes.length, "change")} awaiting approval`, `${changes.length} 项变更待审批`)}
+        </div>
         <div className="mt-0.5 truncate text-[12.5px] text-(--ink-soft)">{changes.map((change) => change.summary).join(" · ")}</div>
       </div>
       <Button variant="primary" size="sm" onClick={onReview}>
-        Review
+        {t("Review", "审核")}
       </Button>
     </section>
   );
@@ -80,7 +86,7 @@ export function QueueOverflow({ hidden, link }: { hidden: number; link?: { label
   if (hidden <= 0) return null;
   return (
     <div className="flex items-center gap-2 border-t border-(--line) px-[18px] py-2.5 text-[12.5px] text-(--ink-soft)">
-      <span>{plural(hidden, "more item")} in the queue</span>
+      <span>{t(`${plural(hidden, "more item")} in the queue`, `队列中还有 ${hidden} 项`)}</span>
       {link ? <ViewLink label={link.label} onClick={link.onClick} className="ml-auto" /> : null}
     </div>
   );
@@ -143,7 +149,7 @@ interface ChangeSummary {
 export function RecentChanges({ changes, limit = 4 }: { changes: ChangeSummary[]; limit?: number }) {
   if (changes.length === 0) return null;
   return (
-    <Panel title="Recent changes">
+    <Panel title={t("Recent changes", "最近的变更")}>
       <ul className="divide-y divide-(--line) px-[18px] pb-2">
         {changes.slice(0, limit).map((change) => {
           const status = CHANGE_STATUS[change.status];
