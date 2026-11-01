@@ -21,7 +21,7 @@
 | 5 | **全套提示词可视 + 可导出** | 商家门户「提示词」面板实时查看运行时实际生效的 6 层提示词（系统提示词/动态上下文/21+23 个工具定义/10 个技能全文/记忆提取模板/分析子代理），支持在线覆盖静态提示词与一键还原；`scripts/export_prompts.py` 另可一键导出 Markdown（产物见 `prompt-export/`） |
 | 6 | **国内网络友好** | 附镜像加速安装路径（git 镜像 / pip 清华源 / npmmirror），Next.js 已放行 `127.0.0.1` 跨域 |
 | 7 | **数据源连接器** | 商家门户「数据源」面板：适配器注册表（内置演示数据 / 远端商品源）运行时切换，远端只读转发 + 连续失败自动降级回本地（演示永不中断），内置模拟外部系统与故障注入自证全链路——详见 [docs/接入系统标准化设计.md](docs/接入系统标准化设计.md) |
-| 8 | **Agent 接入面** | 给 AI Agent 直接操作本系统：AGENTS.md（编码型 Agent 操作手册）、`agentctl` CLI（进程管理 + 模型/提示词/数据源配置一条命令）、MCP 服务器（15 个结构化工具，WorkBuddy 等平台型 Agent 直接调用，天然带权限确认流）——人管意图，Agent 管执行 |
+| 8 | **Agent 接入面** | 给 AI Agent 直接操作本系统：AGENTS.md（编码型 Agent 操作手册）、`agentctl` CLI（进程管理 + 模型/提示词/数据源配置一条命令）、MCP 服务器（17 个结构化工具，WorkBuddy 等平台型 Agent 直接调用，天然带权限确认流）——人管意图，Agent 管执行 |
 
 ## 这是什么
 
@@ -105,20 +105,24 @@ EOF
 ### 3. 启动
 
 ```bash
-python scripts/run_demo.py retail              # API :8000 + 店面 :3000
-python scripts/run_demo.py retail --merchant   # API :8000 + 商家门户 :3100
+python scripts/run_demo.py retail              # API :8001 + 店面 :4001
+python scripts/run_demo.py retail --merchant   # API :8001 + 商家门户 :4101
 python scripts/run_demo.py retail --all        # 三者全起
 ```
 
 | 端 | 地址 | 体验要点 |
 |---|---|---|
-| 顾客店面 | http://localhost:3000 | 对话式导购：搜→比→荐→加购→政策问答，右侧购物车实时联动 |
-| 商家门户 | http://localhost:3100 | 运营助手 + **暂存→审批**闭环（试试"把帐篷降价10%"） |
-| API | http://localhost:8000/docs | OpenAPI 文档 |
+| 顾客店面 | http://localhost:4001 | 对话式导购：搜→比→荐→加购→政策问答，右侧购物车实时联动 |
+| 商家门户 | http://localhost:4101 | 运营助手 + **暂存→审批**闭环（试试"把帐篷降价10%"） |
+| API | http://localhost:8001/docs | OpenAPI 文档 |
 
-> 💡 用 `localhost` 访问最稳（已放行 `127.0.0.1`，两者均可）。四个垂直：retail(:3000/:3100，**全中文**)、travel(:3001)、telecom(:3002)、entertainment(:3003)。
+> ⚠️ **端口说明（原始 vs 本发行版）**：上游默认端口为 API **8000** / 店面 **3000** / 商家门户 **3100**；本发行版为避开你机器上 8000/3000/3100 已占用的服务，已改为 API **8001** / 店面 **4001** / 商家门户 **4101**（门户自动 = web_port + 100）。其余垂直保持上游端口：travel(8001/3001)、telecom(8002/3002)、entertainment(8003/3003)。
 >
-> 💡 端口被占用？`scripts/run_demo.py` 的 `VERTICALS["retail"]` 里可同时自定义 `api_port` 与 `web_port`（门户自动 = web_port + 100）。
+> 🔁 **一键还原到上游端口**（⚠️ 仅当 8000/3000/3100 在你机器上**空闲**时；否则会抢占现有服务，**不建议**执行）：`bash scripts/restore-upstream-ports.sh`。它会先备份 `run_demo.py`，再把 retail 端口改回 8000/3000/3100；想撤销直接 `cp` 对应备份即可。
+>
+> 💡 用 `localhost` 访问最稳（已放行 `127.0.0.1`，两者均可）。四个垂直：retail(:4001/:4101，**全中文**)、travel(:3001)、telecom(:3002)、entertainment(:3003)。
+>
+> 💡 想自定义端口？`scripts/run_demo.py` 的 `VERTICALS["retail"]` 里可同时自定义 `api_port` 与 `web_port`（门户自动 = web_port + 100）。
 
 ## 与上游的差异
 
@@ -144,6 +148,10 @@ python scripts/run_demo.py retail --all        # 三者全起
 - 覆盖：模型名（如 `gpt-5.5`、`deepseek-v4-pro`、`glm-4.7`）、思考档位（off/low…max）、任意 Anthropic-Messages 兼容接入点与 Key（new-api / one-api 中转可用，已实测 GPT 全链路）
 - 「保存并生效」即刻重建两个 Agent；「恢复默认」一键还原。覆盖保存在本地 `data/model-override.json`（已 gitignore，Key 只写不回显）
 
+![商家门户-模型配置面板](docs/screenshots/merchant-model-config-zh.png)
+
+> 模型配置面板：左栏为当前生效值（购物/商家/记忆/分析模型、思考档位、API 接入点），右栏表单可覆盖模型名 / 思考档位 / 任意 Anthropic-Messages 兼容接入点与 Key，「保存并生效」即刻重建两个 Agent。
+
 ## 提示词面板（商家门户）
 
 商家门户侧边栏的 📄 **提示词**入口（模型配置旁）把"模型被喂了什么"完整摊开：
@@ -151,6 +159,10 @@ python scripts/run_demo.py retail --all        # 三者全起
 - **实时查看**：按 Agent（购物/商家）× 层级（静态系统提示词 / 动态上下文样例 / 工具定义 / 技能全文 / 记忆提取模板 / 分析子代理提示词）查看，内容从内存中实际运行的 Agent 现场渲染——即当前**语言、模型配置、覆盖叠加后真正发给模型的字节**，不是静态文件
 - **在线覆盖（P1）**：对任一 Agent 的静态系统提示词做全文替换，「保存并生效」即刻重建 Agent 按新提示词运行（演示提示词工程的直观抓手）；「恢复默认」一键还原上游构建的提示词
 - 覆盖保存在本地 `data/prompt-override.json`（已 gitignore），语言切换、模型覆盖等任何重建都会自动重新套用；上游提示词构建代码零改动
+
+![商家门户-提示词面板](docs/screenshots/merchant-prompt-zh.png)
+
+> 提示词面板：按 Agent（购物/商家）× 层级（静态系统提示词 / 动态上下文样例 / 工具定义 / 技能全文 / 记忆提取模板 / 分析子代理提示词）查看内存中实际渲染的提示词——即当前语言、模型配置、覆盖叠加后真正发给模型的字节；可对静态系统提示词做全文覆盖并即时重建。
 
 ## 数据源连接（商家门户）
 
@@ -162,14 +174,22 @@ python scripts/run_demo.py retail --all        # 三者全起
 - **自证闭环**：内置 `/api/demo-remote/*` 模拟第三方系统（刻意异构字段 + `?fail=1` 故障注入），切换后 Agent 搜远端品牌即见远端商品
 - 覆盖存于本地 `data/backend-override.json`（已 gitignore，Key 只写不回显）；设计全文见 [docs/接入系统标准化设计.md](docs/接入系统标准化设计.md)；面板内的「? 远端目录配置帮助」链接（[docs/数据源配置帮助.md](docs/数据源配置帮助.md)）可逐步引导配置与自测
 
+![商家门户-数据源面板](docs/screenshots/merchant-backend-zh.png)
+
+> 数据源面板：适配器注册表（内置演示数据 / 远端商品目录）运行时切换，左栏为当前生效与读取/失败计数，右栏为连接配置；远端连续失败自动降级回本地（黄标"已降级"）。
+
 ## 中英文切换
 
-店面（:3000）与商家门户（:3100）**顶栏右侧均有语言项**：
+店面（:4001）与商家门户（:4101）**顶栏右侧均有语言项**：
 
 - **切到 English**：界面恢复原始英文、商品数据与运行时文案切回上游原始英文版（英文文案逐字节取自上游 git 历史，非回译）、Agent 品牌语气与记忆提取恢复英文行为——等同运行原项目。
 - **切到 中文**：界面、87 个商品、工具反馈、记忆提取全部回到本汉化包内容。
 
 选择即生效（页面自动重载并重置演示会话），语言偏好记在浏览器本地。默认中文；如需让后端启动即默认英文，在 `.env` 中设 `DEMO_LOCALE=en`。
+
+![语言项-中文](docs/screenshots/merchant-langtoggle-zh.png) ![语言项-英文](docs/screenshots/merchant-langtoggle-en.png)
+
+> 顶栏语言项（商家门户示例）：左图为「中」激活——界面、商品数据、运行时文案全中文；右图为「EN」激活——界面恢复原始英文、商品数据与文案切回上游英文版（逐字节取自上游戏史，非回译）。
 
 ## Agent 接入面（给 AI Agent 操作本系统）
 
@@ -179,10 +199,18 @@ python scripts/run_demo.py retail --all        # 三者全起
 |---|---|---|
 | **A1 `AGENTS.md`** | 编码型 Agent（Codex / Claude Code，能跑 shell） | 读文档即可起服务、跑验证、改配置 |
 | **A2 `scripts/agentctl.py`** | 所有能跑命令的 Agent | `start/stop/status/verify/snapshot/rollback` 管进程 + git 快照；`models`/`prompts`/`backends` 子命令一条命令调三配置面 |
-| **A3 `mcp/server.py`** | 平台型 Agent（WorkBuddy，只给工具不给 shell） | 15 个结构化工具（模型/提示词/数据源配置 + 健康检查 + 日志/进程管理），工具发现 + schema + 权限确认流 |
+| **A3 `mcp/server.py`** | 平台型 Agent（WorkBuddy，只给工具不给 shell） | 17 个结构化工具（模型/提示词/数据源配置 + 健康检查 + 日志/进程管理 + Agent-native 安装），工具发现 + schema + 权限确认流 |
 
 - **启用 MCP**：`pip install fastmcp` 后 `python mcp/server.py`（或 `uv run`）；base URL 用 `MCP_API_BASE` 覆盖（默认 `http://127.0.0.1:8001`）。注册到 `~/.workbuddy/mcp.json` 的精确片段与合并命令见 [mcp/README.md](mcp/README.md)（**不要自动改**该文件，避免扰动当前会话；在 WorkBuddy 连接器页点 Trust 启用）。
 - **设计原则**：Agent 写操作与人的面板写操作走同一批端点、同一套权限模型（不做第二套）；端口仅绑 `127.0.0.1`，绝不暴露公网。详见 [AGENTS.md](AGENTS.md) 第 7 节。
+
+![A2-agentctl 进程管理 CLI](docs/screenshots/merchant-agentctl-evidence.png)
+
+> A2 · `agentctl` 进程管理 CLI（真实输出）：`status` 查端口/进程/三健康端点，`models get` / `backends get` / `prompts list` 一条命令直达三配置面——人管意图，Agent 管执行。
+
+![A3-FastMCP 工具清单](docs/screenshots/merchant-mcp-tools-evidence.png)
+
+> A3 · FastMCP 工具服务器 `mcp/server.py`（17 个结构化工具）：模型/提示词/数据源配置 + 聚合健康检查 + 日志与进程管理 + Agent-native 安装；平台型 Agent 通过工具发现 + schema + 权限确认流操作本系统，天然不带 shell。
 
 ## 版权与独立发包说明
 
